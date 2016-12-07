@@ -23,7 +23,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency> <!-- junit 4.7 -->
-            <groupId>junit</groupId>
+             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
             <type>jar</type>
