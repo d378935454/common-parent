@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bean.dao.CustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.bean.model.Customer" >
+    <id column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="customer_username" property="customerUsername" jdbcType="VARCHAR" />
+    <result column="customer_password" property="customerPassword" jdbcType="VARCHAR" />
+    <result column="customer_nickname" property="customerNickname" jdbcType="VARCHAR" />
+    <result column="is_mobile" property="isMobile" jdbcType="CHAR" />
+    <result column="is_email" property="isEmail" jdbcType="CHAR" />
+    <result column="is_flag" property="isFlag" jdbcType="CHAR" />
+    <result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
+    <result column="login_time" property="loginTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+    <result column="del_time" property="delTime" jdbcType="TIMESTAMP" />
+    <result column="customer_img" property="customerImg" jdbcType="VARCHAR" />
+    <result column="captcha" property="captcha" jdbcType="VARCHAR" />
+    <result column="aead_time" property="aeadTime" jdbcType="TIMESTAMP" />
+    <result column="pwd_captcha" property="pwdCaptcha" jdbcType="VARCHAR" />
+    <result column="pwd_aead_time" property="pwdAeadTime" jdbcType="TIMESTAMP" />
+    <result column="third_id" property="thirdId" jdbcType="BIGINT" />
+    <result column="is_seller" property="isSeller" jdbcType="CHAR" />
+    <result column="is_temp_cust" property="isTempCust" jdbcType="CHAR" />
+    <result column="login_key" property="loginKey" jdbcType="VARCHAR" />
+    <result column="is_site_manager" property="isSiteManager" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    customer_id, customer_username, customer_password, customer_nickname, is_mobile, 
+    is_email, is_flag, login_ip, login_time, create_time, modified_time, del_flag, del_time, 
+    customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, third_id, is_seller, 
+    is_temp_cust, login_key, is_site_manager
+  </sql>
+  <sql id="where">
+    <where>
+      <if test="customerUsername != null" >
+       AND customer_username = #{customerUsername,jdbcType=VARCHAR}
+      </if>
+      <if test="customerPassword != null" >
+        AND customer_password = #{customerPassword,jdbcType=VARCHAR}
+      </if>
+      <if test="customerNickname != null" >
+        AND customer_nickname = #{customerNickname,jdbcType=VARCHAR}
+      </if>
+      <if test="isMobile != null" >
+        AND is_mobile = #{isMobile,jdbcType=CHAR}
+      </if>
+      <if test="isEmail != null" >
+        AND  is_email = #{isEmail,jdbcType=CHAR}
+      </if>
+      <if test="isFlag != null" >
+        AND   is_flag = #{isFlag,jdbcType=CHAR}
+      </if>
+      <if test="loginIp != null" >
+        AND  login_ip = #{loginIp,jdbcType=VARCHAR}
+      </if>
+      <if test="loginTime != null" >
+        AND  login_time = #{loginTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTime != null" >
+        AND create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modifiedTime != null" >
+        AND  modified_time = #{modifiedTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="delFlag != null" >
+        AND  del_flag = #{delFlag,jdbcType=CHAR}
+      </if>
+      <if test="delTime != null" >
+        AND  del_time = #{delTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="customerImg != null" >
+        AND  customer_img = #{customerImg,jdbcType=VARCHAR}
+      </if>
+      <if test="captcha != null" >
+        AND captcha = #{captcha,jdbcType=VARCHAR}
+      </if>
+      <if test="aeadTime != null" >
+        AND  aead_time = #{aeadTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="pwdCaptcha != null" >
+        AND  pwd_captcha = #{pwdCaptcha,jdbcType=VARCHAR}
+      </if>
+      <if test="pwdAeadTime != null" >
+        AND  pwd_aead_time = #{pwdAeadTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="thirdId != null" >
+        AND  third_id = #{thirdId,jdbcType=BIGINT}
+      </if>
+      <if test="isSeller != null" >
+        AND is_seller = #{isSeller,jdbcType=CHAR}
+      </if>
+      <if test="isTempCust != null" >
+        AND  is_temp_cust = #{isTempCust,jdbcType=CHAR}
+      </if>
+      <if test="loginKey != null" >
+        AND  login_key = #{loginKey,jdbcType=VARCHAR}
+      </if>
+      <if test="isSiteManager != null" >
+        AND  is_site_manager = #{isSiteManager,jdbcType=CHAR}
+      </if>
+    </where>
+  </sql>
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from np_customer
+    where customer_id = #{customerId,jdbcType=BIGINT}
+  </select>
+  <select id="getByMap" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from np_customer
+    <include refid="where" />
+  </select>
+  <select id="getListByMap" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from np_customer
+    <include refid="where" />
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from np_customer
+    where customer_id = #{customerId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bean.model.Customer" useGeneratedKeys="true" keyProperty="customerId">
+    insert into np_customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="customerUsername != null" >
+        customer_username,
+      </if>
+      <if test="customerPassword != null" >
+        customer_password,
+      </if>
+      <if test="customerNickname != null" >
+        customer_nickname,
+      </if>
+      <if test="isMobile != null" >
+        is_mobile,
+      </if>
+      <if test="isEmail != null" >
+        is_email,
+      </if>
+      <if test="isFlag != null" >
+        is_flag,
+      </if>
+      <if test="loginIp != null" >
+        login_ip,
+      </if>
+      <if test="loginTime != null" >
+        login_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifiedTime != null" >
+        modified_time,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="delTime != null" >
+        del_time,
+      </if>
+      <if test="customerImg != null" >
+        customer_img,
+      </if>
+      <if test="captcha != null" >
+        captcha,
+      </if>
+      <if test="aeadTime != null" >
+        aead_time,
+      </if>
+      <if test="pwdCaptcha != null" >
+        pwd_captcha,
+      </if>
+      <if test="pwdAeadTime != null" >
+        pwd_aead_time,
+      </if>
+      <if test="thirdId != null" >
+        third_id,
+      </if>
+      <if test="isSeller != null" >
+        is_seller,
+      </if>
+      <if test="isTempCust != null" >
+        is_temp_cust,
+      </if>
+      <if test="loginKey != null" >
+        login_key,
+      </if>
+      <if test="isSiteManager != null" >
+        is_site_manager,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="customerUsername != null" >
+        #{customerUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPassword != null" >
+        #{customerPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="customerNickname != null" >
+        #{customerNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="isMobile != null" >
+        #{isMobile,jdbcType=CHAR},
+      </if>
+      <if test="isEmail != null" >
+        #{isEmail,jdbcType=CHAR},
+      </if>
+      <if test="isFlag != null" >
+        #{isFlag,jdbcType=CHAR},
+      </if>
+      <if test="loginIp != null" >
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null" >
+        #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedTime != null" >
+        #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="delTime != null" >
+        #{delTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerImg != null" >
+        #{customerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="captcha != null" >
+        #{captcha,jdbcType=VARCHAR},
+      </if>
+      <if test="aeadTime != null" >
+        #{aeadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pwdCaptcha != null" >
+        #{pwdCaptcha,jdbcType=VARCHAR},
+      </if>
+      <if test="pwdAeadTime != null" >
+        #{pwdAeadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thirdId != null" >
+        #{thirdId,jdbcType=BIGINT},
+      </if>
+      <if test="isSeller != null" >
+        #{isSeller,jdbcType=CHAR},
+      </if>
+      <if test="isTempCust != null" >
+        #{isTempCust,jdbcType=CHAR},
+      </if>
+      <if test="loginKey != null" >
+        #{loginKey,jdbcType=VARCHAR},
+      </if>
+      <if test="isSiteManager != null" >
+        #{isSiteManager,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.bean.model.Customer" >
+    update np_customer
+    <set >
+      <if test="customerUsername != null" >
+        customer_username = #{customerUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPassword != null" >
+        customer_password = #{customerPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="customerNickname != null" >
+        customer_nickname = #{customerNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="isMobile != null" >
+        is_mobile = #{isMobile,jdbcType=CHAR},
+      </if>
+      <if test="isEmail != null" >
+        is_email = #{isEmail,jdbcType=CHAR},
+      </if>
+      <if test="isFlag != null" >
+        is_flag = #{isFlag,jdbcType=CHAR},
+      </if>
+      <if test="loginIp != null" >
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null" >
+        login_time = #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedTime != null" >
+        modified_time = #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="delTime != null" >
+        del_time = #{delTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerImg != null" >
+        customer_img = #{customerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="captcha != null" >
+        captcha = #{captcha,jdbcType=VARCHAR},
+      </if>
+      <if test="aeadTime != null" >
+        aead_time = #{aeadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pwdCaptcha != null" >
+        pwd_captcha = #{pwdCaptcha,jdbcType=VARCHAR},
+      </if>
+      <if test="pwdAeadTime != null" >
+        pwd_aead_time = #{pwdAeadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thirdId != null" >
+        third_id = #{thirdId,jdbcType=BIGINT},
+      </if>
+      <if test="isSeller != null" >
+        is_seller = #{isSeller,jdbcType=CHAR},
+      </if>
+      <if test="isTempCust != null" >
+        is_temp_cust = #{isTempCust,jdbcType=CHAR},
+      </if>
+      <if test="loginKey != null" >
+        login_key = #{loginKey,jdbcType=VARCHAR},
+      </if>
+      <if test="isSiteManager != null" >
+        is_site_manager = #{isSiteManager,jdbcType=CHAR},
+      </if>
+    </set>
+    where customer_id = #{customerId,jdbcType=BIGINT}
+  </update>
+
+  <!-- 检测手机存在性 -->
+  <select id="checkMobileExist" parameterType="java.lang.String" resultType="java.lang.Long">
+    select
+    count(1)
+    from np_customer_info i
+    INNER JOIN np_customer c on c.customer_id = i.customer_id
+    where  i.info_mobile= #{mobile} and i.del_flag ='0' and c.del_flag = '0' and c.is_mobile = '1'
+  </select>
+  <!-- 插入用户info -->
+  <insert id="insertSelective" parameterType="com.bean.model.CustomerAllInfo" useGeneratedKeys="true" keyProperty="customerId">
+    insert into np_customer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="thirdId != null">
+        third_id,
+      </if>
+      <if test="isSeller != null">
+        is_seller,
+      </if>
+      <if test="customerUsername != null">
+        customer_username,
+      </if>
+      <if test="customerPassword != null">
+        customer_password,
+      </if>
+      <if test="customerNickname != null">
+        customer_nickname,
+      </if>
+      <if test="isMobile == null">
+        is_mobile,
+      </if>
+      <if test="isEmail == null">
+        is_email,
+      </if>
+      <if test="isMobile != null">
+        is_mobile,
+      </if>
+      <if test="isEmail != null">
+        is_email,
+      </if>
+      <if test="isFlag == null">
+        is_flag,
+      </if>
+      <if test="loginIp != null">
+        login_ip,
+      </if>
+      <if test="loginTime == null">
+        login_time,
+      </if>
+      <if test="createTime == null">
+        create_time,
+      </if>
+      <if test="modifiedTime == null">
+        modified_time,
+      </if>
+      <if test="delFlag == null">
+        del_flag,
+      </if>
+      <if test="delTime == null">
+        del_time,
+      </if>
+      <if test="aeadTime == null">
+        aead_time,
+      </if>
+      <if test="customerImg != null">
+        customer_img,
+      </if>
+      <if test="thirdId == null">
+        third_id,
+      </if>
+      <if test="loginKey != null">
+        login_key,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="customerId != null">
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="thirdId != null">
+        #{thirdId,jdbcType=BIGINT},
+      </if>
+      <if test="isSeller != null">
+        #{isSeller,jdbcType=BIGINT},
+      </if>
+      <if test="customerUsername != null">
+        #{customerUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPassword != null">
+        md5(#{customerPassword,jdbcType=VARCHAR}),
+      </if>
+      <if test="customerNickname != null">
+        #{customerNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="isMobile == null">
+        '0',
+      </if>
+      <if test="isEmail == null">
+        '0',
+      </if>
+      <if test="isMobile != null">
+        #{isMobile,jdbcType=CHAR},
+      </if>
+      <if test="isEmail != null">
+        #{isEmail,jdbcType=CHAR},
+      </if>
+      <if test="isFlag == null">
+        '0',
+      </if>
+      <if test="loginIp != null">
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime == null">
+        SYSDATE(),
+      </if>
+      <if test="createTime == null">
+        SYSDATE(),
+      </if>
+      <if test="modifiedTime == null">
+        SYSDATE(),
+      </if>
+      <if test="delFlag == null">
+        '0',
+      </if>
+      <if test="delTime == null">
+        SYSDATE(),
+      </if>
+      <if test="aeadTime == null">
+        date_sub(now(), INTERVAL 1 DAY),
+      </if>
+      <if test="customerImg != null">
+        #{customerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdId == null">
+        '0',
+      </if>
+      <if test="loginKey != null">
+        #{loginKey,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!-- 插入用户地址 -->
+  <insert id="insertAddress" parameterType="com.bean.model.CustomerAddress">
+    insert into np_customer_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="addressId != null">
+        address_id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="addressName != null">
+        address_name,
+      </if>
+      <if test="infoProvince != null">
+        address_province,
+      </if>
+      <if test="infoCity != null">
+        address_city,
+      </if>
+      <if test="infoCounty != null">
+        address_county,
+      </if>
+      <if test="infoStreet != null">
+        address_street,
+      </if>
+      <if test="infoVillage != null">
+        address_village,
+      </if>
+      <if test="addressDetail != null">
+        address_detail,
+      </if>
+      <if test="addressMoblie != null">
+        address_moblie,
+      </if>
+      <if test="addressPhone != null">
+        address_phone,
+      </if>
+      <if test="addressZip != null">
+        address_zip,
+      </if>
+      <if test="addressPay != null">
+        address_pay,
+      </if>
+      <if test="addressShip != null">
+        address_ship,
+      </if>
+      <if test="addressTime != null">
+        address_time,
+      </if>
+      <if test="addressBillType != null">
+        address_bill_type,
+      </if>
+      <if test="addressBillTitle != null">
+        address_bill_title,
+      </if>
+      <if test="addressBillContent != null">
+        address_bill_content,
+      </if>
+      <if test="addressConfirm != null">
+        address_confirm,
+      </if>
+      <if test="addressEmail != null">
+        address_email,
+      </if>
+      <if test="addressAlias != null">
+        address_alias,
+      </if>
+      <if test="isDefault != null">
+        is_default,
+      </if>
+      <if test="createTime == null">
+        create_time,
+      </if>
+      <if test="modifiedTime == null">
+        modified_time,
+      </if>
+      <if test="delTime == null">
+        del_time,
+      </if>
+      <if test="delFlag == null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="addressId != null">
+        #{addressId,jdbcType=BIGINT},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="addressName != null">
+        #{addressName,jdbcType=VARCHAR},
+      </if>
+      <if test="infoProvince != null">
+        #{infoProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="infoCity != null">
+        #{infoCity,jdbcType=VARCHAR},
+      </if>
+      <if test="infoCounty != null">
+        #{infoCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="infoStreet != null">
+        #{infoStreet,jdbcType=VARCHAR},
+      </if>
+      <if test="infoVillage != null">
+        #{infoVillage,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null">
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="addressMoblie != null">
+        #{addressMoblie,jdbcType=VARCHAR},
+      </if>
+      <if test="addressPhone != null">
+        #{addressPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="addressEmail != null">
+        #{addressEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="addressZip != null">
+        #{addressZip,jdbcType=VARCHAR},
+      </if>
+      <if test="addressPay != null">
+        #{addressPay,jdbcType=VARCHAR},
+      </if>
+      <if test="addressShip != null">
+        #{addressShip,jdbcType=VARCHAR},
+      </if>
+      <if test="addressTime != null">
+        #{addressTime,jdbcType=VARCHAR},
+      </if>
+      <if test="addressBillType != null">
+        #{addressBillType,jdbcType=VARCHAR},
+      </if>
+      <if test="addressBillTitle != null">
+        #{addressBillTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="addressBillContent != null">
+        #{addressBillContent,jdbcType=VARCHAR},
+      </if>
+      <if test="addressConfirm != null">
+        #{addressConfirm,jdbcType=VARCHAR},
+      </if>
+      <if test="addressAlias != null">
+        #{addressAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null">
+        #{isDefault,jdbcType=CHAR},
+      </if>
+      <if test="createTime == null">
+        SYSDATE(),
+      </if>
+      <if test="modifiedTime == null">
+        SYSDATE(),
+      </if>
+      <if test="delTime == null">
+        SYSDATE(),
+      </if>
+      <if test="delFlag == null">
+        '0',
+      </if>
+    </trim>
+  </insert>
+</mapper>

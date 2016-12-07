@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bean.dao.VendorMapper">
+    <resultMap id="BaseResultMap" type="com.bean.model.Vendor">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="vendor_num" property="vendorNum" jdbcType="VARCHAR"/>
+        <result column="vendor_name" property="vendorName" jdbcType="VARCHAR"/>
+        <result column="fk_vendor_type" property="fkVendorType" jdbcType="VARCHAR"/>
+        <result column="fk_cd_vendor_template" property="fkCdVendorTemplate" jdbcType="BIGINT"/>
+        <result column="vendor_del_flag" property="vendorDelFlag" jdbcType="INTEGER"/>
+        <result column="vendor_status" property="vendorStatus" jdbcType="VARCHAR"/>
+        <result column="fk_vendor_addr1" property="fkVendorAddr1" jdbcType="BIGINT"/>
+        <result column="fk_vendor_addr2" property="fkVendorAddr2" jdbcType="BIGINT"/>
+        <result column="fk_vendor_addr3" property="fkVendorAddr3" jdbcType="BIGINT"/>
+        <result column="vendor_position" property="vendorPosition" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="vendor_longitude" property="vendorLongitude" jdbcType="VARCHAR"/>
+        <result column="vendor_latitude" property="vendorLatitude" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, vendor_num, vendor_name, fk_vendor_type, fk_cd_vendor_template, vendor_del_flag, 
+    vendor_status, fk_vendor_addr1, fk_vendor_addr2, fk_vendor_addr3, vendor_position, 
+    update_time, vendor_longitude, vendor_latitude
+  </sql>
+    <sql id="where">
+        <where>
+            <if test="vendorNum != null">
+                AND vendor_num = #{vendorNum,jdbcType=VARCHAR}
+            </if>
+            <if test="vendorName != null">
+                AND vendor_name = #{vendorName,jdbcType=VARCHAR}
+            </if>
+            <if test="fkVendorType != null">
+                AND fk_vendor_type = #{fkVendorType,jdbcType=VARCHAR}
+            </if>
+            <if test="fkCdVendorTemplate != null">
+                AND fk_cd_vendor_template = #{fkCdVendorTemplate,jdbcType=BIGINT}
+            </if>
+            <if test="vendorDelFlag != null">
+                AND vendor_del_flag = #{vendorDelFlag,jdbcType=INTEGER}
+            </if>
+            <if test="vendorStatus != null">
+                AND vendor_status = #{vendorStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="fkVendorAddr1 != null">
+                AND fk_vendor_addr1 = #{fkVendorAddr1,jdbcType=BIGINT}
+            </if>
+            <if test="fkVendorAddr2 != null">
+                AND fk_vendor_addr2 = #{fkVendorAddr2,jdbcType=BIGINT}
+            </if>
+            <if test="fkVendorAddr3 != null">
+                AND fk_vendor_addr3 = #{fkVendorAddr3,jdbcType=BIGINT}
+            </if>
+            <if test="vendorPosition != null">
+                AND vendor_position = #{vendorPosition,jdbcType=VARCHAR}
+            </if>
+            <if test="updateTime != null">
+                AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="vendorLongitude != null">
+                AND vendor_longitude = #{vendorLongitude,jdbcType=VARCHAR}
+            </if>
+            <if test="vendorLatitude != null">
+                AND vendor_latitude = #{vendorLatitude,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_vendor
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="getByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_vendor
+        <include refid="where"/>
+    </select>
+    <select id="getListByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_vendor
+        <include refid="where"/>
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long">
+    delete from cd_vendor
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.bean.model.Vendor">
+        insert into cd_vendor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="vendorNum != null">
+                vendor_num,
+            </if>
+            <if test="vendorName != null">
+                vendor_name,
+            </if>
+            <if test="fkVendorType != null">
+                fk_vendor_type,
+            </if>
+            <if test="fkCdVendorTemplate != null">
+                fk_cd_vendor_template,
+            </if>
+            <if test="vendorDelFlag != null">
+                vendor_del_flag,
+            </if>
+            <if test="vendorStatus != null">
+                vendor_status,
+            </if>
+            <if test="fkVendorAddr1 != null">
+                fk_vendor_addr1,
+            </if>
+            <if test="fkVendorAddr2 != null">
+                fk_vendor_addr2,
+            </if>
+            <if test="fkVendorAddr3 != null">
+                fk_vendor_addr3,
+            </if>
+            <if test="vendorPosition != null">
+                vendor_position,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="vendorLongitude != null">
+                vendor_longitude,
+            </if>
+            <if test="vendorLatitude != null">
+                vendor_latitude,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="vendorNum != null">
+                #{vendorNum,jdbcType=VARCHAR},
+            </if>
+            <if test="vendorName != null">
+                #{vendorName,jdbcType=VARCHAR},
+            </if>
+            <if test="fkVendorType != null">
+                #{fkVendorType,jdbcType=VARCHAR},
+            </if>
+            <if test="fkCdVendorTemplate != null">
+                #{fkCdVendorTemplate,jdbcType=BIGINT},
+            </if>
+            <if test="vendorDelFlag != null">
+                #{vendorDelFlag,jdbcType=INTEGER},
+            </if>
+            <if test="vendorStatus != null">
+                #{vendorStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="fkVendorAddr1 != null">
+                #{fkVendorAddr1,jdbcType=BIGINT},
+            </if>
+            <if test="fkVendorAddr2 != null">
+                #{fkVendorAddr2,jdbcType=BIGINT},
+            </if>
+            <if test="fkVendorAddr3 != null">
+                #{fkVendorAddr3,jdbcType=BIGINT},
+            </if>
+            <if test="vendorPosition != null">
+                #{vendorPosition,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="vendorLongitude != null">
+                #{vendorLongitude,jdbcType=VARCHAR},
+            </if>
+            <if test="vendorLatitude != null">
+                #{vendorLatitude,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.bean.model.Vendor">
+        update cd_vendor
+        <set>
+            <if test="vendorNum != null">
+                vendor_num = #{vendorNum,jdbcType=VARCHAR},
+            </if>
+            <if test="vendorName != null">
+                vendor_name = #{vendorName,jdbcType=VARCHAR},
+            </if>
+            <if test="fkVendorType != null">
+                fk_vendor_type = #{fkVendorType,jdbcType=VARCHAR},
+            </if>
+            <if test="fkCdVendorTemplate != null">
+                fk_cd_vendor_template = #{fkCdVendorTemplate,jdbcType=BIGINT},
+            </if>
+            <if test="vendorDelFlag != null">
+                vendor_del_flag = #{vendorDelFlag,jdbcType=INTEGER},
+            </if>
+            <if test="vendorStatus != null">
+                vendor_status = #{vendorStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="fkVendorAddr1 != null">
+                fk_vendor_addr1 = #{fkVendorAddr1,jdbcType=BIGINT},
+            </if>
+            <if test="fkVendorAddr2 != null">
+                fk_vendor_addr2 = #{fkVendorAddr2,jdbcType=BIGINT},
+            </if>
+            <if test="fkVendorAddr3 != null">
+                fk_vendor_addr3 = #{fkVendorAddr3,jdbcType=BIGINT},
+            </if>
+            <if test="vendorPosition != null">
+                vendor_position = #{vendorPosition,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="vendorLongitude != null">
+                vendor_longitude = #{vendorLongitude,jdbcType=VARCHAR},
+            </if>
+            <if test="vendorLatitude != null">
+                vendor_latitude = #{vendorLatitude,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

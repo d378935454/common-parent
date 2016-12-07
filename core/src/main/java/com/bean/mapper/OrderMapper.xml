@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bean.dao.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.bean.model.Order" >
+        <id column="order_id" property="orderId" jdbcType="BIGINT" />
+        <result column="order_code" property="orderCode" jdbcType="VARCHAR" />
+        <result column="order_price" property="orderPrice" jdbcType="DECIMAL" />
+        <result column="order_pre_price" property="orderPrePrice" jdbcType="DECIMAL" />
+        <result column="order_old_price" property="orderOldPrice" jdbcType="DECIMAL" />
+        <result column="order_status" property="orderStatus" jdbcType="CHAR" />
+        <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+        <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+        <result column="send_express_time" property="sendExpressTime" jdbcType="TIMESTAMP" />
+        <result column="get_goods_time" property="getGoodsTime" jdbcType="TIMESTAMP" />
+        <result column="shopping_addr_id" property="shoppingAddrId" jdbcType="BIGINT" />
+        <result column="shipping_province" property="shippingProvince" jdbcType="VARCHAR" />
+        <result column="shipping_city" property="shippingCity" jdbcType="VARCHAR" />
+        <result column="shipping_county" property="shippingCounty" jdbcType="VARCHAR" />
+        <result column="shipping_address" property="shippingAddress" jdbcType="VARCHAR" />
+        <result column="shipping_person" property="shippingPerson" jdbcType="VARCHAR" />
+        <result column="shipping_phone" property="shippingPhone" jdbcType="VARCHAR" />
+        <result column="shipping_mobile" property="shippingMobile" jdbcType="VARCHAR" />
+        <result column="invoice_title" property="invoiceTitle" jdbcType="VARCHAR" />
+        <result column="invoice_content" property="invoiceContent" jdbcType="VARCHAR" />
+        <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+        <result column="invoice_type" property="invoiceType" jdbcType="CHAR" />
+        <result column="customer_remark" property="customerRemark" jdbcType="VARCHAR" />
+        <result column="pay_id" property="payId" jdbcType="BIGINT" />
+        <result column="order_integral" property="orderIntegral" jdbcType="BIGINT" />
+        <result column="coupon_no" property="couponNo" jdbcType="VARCHAR" />
+        <result column="evaluate_flag" property="evaluateFlag" jdbcType="CHAR" />
+        <result column="express_price" property="expressPrice" jdbcType="DECIMAL" />
+        <result column="shipping_postcode" property="shippingPostcode" jdbcType="VARCHAR" />
+        <result column="order_cancel_time" property="orderCancelTime" jdbcType="TIMESTAMP" />
+        <result column="order_cancel_remark" property="orderCancelRemark" jdbcType="VARCHAR" />
+        <result column="back_price" property="backPrice" jdbcType="DECIMAL" />
+        <result column="business_id" property="businessId" jdbcType="BIGINT" />
+        <result column="dealer_type" property="dealerType" jdbcType="CHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="order_old_code" property="orderOldCode" jdbcType="VARCHAR" />
+        <result column="order_new_status" property="orderNewStatus" jdbcType="CHAR" />
+        <result column="order_cargo_status" property="orderCargoStatus" jdbcType="CHAR" />
+        <result column="order_m_type" property="orderMType" jdbcType="CHAR" />
+        <result column="order_express_type" property="orderExpressType" jdbcType="CHAR" />
+        <result column="order_pre_price_order" property="orderPrePriceOrder" jdbcType="DECIMAL" />
+        <result column="order_line_pay" property="orderLinePay" jdbcType="CHAR" />
+        <result column="shipping_county_id" property="shippingCountyId" jdbcType="INTEGER" />
+        <result column="ware_id" property="wareId" jdbcType="BIGINT" />
+        <result column="ware_name" property="wareName" jdbcType="VARCHAR" />
+        <result column="order_mode" property="orderMode" jdbcType="CHAR" />
+        <result column="vending_id" property="vendingId" jdbcType="BIGINT" />
+        <result column="vending_aisle_num" property="vendingAisleNum" jdbcType="VARCHAR" />
+        <result column="order_distribution_status" property="orderDistributionStatus" jdbcType="CHAR" />
+        <result column="boss_flag" property="bossFlag" jdbcType="CHAR" />
+        <result column="is_success" property="isSuccess" jdbcType="BIT" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    order_id, order_code, order_price, order_pre_price, order_old_price, order_status,
+    customer_id, pay_time, send_express_time, get_goods_time, shopping_addr_id, shipping_province,
+    shipping_city, shipping_county, shipping_address, shipping_person, shipping_phone,
+    shipping_mobile, invoice_title, invoice_content, del_flag, invoice_type, customer_remark,
+    pay_id, order_integral, coupon_no, evaluate_flag, express_price, shipping_postcode,
+    order_cancel_time, order_cancel_remark, back_price, business_id, dealer_type, create_time,
+    order_old_code, order_new_status, order_cargo_status, order_m_type, order_express_type,
+    order_pre_price_order, order_line_pay, shipping_county_id, ware_id, ware_name, order_mode,
+    vending_id, vending_aisle_num, order_distribution_status, boss_flag, is_success
+  </sql>
+    <sql id="where">
+        <where>
+            <if test="orderCode != null">
+                and order_code = #{orderCode,jdbcType=VARCHAR}
+            </if>
+            <if test="orderPrice != null">
+                and order_price = #{orderPrice,jdbcType=DECIMAL}
+            </if>
+            <if test="orderPrePrice != null">
+                and order_pre_price = #{orderPrePrice,jdbcType=DECIMAL}
+            </if>
+            <if test="orderOldPrice != null">
+                and order_old_price = #{orderOldPrice,jdbcType=DECIMAL}
+            </if>
+            <if test="orderStatus != null">
+                and order_status = #{orderStatus,jdbcType=CHAR}
+            </if>
+            <if test="customerId != null">
+                and customer_id = #{customerId,jdbcType=BIGINT}
+            </if>
+            <if test="payTime != null">
+                and pay_time = #{payTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="sendExpressTime != null">
+                and send_express_time = #{sendExpressTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="getGoodsTime != null">
+                and get_goods_time = #{getGoodsTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="shoppingAddrId != null">
+                and shopping_addr_id = #{shoppingAddrId,jdbcType=BIGINT}
+            </if>
+            <if test="shippingProvince != null">
+                and shipping_province = #{shippingProvince,jdbcType=VARCHAR}
+            </if>
+            <if test="shippingCity != null">
+                and shipping_city = #{shippingCity,jdbcType=VARCHAR}
+            </if>
+            <if test="shippingCounty != null">
+                and shipping_county = #{shippingCounty,jdbcType=VARCHAR}
+            </if>
+            <if test="shippingAddress != null">
+                and shipping_address = #{shippingAddress,jdbcType=VARCHAR}
+            </if>
+            <if test="shippingPerson != null">
+                and shipping_person = #{shippingPerson,jdbcType=VARCHAR}
+            </if>
+            <if test="shippingPhone != null">
+                and shipping_phone = #{shippingPhone,jdbcType=VARCHAR}
+            </if>
+            <if test="shippingMobile != null">
+                and shipping_mobile = #{shippingMobile,jdbcType=VARCHAR}
+            </if>
+            <if test="invoiceTitle != null">
+                and invoice_title = #{invoiceTitle,jdbcType=VARCHAR}
+            </if>
+            <if test="invoiceContent != null">
+                and invoice_content = #{invoiceContent,jdbcType=VARCHAR}
+            </if>
+            <if test="delFlag != null">
+                and del_flag = #{delFlag,jdbcType=CHAR}
+            </if>
+            <if test="invoiceType != null">
+                and invoice_type = #{invoiceType,jdbcType=CHAR}
+            </if>
+            <if test="customerRemark != null">
+                and customer_remark = #{customerRemark,jdbcType=VARCHAR}
+            </if>
+            <if test="payId != null">
+                and pay_id = #{payId,jdbcType=BIGINT}
+            </if>
+            <if test="orderIntegral != null">
+                and order_integral = #{orderIntegral,jdbcType=BIGINT}
+            </if>
+            <if test="couponNo != null">
+                and coupon_no = #{couponNo,jdbcType=VARCHAR}
+            </if>
+            <if test="evaluateFlag != null">
+                and evaluate_flag = #{evaluateFlag,jdbcType=CHAR}
+            </if>
+            <if test="expressPrice != null">
+                and express_price = #{expressPrice,jdbcType=DECIMAL}
+            </if>
+            <if test="shippingPostcode != null">
+                and shipping_postcode = #{shippingPostcode,jdbcType=VARCHAR}
+            </if>
+            <if test="orderCancelTime != null">
+                and order_cancel_time = #{orderCancelTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="orderCancelRemark != null">
+                and order_cancel_remark = #{orderCancelRemark,jdbcType=VARCHAR}
+            </if>
+            <if test="backPrice != null">
+                and back_price = #{backPrice,jdbcType=DECIMAL}
+            </if>
+            <if test="businessId != null">
+                and business_id = #{businessId,jdbcType=BIGINT}
+            </if>
+            <if test="dealerType != null">
+                and dealer_type = #{dealerType,jdbcType=CHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="orderOldCode != null">
+                and order_old_code = #{orderOldCode,jdbcType=VARCHAR}
+            </if>
+            <if test="orderNewStatus != null">
+                and order_new_status = #{orderNewStatus,jdbcType=CHAR}
+            </if>
+            <if test="orderCargoStatus != null">
+                and order_cargo_status = #{orderCargoStatus,jdbcType=CHAR}
+            </if>
+            <if test="orderMType != null">
+                and order_m_type = #{orderMType,jdbcType=CHAR}
+            </if>
+            <if test="orderExpressType != null">
+                and order_express_type = #{orderExpressType,jdbcType=CHAR}
+            </if>
+            <if test="orderPrePriceOrder != null">
+                and order_pre_price_order = #{orderPrePriceOrder,jdbcType=DECIMAL}
+            </if>
+            <if test="orderLinePay != null">
+                and order_line_pay = #{orderLinePay,jdbcType=CHAR}
+            </if>
+            <if test="shippingCountyId != null">
+                and shipping_county_id = #{shippingCountyId,jdbcType=INTEGER}
+            </if>
+            <if test="wareId != null">
+                and ware_id = #{wareId,jdbcType=BIGINT}
+            </if>
+            <if test="wareName != null">
+                and ware_name = #{wareName,jdbcType=VARCHAR}
+            </if>
+            <if test="orderMode != null">
+                and order_mode = #{orderMode,jdbcType=CHAR}
+            </if>
+            <if test="vendingId != null">
+                and vending_id = #{vendingId,jdbcType=BIGINT}
+            </if>
+            <if test="orderDistributionStatus != null">
+                and order_distribution_status = #{orderDistributionStatus,jdbcType=CHAR}
+            </if>
+            <if test="bossFlag != null">
+                and boss_flag = #{bossFlag,jdbcType=CHAR}
+            </if>
+            <if test="isSuccess != null">
+                and is_success = #{isSuccess,jdbcType=BIT}
+            </if>
+        </where>
+    </sql>
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from np_order
+        where order_id = #{orderId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long">
+    delete from np_order
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.bean.model.Order" useGeneratedKeys="true" keyProperty="orderId">
+        insert into np_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="orderCode != null">
+                order_code,
+            </if>
+            <if test="orderPrice != null">
+                order_price,
+            </if>
+            <if test="orderPrePrice != null">
+                order_pre_price,
+            </if>
+            <if test="orderOldPrice != null">
+                order_old_price,
+            </if>
+            <if test="orderStatus != null">
+                order_status,
+            </if>
+            <if test="rfidCode != null">
+                customer_id,
+            </if>
+            <if test="payTime != null">
+                pay_time,
+            </if>
+            <if test="sendExpressTime != null">
+                send_express_time,
+            </if>
+            <if test="getGoodsTime != null">
+                get_goods_time,
+            </if>
+            <if test="shoppingAddrId != null">
+                shopping_addr_id,
+            </if>
+            <if test="shippingProvince != null">
+                shipping_province,
+            </if>
+            <if test="shippingCity != null">
+                shipping_city,
+            </if>
+            <if test="shippingCounty != null">
+                shipping_county,
+            </if>
+            <if test="shippingAddress != null">
+                shipping_address,
+            </if>
+            <if test="shippingPerson != null">
+                shipping_person,
+            </if>
+            <if test="shippingPhone != null">
+                shipping_phone,
+            </if>
+            <if test="shippingMobile != null">
+                shipping_mobile,
+            </if>
+            <if test="invoiceTitle != null">
+                invoice_title,
+            </if>
+            <if test="invoiceContent != null">
+                invoice_content,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="invoiceType != null">
+                invoice_type,
+            </if>
+            <if test="customerRemark != null">
+                customer_remark,
+            </if>
+            <if test="payId != null">
+                pay_id,
+            </if>
+            <if test="orderIntegral != null">
+                order_integral,
+            </if>
+            <if test="couponNo != null">
+                coupon_no,
+            </if>
+            <if test="evaluateFlag != null">
+                evaluate_flag,
+            </if>
+            <if test="expressPrice != null">
+                express_price,
+            </if>
+            <if test="shippingPostcode != null">
+                shipping_postcode,
+            </if>
+            <if test="orderCancelTime != null">
+                order_cancel_time,
+            </if>
+            <if test="orderCancelRemark != null">
+                order_cancel_remark,
+            </if>
+            <if test="backPrice != null">
+                back_price,
+            </if>
+            <if test="businessId != null">
+                business_id,
+            </if>
+            <if test="dealerType != null">
+                dealer_type,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="orderOldCode != null">
+                order_old_code,
+            </if>
+            <if test="orderNewStatus != null">
+                order_new_status,
+            </if>
+            <if test="orderCargoStatus != null">
+                order_cargo_status,
+            </if>
+            <if test="orderMType != null">
+                order_m_type,
+            </if>
+            <if test="orderExpressType != null">
+                order_express_type,
+            </if>
+            <if test="orderPrePriceOrder != null">
+                order_pre_price_order,
+            </if>
+            <if test="orderLinePay != null">
+                order_line_pay,
+            </if>
+            <if test="shippingCountyId != null">
+                shipping_county_id,
+            </if>
+            <if test="wareId != null">
+                ware_id,
+            </if>
+            <if test="wareName != null">
+                ware_name,
+            </if>
+            <if test="orderMode != null">
+                order_mode,
+            </if>
+            <if test="vendingId != null">
+                vending_id,
+            </if>
+            <if test="vendingAisleNum != null" >
+                vending_aisle_num,
+            </if>
+            <if test="orderDistributionStatus != null">
+                order_distribution_status,
+            </if>
+            <if test="bossFlag != null">
+                boss_flag,
+            </if>
+            <if test="isSuccess != null">
+                is_success,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                #{orderId,jdbcType=BIGINT},
+            </if>
+            <if test="orderCode != null">
+                #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderPrice != null">
+                #{orderPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="orderPrePrice != null">
+                #{orderPrePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="orderOldPrice != null">
+                #{orderOldPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="orderStatus != null">
+                #{orderStatus,jdbcType=CHAR},
+            </if>
+            <if test="rfidCode != null">
+                (SELECT ccc.customer_id
+                from cd_customer_card ccc
+                WHERE ccc.rfid_code=#{rfidCode,jdbcType=VARCHAR}),
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sendExpressTime != null">
+                #{sendExpressTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="getGoodsTime != null">
+                #{getGoodsTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shoppingAddrId != null">
+                #{shoppingAddrId,jdbcType=BIGINT},
+            </if>
+            <if test="shippingProvince != null">
+                #{shippingProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="shippingCity != null">
+                #{shippingCity,jdbcType=VARCHAR},
+            </if>
+            <if test="shippingCounty != null">
+                #{shippingCounty,jdbcType=VARCHAR},
+            </if>
+            <if test="shippingAddress != null">
+                #{shippingAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="shippingPerson != null">
+                #{shippingPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="shippingPhone != null">
+                #{shippingPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="shippingMobile != null">
+                #{shippingMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="invoiceTitle != null">
+                #{invoiceTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="invoiceContent != null">
+                #{invoiceContent,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=CHAR},
+            </if>
+            <if test="invoiceType != null">
+                #{invoiceType,jdbcType=CHAR},
+            </if>
+            <if test="customerRemark != null">
+                #{customerRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="payId != null">
+                #{payId,jdbcType=BIGINT},
+            </if>
+            <if test="orderIntegral != null">
+                #{orderIntegral,jdbcType=BIGINT},
+            </if>
+            <if test="couponNo != null">
+                #{couponNo,jdbcType=VARCHAR},
+            </if>
+            <if test="evaluateFlag != null">
+                #{evaluateFlag,jdbcType=CHAR},
+            </if>
+            <if test="expressPrice != null">
+                #{expressPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="shippingPostcode != null">
+                #{shippingPostcode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderCancelTime != null">
+                #{orderCancelTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderCancelRemark != null">
+                #{orderCancelRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="backPrice != null">
+                #{backPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="businessId != null">
+                #{businessId,jdbcType=BIGINT},
+            </if>
+            <if test="dealerType != null">
+                #{dealerType,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderOldCode != null">
+                #{orderOldCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNewStatus != null">
+                #{orderNewStatus,jdbcType=CHAR},
+            </if>
+            <if test="orderCargoStatus != null">
+                #{orderCargoStatus,jdbcType=CHAR},
+            </if>
+            <if test="orderMType != null">
+                #{orderMType,jdbcType=CHAR},
+            </if>
+            <if test="orderExpressType != null">
+                #{orderExpressType,jdbcType=CHAR},
+            </if>
+            <if test="orderPrePriceOrder != null">
+                #{orderPrePriceOrder,jdbcType=DECIMAL},
+            </if>
+            <if test="orderLinePay != null">
+                #{orderLinePay,jdbcType=CHAR},
+            </if>
+            <if test="shippingCountyId != null">
+                #{shippingCountyId,jdbcType=INTEGER},
+            </if>
+            <if test="wareId != null">
+                #{wareId,jdbcType=BIGINT},
+            </if>
+            <if test="wareName != null">
+                #{wareName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderMode != null">
+                #{orderMode,jdbcType=CHAR},
+            </if>
+            <if test="vendingId != null">
+                #{vendingId,jdbcType=BIGINT},
+            </if>
+            <if test="vendingAisleNum != null" >
+                #{vendingAisleNum,jdbcType=VARCHAR},
+            </if>
+            <if test="orderDistributionStatus != null">
+                #{orderDistributionStatus,jdbcType=CHAR},
+            </if>
+            <if test="bossFlag != null">
+                #{bossFlag,jdbcType=CHAR},
+            </if>
+            <if test="isSuccess != null">
+                #{isSuccess,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.bean.model.Order">
+        update np_order
+        <set>
+            <if test="orderCode != null">
+                order_code = #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderPrice != null">
+                order_price = #{orderPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="orderPrePrice != null">
+                order_pre_price = #{orderPrePrice,jdbcType=DECIMAL},
+            </if>
+            <if test="orderOldPrice != null">
+                order_old_price = #{orderOldPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus,jdbcType=CHAR},
+            </if>
+            <if test="customerId != null">
+                customer_id = #{customerId,jdbcType=BIGINT},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sendExpressTime != null">
+                send_express_time = #{sendExpressTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="getGoodsTime != null">
+                get_goods_time = #{getGoodsTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shoppingAddrId != null">
+                shopping_addr_id = #{shoppingAddrId,jdbcType=BIGINT},
+            </if>
+            <if test="shippingProvince != null">
+                shipping_province = #{shippingProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="shippingCity != null">
+                shipping_city = #{shippingCity,jdbcType=VARCHAR},
+            </if>
+            <if test="shippingCounty != null">
+                shipping_county = #{shippingCounty,jdbcType=VARCHAR},
+            </if>
+            <if test="shippingAddress != null">
+                shipping_address = #{shippingAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="shippingPerson != null">
+                shipping_person = #{shippingPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="shippingPhone != null">
+                shipping_phone = #{shippingPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="shippingMobile != null">
+                shipping_mobile = #{shippingMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="invoiceTitle != null">
+                invoice_title = #{invoiceTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="invoiceContent != null">
+                invoice_content = #{invoiceContent,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=CHAR},
+            </if>
+            <if test="invoiceType != null">
+                invoice_type = #{invoiceType,jdbcType=CHAR},
+            </if>
+            <if test="customerRemark != null">
+                customer_remark = #{customerRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="payId != null">
+                pay_id = #{payId,jdbcType=BIGINT},
+            </if>
+            <if test="orderIntegral != null">
+                order_integral = #{orderIntegral,jdbcType=BIGINT},
+            </if>
+            <if test="couponNo != null">
+                coupon_no = #{couponNo,jdbcType=VARCHAR},
+            </if>
+            <if test="evaluateFlag != null">
+                evaluate_flag = #{evaluateFlag,jdbcType=CHAR},
+            </if>
+            <if test="expressPrice != null">
+                express_price = #{expressPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="shippingPostcode != null">
+                shipping_postcode = #{shippingPostcode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderCancelTime != null">
+                order_cancel_time = #{orderCancelTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderCancelRemark != null">
+                order_cancel_remark = #{orderCancelRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="backPrice != null">
+                back_price = #{backPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="businessId != null">
+                business_id = #{businessId,jdbcType=BIGINT},
+            </if>
+            <if test="dealerType != null">
+                dealer_type = #{dealerType,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderOldCode != null">
+                order_old_code = #{orderOldCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNewStatus != null">
+                order_new_status = #{orderNewStatus,jdbcType=CHAR},
+            </if>
+            <if test="orderCargoStatus != null">
+                order_cargo_status = #{orderCargoStatus,jdbcType=CHAR},
+            </if>
+            <if test="orderMType != null">
+                order_m_type = #{orderMType,jdbcType=CHAR},
+            </if>
+            <if test="orderExpressType != null">
+                order_express_type = #{orderExpressType,jdbcType=CHAR},
+            </if>
+            <if test="orderPrePriceOrder != null">
+                order_pre_price_order = #{orderPrePriceOrder,jdbcType=DECIMAL},
+            </if>
+            <if test="orderLinePay != null">
+                order_line_pay = #{orderLinePay,jdbcType=CHAR},
+            </if>
+            <if test="shippingCountyId != null">
+                shipping_county_id = #{shippingCountyId,jdbcType=INTEGER},
+            </if>
+            <if test="wareId != null">
+                ware_id = #{wareId,jdbcType=BIGINT},
+            </if>
+            <if test="wareName != null">
+                ware_name = #{wareName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderMode != null">
+                order_mode = #{orderMode,jdbcType=CHAR},
+            </if>
+            <if test="vendingId != null">
+                vending_id = #{vendingId,jdbcType=BIGINT},
+            </if>
+            <if test="orderDistributionStatus != null">
+                order_distribution_status = #{orderDistributionStatus,jdbcType=CHAR},
+            </if>
+            <if test="bossFlag != null">
+                boss_flag = #{bossFlag,jdbcType=CHAR},
+            </if>
+            <if test="isSuccess != null">
+                is_success = #{isSuccess,jdbcType=BIT},
+            </if>
+        </set>
+        where order_id = #{orderId,jdbcType=BIGINT}
+    </update>
+    <select id="getListByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List"/>
+    from np_order
+    <include refid="where"/>
+</select>
+    <select id="getByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from np_order
+        <include refid="where"/>
+    </select>
+</mapper>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bean.dao.CaptchaRecordMapper">
+    <resultMap id="BaseResultMap" type="com.bean.model.CaptchaRecord">
+        <id column="captcha_id" property="captchaId" jdbcType="BIGINT"/>
+        <result column="target_mobile" property="targetMobile" jdbcType="VARCHAR"/>
+        <result column="check_code" property="checkCode" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="operate_type" property="operateType" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    captcha_id, target_mobile, check_code, create_time, operate_type
+  </sql>
+    <sql id="where">
+        <where>
+            <if test="targetMobile != null">
+                AND target_mobile = #{targetMobile,jdbcType=VARCHAR}
+            </if>
+            <if test="checkCode != null">
+                AND check_code = #{checkCode,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                AND create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="operateType != null">
+                AND operate_type = #{operateType,jdbcType=BIGINT}
+            </if>
+        </where>
+    </sql>
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_captcha_record
+        where captcha_id = #{captchaId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long">
+    delete from cd_captcha_record
+    where captcha_id = #{captchaId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.bean.model.CaptchaRecord">
+        insert into cd_captcha_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="captchaId != null">
+                captcha_id,
+            </if>
+            <if test="targetMobile != null">
+                target_mobile,
+            </if>
+            <if test="checkCode != null">
+                check_code,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="operateType != null">
+                operate_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="captchaId != null">
+                #{captchaId,jdbcType=BIGINT},
+            </if>
+            <if test="targetMobile != null">
+                #{targetMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="checkCode != null">
+                #{checkCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operateType != null">
+                #{operateType,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.bean.model.CaptchaRecord">
+        update cd_captcha_record
+        <set>
+            <if test="targetMobile != null">
+                target_mobile = #{targetMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="checkCode != null">
+                check_code = #{checkCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operateType != null">
+                operate_type = #{operateType,jdbcType=BIGINT},
+            </if>
+        </set>
+        where captcha_id = #{captchaId,jdbcType=BIGINT}
+    </update>
+    <select id="getListByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_captcha_record
+        <include refid="where"/>
+    </select>
+    <select id="getByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_captcha_record
+        <include refid="where"/>
+    </select>
+</mapper>

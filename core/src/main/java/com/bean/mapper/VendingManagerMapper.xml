@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bean.dao.VendingManagerMapper">
+    <resultMap id="BaseResultMap" type="com.bean.model.VendingManager">
+        <id column="vending_manager_id" property="vendingManagerId" jdbcType="BIGINT"/>
+        <result column="vending_id" property="vendingId" jdbcType="BIGINT"/>
+        <result column="manager_code" property="managerCode" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="pwd" property="pwd" jdbcType="VARCHAR"/>
+        <result column="rfid_code" property="rfidCode" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    vending_manager_id, vending_id, manager_code, name, pwd, rfid_code
+  </sql>
+    <sql id="where">
+        <where>
+            <if test="vendingId != null">
+                AND vending_id = #{vendingId,jdbcType=BIGINT}
+            </if>
+            <if test="managerCode != null">
+                AND manager_code = #{managerCode,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null">
+                AND name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="pwd != null">
+                AND pwd = #{pwd,jdbcType=VARCHAR}
+            </if>
+            <if test="rfidCode != null">
+                AND rfid_code = #{rfidCode,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_vending_manager
+        where vending_manager_id = #{vendingManagerId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long">
+    delete from cd_vending_manager
+    where vending_manager_id = #{vendingManagerId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.bean.model.VendingManager">
+        insert into cd_vending_manager
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="vendingManagerId != null">
+                vending_manager_id,
+            </if>
+            <if test="vendingId != null">
+                vending_id,
+            </if>
+            <if test="managerCode != null">
+                manager_code,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="pwd != null">
+                pwd,
+            </if>
+            <if test="rfidCode != null">
+                rfid_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="vendingManagerId != null">
+                #{vendingManagerId,jdbcType=BIGINT},
+            </if>
+            <if test="vendingId != null">
+                #{vendingId,jdbcType=BIGINT},
+            </if>
+            <if test="managerCode != null">
+                #{managerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null">
+                #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="rfidCode != null">
+                #{rfidCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.bean.model.VendingManager">
+        update cd_vending_manager
+        <set>
+            <if test="vendingId != null">
+                vending_id = #{vendingId,jdbcType=BIGINT},
+            </if>
+            <if test="managerCode != null">
+                manager_code = #{managerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null">
+                pwd = #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="rfidCode != null">
+                rfid_code = #{rfidCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where vending_manager_id = #{vendingManagerId,jdbcType=BIGINT}
+    </update>
+    <select id="getListByMap" resultMap="BaseResultMap" parameterType="com.bean.model.VendingManager">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_vending_manager
+
+        <include refid="where"/>
+    </select>
+
+    <!--验证售卖机管理员-->
+    <select id="validateManager" resultType="int" parameterType="java.util.Map">
+    SELECT COUNT(*)
+    FROM
+    cd_vending_manager
+    WHERE manager_code=#{managerCode,jdbcType=VARCHAR}
+    AND pwd=#{passWord,jdbcType=VARCHAR}
+    AND vending_id=#{vendingCode,jdbcType=VARCHAR}
+  </select>
+</mapper>

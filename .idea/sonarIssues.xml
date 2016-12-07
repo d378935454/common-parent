@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="issues">
+    <option name="index">
+      <map>
+        <entry key="/Dummy.txt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/a.dummy">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/fragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/java 软件/jhfarm/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/java 软件/jhfarm/src/main/java/com/ld/pulgin/mybatis/plugin/PagePlugin.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_boss_site/src/main/webapp/jsp/couponGift/coupongiftlist.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_boss_site/src/main/webapp/jsp/vending/canbinetlist.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_core/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_core/src/main/java/com/ningpai/util/MyLogger.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_core/src/main/java/com/ningpai/util/URLInterceptor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_core/src/main/java/com/ningpai/vend/bean/Canbinet.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_core/src/main/java/com/ningpai/vend/controller/CustomerCardController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_core/src/main/resources/com/ningpai/vend/mybatis/mapper/CanbinetMapper.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_core/src/main/resources/com/ningpai/web/config/jdbc.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_custom/src/main/java/com/ningpai/customer/controller/CustomerController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_gift/src/main/java/com/ningpai/coupon/bean/CouponGift.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_gift/src/main/java/com/ningpai/coupon/controller/CouponGiftController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_gift/src/main/java/com/ningpai/coupon/dao/CouponGiftMapper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_gift/src/main/java/com/ningpai/coupon/dao/impl/CouponGiftMapperImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_gift/src/main/java/com/ningpai/coupon/service/CouponGiftService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_gift/src/main/java/com/ningpai/coupon/service/impl/CouponGiftServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_gift/src/main/resources/com/ningpai/mybatis/mapper/CouponGiftMapper.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_goods/src/main/resources/com/ningpai/mybatis/mapper/GoodspackageMapper.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_goods/src/main/resources/com/ningpai/mybatis/mapper/MarketMapper.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_haoxianggou_site/src/main/resources/com/ningpai/web/config/dispatcher-servlet.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_m_site/src/main/java/com/ningpai/m/goodspackage/controller/GoodsPackageController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_m_site/src/main/java/com/ningpai/m/order/controller/MSiteOrderController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_m_site/src/main/java/com/ningpai/m/order/util/Token.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_m_site/src/main/java/com/ningpai/m/weixin/controller/ConsultController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_m_site/src/main/resources/com/ningpai/web/config/dispatcher-servlet.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_m_site/src/main/webapp/view/goods/goods_detail.ftl">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_m_site/src/main/webapp/view/goods/goods_package_list.ftl">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/paistore/svnCheck/paistore/paistore_market/src/main/java/com/ningpai/marketing/controller/MarketingController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/project/generator/src/main/java/com/bean/sqlmapper/CanbinetMapper.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="D:/project/generator/src/main/resources/generateConfig.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api-service/src/main/java/com/bean/redis/UserOperationsService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api-service/src/main/java/com/bean/redis/UserOperationsServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api-service/src/main/java/com/bean/service/CanbinetService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api-service/src/main/java/com/bean/service/CanbinetServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api-service/src/main/java/com/bean/service/CustomerCardService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api-service/src/main/java/com/bean/service/CustomerCardServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api-service/src/main/java/com/bean/service/VendingService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/api-service/src/main/java/com/bean/service/VendingServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/caidao-api/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/caidao-api/src/main/java/com/bean/controller/ZYController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/caidao-api/src/main/java/com/bean/redis/RedisServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/caidao-api/src/main/java/com/bean/redis/UserOperationsServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/caidao-api/src/main/resources/spring-mybatis.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/caidao-api/src/main/resources/spring-redis.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/caidao-api/src/main/webapp/css/select2.min.css">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/caidao-api/src/main/webapp/index.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/caidao-api/src/main/webapp/js/common.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/caidao-api/src/main/webapp/js/select2.min.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/caidao-api/src/main/webapp/testdiv.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/caidao-api/src/test/java/com.bean.test/A.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/caidao-api/src/test/java/com.bean.test/B.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/caidao-api/src/test/java/com.bean.test/C.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/caidao-api/src/test/java/com.bean.test/test.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/common-config/src/main/resources/dev/jdbc.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/common-config/src/main/resources/local/jdbc.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/common-config/src/main/resources/local/redis.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/common/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/common/src/main/java/mybatis/basemapper/BaseMapper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/common/src/main/java/utils/Sms.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/common/src/main/java/utils/SmsPost.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/common/src/main/java/utils/Utils.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/dao/CanbinetCellLogMapper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/dao/CustomerCardMapper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/dao/CustomerInfoMapper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/dao/CustomerMapper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/dao/PackageRecordMapper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/mapper/CanbinetCellLogMapper.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/mapper/CanbinetCellMapper.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/mapper/CanbinetMapper.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/mapper/CustomerCardMapper.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/mapper/CustomerInfoMapper.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/mapper/CustomerMapper.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/mapper/OrderMapper.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/mapper/PackageRecordMapper.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/mapper/VendingMapper.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/model/Customer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/model/CustomerAddress.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/model/CustomerAllInfo.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/model/CustomerPointLevel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/model/Goods.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/model/PackageRecord.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/model/Vending.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/model/VillageBean.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/redis/RedisDataSource.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/redis/RedisDataSourceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/redis/RedisService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/core/src/main/java/com/bean/redis/RedisServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/socket/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/socket/src/main/java/com/xx/server/SmartClient.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/socket/src/main/java/com/xx/server/SmartServer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/socket/src/main/java/com/xx/server/message/PacketMessageDispatcher.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/socket/src/main/java/com/xx/server/server/Application.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/socket/src/main/java/com/xx/server/server/ApplicationConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/socket/src/main/java/com/xx/server/server/SocketServer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/socket/src/main/java/com/xx/server/service/CanbinetHandle.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/socket/src/main/java/com/xx/server/util/DatasUtil.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/socket/src/main/resources/context.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/socket/src/main/resources/server.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../sms/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../sms/src/main/java/com/PostController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../sms/src/main/java/com/ThreadTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../sms/src/main/resources/spring-mvc.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../sms/src/main/webapp/WEB-INF/web.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../sms/src/main/webapp/index.jsp">
+          <value>
+            <set />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

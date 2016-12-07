@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bean.dao.GoodsInfoMapper">
+    <resultMap id="BaseResultMap" type="com.bean.model.GoodsInfo">
+        <id column="goods_info_id" property="goodsInfoId" jdbcType="BIGINT"/>
+        <id column="goods_info_img_id" property="goodsInfoImgId" jdbcType="VARCHAR"/>
+        <result column="goods_id" property="goodsId" jdbcType="BIGINT"/>
+        <result column="goods_info_item_no" property="goodsInfoItemNo" jdbcType="VARCHAR"/>
+        <result column="goods_info_name" property="goodsInfoName" jdbcType="VARCHAR"/>
+        <result column="goods_info_subtitle" property="goodsInfoSubtitle" jdbcType="VARCHAR"/>
+        <result column="goods_info_added" property="goodsInfoAdded" jdbcType="CHAR"/>
+        <result column="goods_info_added_time" property="goodsInfoAddedTime" jdbcType="TIMESTAMP"/>
+        <result column="goods_info_unadded_time" property="goodsInfoUnaddedTime" jdbcType="TIMESTAMP"/>
+        <result column="goods_info_stock" property="goodsInfoStock" jdbcType="BIGINT"/>
+        <result column="goods_info_prefer_price" property="goodsInfoPreferPrice" jdbcType="DECIMAL"/>
+        <result column="goods_info_cost_price" property="goodsInfoCostPrice" jdbcType="DECIMAL"/>
+        <result column="goods_info_market_price" property="goodsInfoMarketPrice" jdbcType="DECIMAL"/>
+        <result column="goods_info_weight" property="goodsInfoWeight" jdbcType="DECIMAL"/>
+        <result column="goods_info_create_name" property="goodsInfoCreateName" jdbcType="VARCHAR"/>
+        <result column="goods_info_create_time" property="goodsInfoCreateTime" jdbcType="TIMESTAMP"/>
+        <result column="goods_info_modified_name" property="goodsInfoModifiedName" jdbcType="VARCHAR"/>
+        <result column="goods_info_modified_time" property="goodsInfoModifiedTime" jdbcType="TIMESTAMP"/>
+        <result column="goods_info_del_name" property="goodsInfoDelName" jdbcType="VARCHAR"/>
+        <result column="goods_info_del_time" property="goodsInfoDelTime" jdbcType="TIMESTAMP"/>
+        <result column="goods_info_delflag" property="goodsInfoDelflag" jdbcType="CHAR"/>
+        <result column="third_id" property="thirdId" jdbcType="BIGINT"/>
+        <result column="third_name" property="thirdName" jdbcType="VARCHAR"/>
+        <result column="is_third" property="isThird" jdbcType="CHAR"/>
+        <result column="goods_info_isbn" property="goodsInfoIsbn" jdbcType="VARCHAR"/>
+        <result column="show_list" property="showList" jdbcType="CHAR"/>
+        <result column="show_mobile" property="showMobile" jdbcType="CHAR"/>
+        <result column="is_customer_discount" property="isCustomerDiscount" jdbcType="CHAR"/>
+        <result column="audit_status" property="auditStatus" jdbcType="CHAR"/>
+        <result column="isMailBay" property="ismailbay" jdbcType="CHAR"/>
+        <result column="refuse_reason" property="refuseReason" jdbcType="VARCHAR"/>
+        <result column="vending_price" property="vendingPrice" jdbcType="DECIMAL"/>
+        <result column="frequency" property="frequency" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    goods_info_id, goods_info_img_id, goods_id, goods_info_item_no, goods_info_name, 
+    goods_info_subtitle, goods_info_added, goods_info_added_time, goods_info_unadded_time, 
+    goods_info_stock, goods_info_prefer_price, goods_info_cost_price, goods_info_market_price, 
+    goods_info_weight, goods_info_create_name, goods_info_create_time, goods_info_modified_name, 
+    goods_info_modified_time, goods_info_del_name, goods_info_del_time, goods_info_delflag, 
+    third_id, third_name, is_third, goods_info_isbn, show_list, show_mobile, is_customer_discount, 
+    audit_status, isMailBay, refuse_reason, vending_price, frequency
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from np_goods_info
+        where goods_info_id = #{goodsInfoId,jdbcType=BIGINT}
+        and goods_info_img_id = #{goodsInfoImgId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from np_goods_info
+    where goods_info_id = #{goodsInfoId,jdbcType=BIGINT}
+      and goods_info_img_id = #{goodsInfoImgId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.bean.model.GoodsInfo">
+    insert into np_goods_info (goods_info_id, goods_info_img_id, goods_id, 
+      goods_info_item_no, goods_info_name, goods_info_subtitle, 
+      goods_info_added, goods_info_added_time, goods_info_unadded_time, 
+      goods_info_stock, goods_info_prefer_price, goods_info_cost_price, 
+      goods_info_market_price, goods_info_weight, 
+      goods_info_create_name, goods_info_create_time, 
+      goods_info_modified_name, goods_info_modified_time, 
+      goods_info_del_name, goods_info_del_time, goods_info_delflag, 
+      third_id, third_name, is_third, 
+      goods_info_isbn, show_list, show_mobile, 
+      is_customer_discount, audit_status, isMailBay, 
+      refuse_reason, vending_price, frequency
+      )
+    values (#{goodsInfoId,jdbcType=BIGINT}, #{goodsInfoImgId,jdbcType=VARCHAR}, #{goodsId,jdbcType=BIGINT}, 
+      #{goodsInfoItemNo,jdbcType=VARCHAR}, #{goodsInfoName,jdbcType=VARCHAR}, #{goodsInfoSubtitle,jdbcType=VARCHAR}, 
+      #{goodsInfoAdded,jdbcType=CHAR}, #{goodsInfoAddedTime,jdbcType=TIMESTAMP}, #{goodsInfoUnaddedTime,jdbcType=TIMESTAMP}, 
+      #{goodsInfoStock,jdbcType=BIGINT}, #{goodsInfoPreferPrice,jdbcType=DECIMAL}, #{goodsInfoCostPrice,jdbcType=DECIMAL}, 
+      #{goodsInfoMarketPrice,jdbcType=DECIMAL}, #{goodsInfoWeight,jdbcType=DECIMAL}, 
+      #{goodsInfoCreateName,jdbcType=VARCHAR}, #{goodsInfoCreateTime,jdbcType=TIMESTAMP}, 
+      #{goodsInfoModifiedName,jdbcType=VARCHAR}, #{goodsInfoModifiedTime,jdbcType=TIMESTAMP}, 
+      #{goodsInfoDelName,jdbcType=VARCHAR}, #{goodsInfoDelTime,jdbcType=TIMESTAMP}, #{goodsInfoDelflag,jdbcType=CHAR}, 
+      #{thirdId,jdbcType=BIGINT}, #{thirdName,jdbcType=VARCHAR}, #{isThird,jdbcType=CHAR}, 
+      #{goodsInfoIsbn,jdbcType=VARCHAR}, #{showList,jdbcType=CHAR}, #{showMobile,jdbcType=CHAR}, 
+      #{isCustomerDiscount,jdbcType=CHAR}, #{auditStatus,jdbcType=CHAR}, #{ismailbay,jdbcType=CHAR}, 
+      #{refuseReason,jdbcType=VARCHAR}, #{vendingPrice,jdbcType=DECIMAL}, #{frequency,jdbcType=BIGINT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.bean.model.GoodsInfo">
+        insert into np_goods_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="goodsInfoId != null">
+                goods_info_id,
+            </if>
+            <if test="goodsInfoImgId != null">
+                goods_info_img_id,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="goodsInfoItemNo != null">
+                goods_info_item_no,
+            </if>
+            <if test="goodsInfoName != null">
+                goods_info_name,
+            </if>
+            <if test="goodsInfoSubtitle != null">
+                goods_info_subtitle,
+            </if>
+            <if test="goodsInfoAdded != null">
+                goods_info_added,
+            </if>
+            <if test="goodsInfoAddedTime != null">
+                goods_info_added_time,
+            </if>
+            <if test="goodsInfoUnaddedTime != null">
+                goods_info_unadded_time,
+            </if>
+            <if test="goodsInfoStock != null">
+                goods_info_stock,
+            </if>
+            <if test="goodsInfoPreferPrice != null">
+                goods_info_prefer_price,
+            </if>
+            <if test="goodsInfoCostPrice != null">
+                goods_info_cost_price,
+            </if>
+            <if test="goodsInfoMarketPrice != null">
+                goods_info_market_price,
+            </if>
+            <if test="goodsInfoWeight != null">
+                goods_info_weight,
+            </if>
+            <if test="goodsInfoCreateName != null">
+                goods_info_create_name,
+            </if>
+            <if test="goodsInfoCreateTime != null">
+                goods_info_create_time,
+            </if>
+            <if test="goodsInfoModifiedName != null">
+                goods_info_modified_name,
+            </if>
+            <if test="goodsInfoModifiedTime != null">
+                goods_info_modified_time,
+            </if>
+            <if test="goodsInfoDelName != null">
+                goods_info_del_name,
+            </if>
+            <if test="goodsInfoDelTime != null">
+                goods_info_del_time,
+            </if>
+            <if test="goodsInfoDelflag != null">
+                goods_info_delflag,
+            </if>
+            <if test="thirdId != null">
+                third_id,
+            </if>
+            <if test="thirdName != null">
+                third_name,
+            </if>
+            <if test="isThird != null">
+                is_third,
+            </if>
+            <if test="goodsInfoIsbn != null">
+                goods_info_isbn,
+            </if>
+            <if test="showList != null">
+                show_list,
+            </if>
+            <if test="showMobile != null">
+                show_mobile,
+            </if>
+            <if test="isCustomerDiscount != null">
+                is_customer_discount,
+            </if>
+            <if test="auditStatus != null">
+                audit_status,
+            </if>
+            <if test="ismailbay != null">
+                isMailBay,
+            </if>
+            <if test="refuseReason != null">
+                refuse_reason,
+            </if>
+            <if test="vendingPrice != null">
+                vending_price,
+            </if>
+            <if test="frequency != null">
+                frequency,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="goodsInfoId != null">
+                #{goodsInfoId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsInfoImgId != null">
+                #{goodsInfoImgId,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsInfoItemNo != null">
+                #{goodsInfoItemNo,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsInfoName != null">
+                #{goodsInfoName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsInfoSubtitle != null">
+                #{goodsInfoSubtitle,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsInfoAdded != null">
+                #{goodsInfoAdded,jdbcType=CHAR},
+            </if>
+            <if test="goodsInfoAddedTime != null">
+                #{goodsInfoAddedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="goodsInfoUnaddedTime != null">
+                #{goodsInfoUnaddedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="goodsInfoStock != null">
+                #{goodsInfoStock,jdbcType=BIGINT},
+            </if>
+            <if test="goodsInfoPreferPrice != null">
+                #{goodsInfoPreferPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="goodsInfoCostPrice != null">
+                #{goodsInfoCostPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="goodsInfoMarketPrice != null">
+                #{goodsInfoMarketPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="goodsInfoWeight != null">
+                #{goodsInfoWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="goodsInfoCreateName != null">
+                #{goodsInfoCreateName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsInfoCreateTime != null">
+                #{goodsInfoCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="goodsInfoModifiedName != null">
+                #{goodsInfoModifiedName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsInfoModifiedTime != null">
+                #{goodsInfoModifiedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="goodsInfoDelName != null">
+                #{goodsInfoDelName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsInfoDelTime != null">
+                #{goodsInfoDelTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="goodsInfoDelflag != null">
+                #{goodsInfoDelflag,jdbcType=CHAR},
+            </if>
+            <if test="thirdId != null">
+                #{thirdId,jdbcType=BIGINT},
+            </if>
+            <if test="thirdName != null">
+                #{thirdName,jdbcType=VARCHAR},
+            </if>
+            <if test="isThird != null">
+                #{isThird,jdbcType=CHAR},
+            </if>
+            <if test="goodsInfoIsbn != null">
+                #{goodsInfoIsbn,jdbcType=VARCHAR},
+            </if>
+            <if test="showList != null">
+                #{showList,jdbcType=CHAR},
+            </if>
+            <if test="showMobile != null">
+                #{showMobile,jdbcType=CHAR},
+            </if>
+            <if test="isCustomerDiscount != null">
+                #{isCustomerDiscount,jdbcType=CHAR},
+            </if>
+            <if test="auditStatus != null">
+                #{auditStatus,jdbcType=CHAR},
+            </if>
+            <if test="ismailbay != null">
+                #{ismailbay,jdbcType=CHAR},
+            </if>
+            <if test="refuseReason != null">
+                #{refuseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="vendingPrice != null">
+                #{vendingPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="frequency != null">
+                #{frequency,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bean.model.GoodsInfo">
+        update np_goods_info
+        <set>
+            <if test="goodsId != null">
+                goods_id = #{goodsId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsInfoItemNo != null">
+                goods_info_item_no = #{goodsInfoItemNo,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsInfoName != null">
+                goods_info_name = #{goodsInfoName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsInfoSubtitle != null">
+                goods_info_subtitle = #{goodsInfoSubtitle,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsInfoAdded != null">
+                goods_info_added = #{goodsInfoAdded,jdbcType=CHAR},
+            </if>
+            <if test="goodsInfoAddedTime != null">
+                goods_info_added_time = #{goodsInfoAddedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="goodsInfoUnaddedTime != null">
+                goods_info_unadded_time = #{goodsInfoUnaddedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="goodsInfoStock != null">
+                goods_info_stock = #{goodsInfoStock,jdbcType=BIGINT},
+            </if>
+            <if test="goodsInfoPreferPrice != null">
+                goods_info_prefer_price = #{goodsInfoPreferPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="goodsInfoCostPrice != null">
+                goods_info_cost_price = #{goodsInfoCostPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="goodsInfoMarketPrice != null">
+                goods_info_market_price = #{goodsInfoMarketPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="goodsInfoWeight != null">
+                goods_info_weight = #{goodsInfoWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="goodsInfoCreateName != null">
+                goods_info_create_name = #{goodsInfoCreateName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsInfoCreateTime != null">
+                goods_info_create_time = #{goodsInfoCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="goodsInfoModifiedName != null">
+                goods_info_modified_name = #{goodsInfoModifiedName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsInfoModifiedTime != null">
+                goods_info_modified_time = #{goodsInfoModifiedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="goodsInfoDelName != null">
+                goods_info_del_name = #{goodsInfoDelName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsInfoDelTime != null">
+                goods_info_del_time = #{goodsInfoDelTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="goodsInfoDelflag != null">
+                goods_info_delflag = #{goodsInfoDelflag,jdbcType=CHAR},
+            </if>
+            <if test="thirdId != null">
+                third_id = #{thirdId,jdbcType=BIGINT},
+            </if>
+            <if test="thirdName != null">
+                third_name = #{thirdName,jdbcType=VARCHAR},
+            </if>
+            <if test="isThird != null">
+                is_third = #{isThird,jdbcType=CHAR},
+            </if>
+            <if test="goodsInfoIsbn != null">
+                goods_info_isbn = #{goodsInfoIsbn,jdbcType=VARCHAR},
+            </if>
+            <if test="showList != null">
+                show_list = #{showList,jdbcType=CHAR},
+            </if>
+            <if test="showMobile != null">
+                show_mobile = #{showMobile,jdbcType=CHAR},
+            </if>
+            <if test="isCustomerDiscount != null">
+                is_customer_discount = #{isCustomerDiscount,jdbcType=CHAR},
+            </if>
+            <if test="auditStatus != null">
+                audit_status = #{auditStatus,jdbcType=CHAR},
+            </if>
+            <if test="ismailbay != null">
+                isMailBay = #{ismailbay,jdbcType=CHAR},
+            </if>
+            <if test="refuseReason != null">
+                refuse_reason = #{refuseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="vendingPrice != null">
+                vending_price = #{vendingPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="frequency != null">
+                frequency = #{frequency,jdbcType=BIGINT},
+            </if>
+        </set>
+        where goods_info_id = #{goodsInfoId,jdbcType=BIGINT}
+        and goods_info_img_id = #{goodsInfoImgId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bean.model.GoodsInfo">
+    update np_goods_info
+    set goods_id = #{goodsId,jdbcType=BIGINT},
+      goods_info_item_no = #{goodsInfoItemNo,jdbcType=VARCHAR},
+      goods_info_name = #{goodsInfoName,jdbcType=VARCHAR},
+      goods_info_subtitle = #{goodsInfoSubtitle,jdbcType=VARCHAR},
+      goods_info_added = #{goodsInfoAdded,jdbcType=CHAR},
+      goods_info_added_time = #{goodsInfoAddedTime,jdbcType=TIMESTAMP},
+      goods_info_unadded_time = #{goodsInfoUnaddedTime,jdbcType=TIMESTAMP},
+      goods_info_stock = #{goodsInfoStock,jdbcType=BIGINT},
+      goods_info_prefer_price = #{goodsInfoPreferPrice,jdbcType=DECIMAL},
+      goods_info_cost_price = #{goodsInfoCostPrice,jdbcType=DECIMAL},
+      goods_info_market_price = #{goodsInfoMarketPrice,jdbcType=DECIMAL},
+      goods_info_weight = #{goodsInfoWeight,jdbcType=DECIMAL},
+      goods_info_create_name = #{goodsInfoCreateName,jdbcType=VARCHAR},
+      goods_info_create_time = #{goodsInfoCreateTime,jdbcType=TIMESTAMP},
+      goods_info_modified_name = #{goodsInfoModifiedName,jdbcType=VARCHAR},
+      goods_info_modified_time = #{goodsInfoModifiedTime,jdbcType=TIMESTAMP},
+      goods_info_del_name = #{goodsInfoDelName,jdbcType=VARCHAR},
+      goods_info_del_time = #{goodsInfoDelTime,jdbcType=TIMESTAMP},
+      goods_info_delflag = #{goodsInfoDelflag,jdbcType=CHAR},
+      third_id = #{thirdId,jdbcType=BIGINT},
+      third_name = #{thirdName,jdbcType=VARCHAR},
+      is_third = #{isThird,jdbcType=CHAR},
+      goods_info_isbn = #{goodsInfoIsbn,jdbcType=VARCHAR},
+      show_list = #{showList,jdbcType=CHAR},
+      show_mobile = #{showMobile,jdbcType=CHAR},
+      is_customer_discount = #{isCustomerDiscount,jdbcType=CHAR},
+      audit_status = #{auditStatus,jdbcType=CHAR},
+      isMailBay = #{ismailbay,jdbcType=CHAR},
+      refuse_reason = #{refuseReason,jdbcType=VARCHAR},
+      vending_price = #{vendingPrice,jdbcType=DECIMAL},
+      frequency = #{frequency,jdbcType=BIGINT}
+    where goods_info_id = #{goodsInfoId,jdbcType=BIGINT}
+      and goods_info_img_id = #{goodsInfoImgId,jdbcType=VARCHAR}
+  </update>
+    <update id="updateStockByNo" parameterType="java.util.List">
+        update np_goods_info
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="goods_info_stock =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id= #{item.goodsInfoItemNo,jdbcType=BIGINT}
+                    then #{item.goodsInfoStock,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+        </trim>
+        <where>
+            <foreach collection="list" separator="or" item="itemWhere" index="index">
+                id =#{itemWhere.goodsInfoItemNo,jdbcType=VARCHAR}
+
+            </foreach>
+        </where>
+    </update>
+</mapper>

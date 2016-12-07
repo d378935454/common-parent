@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bean.dao.CardRechargeMapper">
+    <resultMap id="BaseResultMap" type="com.bean.model.CardRecharge">
+        <id column="recharge_id" property="rechargeId" jdbcType="BIGINT"/>
+        <result column="order_num" property="orderNum" jdbcType="VARCHAR"/>
+        <result column="customer_id" property="customerId" jdbcType="BIGINT"/>
+        <result column="recharge_amount" property="rechargeAmount" jdbcType="DECIMAL"/>
+        <result column="present_amount" property="presentAmount" jdbcType="DECIMAL"/>
+        <result column="recharge_type" property="rechargeType" jdbcType="CHAR"/>
+        <result column="recharge_way" property="rechargeWay" jdbcType="CHAR"/>
+        <result column="vending_id" property="vendingId" jdbcType="BIGINT"/>
+        <result column="marketer_id" property="marketerId" jdbcType="BIGINT"/>
+        <result column="pay_status" property="payStatus" jdbcType="CHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    recharge_id, order_num, customer_id, recharge_amount, present_amount, recharge_type, 
+    recharge_way, vending_id, marketer_id, pay_status
+  </sql>
+    <sql id="where">
+        <where>
+            <if test="orderNum != null">
+                AND order_num = #{orderNum,jdbcType=VARCHAR}
+            </if>
+            <if test="customerId != null">
+                AND customer_id = #{customerId,jdbcType=BIGINT}
+            </if>
+            <if test="rechargeAmount != null">
+                AND recharge_amount = #{rechargeAmount,jdbcType=DECIMAL}
+            </if>
+            <if test="presentAmount != null">
+                AND present_amount = #{presentAmount,jdbcType=DECIMAL}
+            </if>
+            <if test="rechargeType != null">
+                AND recharge_type = #{rechargeType,jdbcType=CHAR}
+            </if>
+            <if test="rechargeWay != null">
+                AND recharge_way = #{rechargeWay,jdbcType=CHAR}
+            </if>
+            <if test="vendingId != null">
+                AND vending_id = #{vendingId,jdbcType=BIGINT}
+            </if>
+            <if test="marketerId != null">
+                AND marketer_id = #{marketerId,jdbcType=BIGINT}
+            </if>
+            <if test="payStatus != null">
+                AND pay_status = #{payStatus,jdbcType=CHAR}
+            </if>
+        </where>
+    </sql>
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_card_recharge
+        where recharge_id = #{rechargeId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long">
+    delete from cd_card_recharge
+    where recharge_id = #{rechargeId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.bean.model.CardRecharge">
+        insert into cd_card_recharge
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rechargeId != null">
+                recharge_id,
+            </if>
+            <if test="orderNum != null">
+                order_num,
+            </if>
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="rechargeAmount != null">
+                recharge_amount,
+            </if>
+            <if test="presentAmount != null">
+                present_amount,
+            </if>
+            <if test="rechargeType != null">
+                recharge_type,
+            </if>
+            <if test="rechargeWay != null">
+                recharge_way,
+            </if>
+            <if test="vendingId != null">
+                vending_id,
+            </if>
+            <if test="marketerId != null">
+                marketer_id,
+            </if>
+            <if test="payStatus != null">
+                pay_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="rechargeId != null">
+                #{rechargeId,jdbcType=BIGINT},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null">
+                #{customerId,jdbcType=BIGINT},
+            </if>
+            <if test="rechargeAmount != null">
+                #{rechargeAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="presentAmount != null">
+                #{presentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="rechargeType != null">
+                #{rechargeType,jdbcType=CHAR},
+            </if>
+            <if test="rechargeWay != null">
+                #{rechargeWay,jdbcType=CHAR},
+            </if>
+            <if test="vendingId != null">
+                #{vendingId,jdbcType=BIGINT},
+            </if>
+            <if test="marketerId != null">
+                #{marketerId,jdbcType=BIGINT},
+            </if>
+            <if test="payStatus != null">
+                #{payStatus,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.bean.model.CardRecharge">
+        update cd_card_recharge
+        <set>
+            <if test="orderNum != null">
+                order_num = #{orderNum,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null">
+                customer_id = #{customerId,jdbcType=BIGINT},
+            </if>
+            <if test="rechargeAmount != null">
+                recharge_amount = #{rechargeAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="presentAmount != null">
+                present_amount = #{presentAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="rechargeType != null">
+                recharge_type = #{rechargeType,jdbcType=CHAR},
+            </if>
+            <if test="rechargeWay != null">
+                recharge_way = #{rechargeWay,jdbcType=CHAR},
+            </if>
+            <if test="vendingId != null">
+                vending_id = #{vendingId,jdbcType=BIGINT},
+            </if>
+            <if test="marketerId != null">
+                marketer_id = #{marketerId,jdbcType=BIGINT},
+            </if>
+            <if test="payStatus != null">
+                pay_status = #{payStatus,jdbcType=CHAR},
+            </if>
+        </set>
+        where recharge_id = #{rechargeId,jdbcType=BIGINT}
+    </update>
+    <select id="getListByMap" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_card_recharge
+        <include refid="where"/>
+    </select>
+    <!--会员充值 recharge表-->
+    <insert id="insertCardRecharge" parameterType="java.util.Map">
+        INSERT INTO cd_card_recharge
+        (
+        customer_id,
+        recharge_amount,
+        recharge_type,
+        recharge_way,
+        vending_id,
+        pay_status
+        )
+        VALUE
+        (
+        (SELECT customer_id FROM cd_customer_card WHERE rfid_code=#{rfidCode,jdbcType=VARCHAR}),
+        #{rechargeAmount,jdbcType=DECIMAL},
+        #{rechargeType,jdbcType=VARCHAR},
+        #{rechargeWay,jdbcType=VARCHAR},
+        (
+        SELECT id  FROM cd_vendor WHERE  vendor_num=#{vendingCode,jdbcType=VARCHAR}
+        ),
+        '1'
+        )
+    </insert>
+</mapper>

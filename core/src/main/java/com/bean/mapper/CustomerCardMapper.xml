@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bean.dao.CustomerCardMapper">
+    <resultMap id="BaseResultMap" type="com.bean.model.CustomerCard">
+        <id column="card_id" property="cardId" jdbcType="BIGINT"/>
+        <result column="customer_id" property="customerId" jdbcType="BIGINT"/>
+        <result column="rfid_code" property="rfidCode" jdbcType="VARCHAR"/>
+        <result column="card_code" property="cardCode" jdbcType="VARCHAR"/>
+        <result column="card_pwd" property="cardPwd" jdbcType="VARCHAR"/>
+        <result column="card_balance" property="cardBalance" jdbcType="DECIMAL"/>
+        <result column="issue_date" property="issueDate" jdbcType="TIMESTAMP"/>
+        <result column="issue_operator" property="issueOperator" jdbcType="VARCHAR"/>
+        <result column="marketer_id" property="marketerId" jdbcType="BIGINT"/>
+        <result column="issue_mode" property="issueMode" jdbcType="CHAR"/>
+        <result column="card_status" property="cardStatus" jdbcType="CHAR"/>
+        <result column="del_flag" property="delFlag" jdbcType="CHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    card_id, customer_id, rfid_code, card_code, card_pwd, card_balance, issue_date, issue_operator, 
+    marketer_id, issue_mode, card_status, del_flag
+  </sql>
+    <sql id="where">
+        <where>
+            <if test="customerId != null">
+                AND customer_id = #{customerId,jdbcType=BIGINT}
+            </if>
+            <if test="rfidCode != null">
+                AND rfid_code = #{rfidCode,jdbcType=VARCHAR}
+            </if>
+            <if test="cardCode != null">
+                AND card_code = #{cardCode,jdbcType=VARCHAR}
+            </if>
+            <if test="cardPwd != null">
+                AND card_pwd = #{cardPwd,jdbcType=VARCHAR}
+            </if>
+            <if test="cardBalance != null">
+                AND card_balance = #{cardBalance,jdbcType=DECIMAL}
+            </if>
+            <if test="issueDate != null">
+                AND issue_date = #{issueDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="issueOperator != null">
+                AND issue_operator = #{issueOperator,jdbcType=VARCHAR}
+            </if>
+            <if test="marketerId != null">
+                AND marketer_id = #{marketerId,jdbcType=BIGINT}
+            </if>
+            <if test="issueMode != null">
+                AND issue_mode = #{issueMode,jdbcType=CHAR}
+            </if>
+            <if test="cardStatus != null">
+                AND card_status = #{cardStatus,jdbcType=CHAR}
+            </if>
+            <if test="delFlag != null">
+                AND del_flag = #{delFlag,jdbcType=CHAR}
+            </if>
+        </where>
+    </sql>
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_customer_card
+        where card_id = #{cardId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long">
+    delete from cd_customer_card
+    where card_id = #{cardId,jdbcType=BIGINT}
+  </delete>
+    <select id="getByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_customer_card
+        <include refid="where"/>
+    </select>
+    <insert id="insert" parameterType="com.bean.model.CustomerCard">
+        insert into cd_customer_card
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cardId != null">
+                card_id,
+            </if>
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="rfidCode != null">
+                rfid_code,
+            </if>
+            <if test="cardCode != null">
+                card_code,
+            </if>
+            <if test="cardPwd != null">
+                card_pwd,
+            </if>
+            <if test="cardBalance != null">
+                card_balance,
+            </if>
+            <if test="issueDate != null">
+                issue_date,
+            </if>
+            <if test="issueOperator != null">
+                issue_operator,
+            </if>
+            <if test="marketerId != null">
+                marketer_id,
+            </if>
+            <if test="issueMode != null">
+                issue_mode,
+            </if>
+            <if test="cardStatus != null">
+                card_status,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cardId != null">
+                #{cardId,jdbcType=BIGINT},
+            </if>
+            <if test="customerId != null">
+                #{customerId,jdbcType=BIGINT},
+            </if>
+            <if test="rfidCode != null">
+                #{rfidCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cardCode != null">
+                #{cardCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cardPwd != null">
+                #{cardPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="cardBalance != null">
+                #{cardBalance,jdbcType=DECIMAL},
+            </if>
+            <if test="issueDate != null">
+                #{issueDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="issueOperator != null">
+                #{issueOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="marketerId != null">
+                #{marketerId,jdbcType=BIGINT},
+            </if>
+            <if test="issueMode != null">
+                #{issueMode,jdbcType=CHAR},
+            </if>
+            <if test="cardStatus != null">
+                #{cardStatus,jdbcType=CHAR},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.bean.model.CustomerCard">
+        update cd_customer_card
+        <set>
+            <if test="customerId != null">
+                customer_id = #{customerId,jdbcType=BIGINT},
+            </if>
+            <if test="rfidCode != null">
+                rfid_code = #{rfidCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cardCode != null">
+                card_code = #{cardCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cardPwd != null">
+                card_pwd = #{cardPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="cardBalance != null">
+                card_balance = #{cardBalance,jdbcType=DECIMAL},
+            </if>
+            <if test="issueDate != null">
+                issue_date = #{issueDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="issueOperator != null">
+                issue_operator = #{issueOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="marketerId != null">
+                marketer_id = #{marketerId,jdbcType=BIGINT},
+            </if>
+            <if test="issueMode != null">
+                issue_mode = #{issueMode,jdbcType=CHAR},
+            </if>
+            <if test="cardStatus != null">
+                card_status = #{cardStatus,jdbcType=CHAR},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=CHAR},
+            </if>
+        </set>
+        where card_id = #{cardId,jdbcType=BIGINT}
+    </update>
+    <select id="getListByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_customer_card
+        <include refid="where"/>
+    </select>
+
+    <!--原更新余额-->
+    <!-- <update id="updateCustomerAmount" parameterType="String">
+    UPDATE cd_customer_card t1,
+ (
+	SELECT
+		SUM(
+
+			IF (
+				cr.record_type = "0",
+				1 * cr.amount ,- 1 * cr.amount
+			)
+		) AS amo
+	FROM
+		cd_card_record AS cr
+	WHERE
+		cr.customer_id = (
+			SELECT
+				customer_id
+			FROM
+				cd_customer_card AS cc
+			WHERE
+				cc.rfid_code = #{rfidCode,jdbcType=VARCHAR}
+		)
+) t2
+SET card_balance = t2.amo
+WHERE
+	rfid_code = #{rfidCode,jdbcType=VARCHAR}
+  </update> -->
+
+    <!--更新余额-->
+    <update id="updateCustomerAmount" parameterType="java.util.Map">
+        UPDATE cd_customer_card
+            SET card_balance = card_balance + IF(#{recodeType,jdbcType=VARCHAR} = "0",1*#{amount,jdbcType=DECIMAL},-1*#{amount,jdbcType=DECIMAL})
+        WHERE rfid_code=#{rfidCode,jdbcType=VARCHAR} AND del_flag="0"
+    </update>
+
+
+    <select id="getCustomerCard" resultMap="BaseResultMap" parameterType="com.bean.model.CustomerCard">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM cd_customer_card
+        WHERE rfid_code = #{rfidCode,jdbcType=VARCHAR} AND customer_id IS NOT NULL AND customer_id!='' AND del_flag="0"
+    </select>
+    <select id="getCustomerLevelById" parameterType="java.lang.Long" resultType="java.lang.Long">
+        SELECT point_level_id FROM `np_customer_info` WHERE customer_id=#{0,jdbcType=BIGINT};
+    </select>
+    <update id="updateCustomerLevel" parameterType="java.util.Map">
+        UPDATE np_customer_info
+        SET point_level_id = #{levelId,jdbcType=BIGINT},
+        point_level_name = (
+        SELECT
+        ncpl.point_level_name
+        FROM
+        np_customer_point_level ncpl
+        WHERE
+        ncpl.point_lelvel_id = #{levelId,jdbcType=BIGINT}
+        ),
+        point_level_endtime=#{endTime,jdbcType=DATE}
+        WHERE
+        customer_id = #{customerId,jdbcType=BIGINT}
+    </update>
+
+
+    <resultMap id="PointLevelMap" type="com.bean.model.CustomerPointLevel">
+        <id column="point_lelvel_id" jdbcType="BIGINT" property="pointLelvelId"/>
+        <result column="point_level_name" jdbcType="VARCHAR" property="pointLevelName"/>
+        <result column="point_need" jdbcType="VARCHAR" property="pointNeed"/>
+        <result column="point_discount" jdbcType="DECIMAL" property="pointDiscount"/>
+        <result column="is_default" jdbcType="CHAR" property="isDefault"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime"/>
+        <result column="del_time" jdbcType="TIMESTAMP" property="delTime"/>
+        <result column="del_flag" jdbcType="CHAR" property="delFlag"/>
+    </resultMap>
+    <select id="selectDefaultCustomerLevel" resultMap="PointLevelMap">
+        select
+        point_lelvel_id, point_level_name, point_need, point_discount, is_default, create_time,
+    modified_time, del_time, del_flag
+        from np_customer_point_level p
+        where p.is_default = '1'
+    </select>
+
+    <update id="updateByCardCodeSelective" parameterType="com.bean.model.CustomerCard" >
+        update cd_customer_card
+        <set >
+            <if test="customerId != null" >
+                customer_id = #{customerId,jdbcType=BIGINT},
+            </if>
+            <if test="rfidCode != null" >
+                rfid_code = #{rfidCode,jdbcType=VARCHAR},
+            </if>
+            <!-- <if test="cardCode != null" >
+              card_code = #{cardCode,jdbcType=VARCHAR},
+            </if> -->
+            <if test="cardPwd != null" >
+                card_pwd = #{cardPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="cardBalance != null" >
+                card_balance = #{cardBalance,jdbcType=DECIMAL},
+            </if>
+            <if test="issueDate != null" >
+                issue_date = #{issueDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="issueOperator != null" >
+                issue_operator = #{issueOperator,jdbcType=VARCHAR},
+            </if>
+            <if test="marketerId != null" >
+                marketer_id = #{marketerId,jdbcType=BIGINT},
+            </if>
+            <if test="issueMode != null" >
+                issue_mode = #{issueMode,jdbcType=CHAR},
+            </if>
+            <if test="cardStatus != null" >
+                card_status = #{cardStatus,jdbcType=CHAR},
+            </if>
+            <if test="delFlag != null" >
+                del_flag = #{delFlag,jdbcType=CHAR},
+            </if>
+        </set>
+        where card_code = #{cardCode,jdbcType=VARCHAR}
+    </update>
+</mapper>

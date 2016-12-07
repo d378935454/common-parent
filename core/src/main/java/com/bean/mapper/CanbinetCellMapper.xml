@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bean.dao.CanbinetCellMapper">
+    <resultMap id="BaseResultMap" type="com.bean.model.CanbinetCell">
+        <id column="canbinet_cell_id" property="canbinetCellId" jdbcType="BIGINT"/>
+        <result column="canbinet_id" property="canbinetId" jdbcType="BIGINT"/>
+        <result column="cell_code" property="cellCode" jdbcType="VARCHAR"/>
+        <result column="cell_status" property="cellStatus" jdbcType="CHAR"/>
+        <result column="password" property="passWord" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    canbinet_cell_id, canbinet_id, cell_code, cell_status
+  </sql>
+    <sql id="where">
+        <where>
+            <if test="canbinetId != null">
+                AND canbinet_id = #{canbinetId,jdbcType=BIGINT}
+            </if>
+            <if test="cellCode != null">
+                AND cell_code = #{cellCode,jdbcType=VARCHAR}
+            </if>
+            <if test="cellStatus != null">
+                AND cell_status = #{cellStatus,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_canbinet_cell
+        where canbinet_cell_id = #{canbinetCellId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long">
+    delete from cd_canbinet_cell
+    where canbinet_cell_id = #{canbinetCellId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.bean.model.CanbinetCell">
+        insert into cd_canbinet_cell
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="canbinetCellId != null">
+                canbinet_cell_id,
+            </if>
+            <if test="canbinetId != null">
+                canbinet_id,
+            </if>
+            <if test="cellCode != null">
+                cell_code,
+            </if>
+            <if test="cellStatus != null">
+                cell_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="canbinetCellId != null">
+                #{canbinetCellId,jdbcType=BIGINT},
+            </if>
+            <if test="canbinetId != null">
+                #{canbinetId,jdbcType=BIGINT},
+            </if>
+            <if test="cellCode != null">
+                #{cellCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cellStatus != null">
+                #{cellStatus,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.bean.model.CanbinetCell">
+        update cd_canbinet_cell
+        <set>
+            <if test="canbinetId != null">
+                canbinet_id = #{canbinetId,jdbcType=BIGINT},
+            </if>
+            <if test="cellCode != null">
+                cell_code = #{cellCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cellStatus != null">
+                cell_status = #{cellStatus,jdbcType=CHAR},
+            </if>
+        </set>
+        where canbinet_cell_id = #{canbinetCellId,jdbcType=BIGINT}
+    </update>
+    <select id="getListByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_canbinet_cell
+        <include refid="where"/>
+    </select>
+
+
+    <select id="getCellsByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        ccc.*
+        from cd_canbinet_cell ccc
+        LEFT JOIN cd_canbinet cc on ccc.canbinet_id=cc.canbinet_id
+        LEFT JOIN cd_vendor cv ON cc.vending_id=cv.id
+        where
+        cv.id=#{vendingId,jdbcType=VARCHAR}
+        AND cell_status = #{cellStatus,jdbcType=VARCHAR}
+    </select>
+    <select id="getCellsBycellCodeAndCanbinet" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        *
+        from cd_canbinet_cell ccc
+        LEFT JOIN cd_canbinet cc on ccc.canbinet_id=cc.canbinet_id
+        where
+        cc.canbinet_code_root=#{canbinetCodeRoot,jdbcType=VARCHAR} AND cell_code=#{cellCode,jdbcType=VARCHAR}
+    </select>
+    <select id="getListWithPassWordByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        ccc.canbinet_cell_id,ccc.canbinet_id, ccc.cell_code, ccc.cell_status,cpr.password
+        FROM
+        cd_canbinet_cell ccc
+        LEFT JOIN cd_canbinet cc on ccc.canbinet_id=cc.canbinet_id
+        LEFT JOIN cd_vendor cv ON cc.vending_id=cv.id
+        INNER JOIN cd_package_record cpr ON ccc.canbinet_cell_id=cpr.canbinet_cell_id
+        <where>
+            ccc.cell_status = #{cellStatus,jdbcType=CHAR}
+            AND cv.id=#{vendingId,jdbcType=VARCHAR}
+        </where>
+    </select>
+</mapper>

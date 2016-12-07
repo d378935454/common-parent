@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bean.dao.CanbinetManagerRecordMapper">
+    <resultMap id="BaseResultMap" type="com.bean.model.CanbinetManagerRecord">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="manager_id" property="managerId" jdbcType="BIGINT"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, manager_id, time
+  </sql>
+    <sql id="where">
+        <where>
+            <if test="managerId != null">
+                AND manager_id = #{managerId,jdbcType=BIGINT}
+            </if>
+            <if test="canbinetId != null">
+                AND canbinet_id = #{canbinetId,jdbcType=BIGINT}
+            </if>
+            <if test="time != null">
+                AND time = #{time,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </sql>
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_canbinet_manager_record
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long">
+    delete from cd_canbinet_manager_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.bean.model.CanbinetManagerRecord">
+        insert into cd_canbinet_manager_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="managerId != null">
+                manager_id,
+            </if>
+            <if test="canbinetId != null">
+                canbinet_id,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="managerId != null">
+                #{managerId,jdbcType=BIGINT},
+            </if>
+            <if test="canbinetId != null">
+                #{canbinetId,jdbcType=BIGINT},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.bean.model.CanbinetManagerRecord">
+        update cd_canbinet_manager_record
+        <set>
+            <if test="managerId != null">
+                manager_id = #{managerId,jdbcType=BIGINT},
+            </if>
+            <if test="canbinetId != null">
+                canbinet_id = #{canbinetId,jdbcType=BIGINT},
+            </if>
+            <if test="time != null">
+                time = #{time,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="getListByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_canbinet_manager_record
+        <include refid="where"/>
+    </select>
+    <select id="getByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_canbinet_manager_record
+        <include refid="where"/>
+    </select>
+</mapper>

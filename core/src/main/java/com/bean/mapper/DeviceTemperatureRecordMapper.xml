@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bean.dao.DeviceTemperatureRecordMapper">
+    <resultMap id="BaseResultMap" type="com.bean.model.DeviceTemperatureRecord">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="device_id" jdbcType="BIGINT" property="deviceId"/>
+        <result column="device_type" jdbcType="INTEGER" property="deviceType"/>
+        <result column="temperature" jdbcType="DECIMAL" property="temperature"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, device_id, device_type, temperature, update_time
+  </sql>
+    <sql id="where">
+        <where>
+            <if test="deviceId != null">
+                AND device_id = #{deviceId,jdbcType=BIGINT}
+            </if>
+            <if test="deviceType != null">
+                AND device_type = #{deviceType,jdbcType=INTEGER}
+            </if>
+            <if test="temperature != null">
+                AND temperature = #{temperature,jdbcType=DECIMAL}
+            </if>
+            <if test="updateTime != null">
+                AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </sql>
+    <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_device_temperature_record
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long">
+    delete from cd_device_temperature_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.bean.model.DeviceTemperatureRecord">
+        insert into cd_device_temperature_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="deviceId != null">
+                device_id,
+            </if>
+            <if test="deviceType != null">
+                device_type,
+            </if>
+            <if test="temperature != null">
+                temperature,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="deviceId != null">
+                #{deviceId,jdbcType=BIGINT},
+            </if>
+            <if test="deviceType != null">
+                #{deviceType,jdbcType=INTEGER},
+            </if>
+            <if test="temperature != null">
+                #{temperature,jdbcType=DECIMAL},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.bean.model.DeviceTemperatureRecord">
+        update cd_device_temperature_record
+        <set>
+            <if test="deviceId != null">
+                device_id = #{deviceId,jdbcType=BIGINT},
+            </if>
+            <if test="deviceType != null">
+                device_type = #{deviceType,jdbcType=INTEGER},
+            </if>
+            <if test="temperature != null">
+                temperature = #{temperature,jdbcType=DECIMAL},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="getListByMap" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_device_temperature_record
+        <include refid="where"/>
+    </select>
+    <select id="getByMap" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_device_temperature_record
+        <include refid="where"/>
+    </select>
+</mapper>

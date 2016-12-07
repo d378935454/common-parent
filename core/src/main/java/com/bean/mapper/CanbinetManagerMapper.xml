@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bean.dao.CanbinetManagerMapper">
+    <resultMap id="BaseResultMap" type="com.bean.model.CanbinetManager">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="card_code" property="cardCode" jdbcType="VARCHAR"/>
+        <result column="rfid_code" property="rfidCode" jdbcType="VARCHAR"/>
+        <result column="role" property="role" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, card_code, rfid_code, role
+  </sql>
+    <sql id="where">
+        <where>
+            <if test="name != null">
+                AND name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="cardCode != null">
+                AND card_code = #{cardCode,jdbcType=VARCHAR}
+            </if>
+            <if test="rfidCode != null">
+                AND rfid_code = #{rfidCode,jdbcType=VARCHAR}
+            </if>
+            <if test="role != null">
+                AND role = #{role,jdbcType=INTEGER}
+            </if>
+        </where>
+    </sql>
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_canbinet_manager
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long">
+    delete from cd_canbinet_manager
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.bean.model.CanbinetManager">
+        insert into cd_canbinet_manager
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="cardCode != null">
+                card_code,
+            </if>
+            <if test="rfidCode != null">
+                rfid_code,
+            </if>
+            <if test="role != null">
+                role,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="cardCode != null">
+                #{cardCode,jdbcType=VARCHAR},
+            </if>
+            <if test="rfidCode != null">
+                #{rfidCode,jdbcType=VARCHAR},
+            </if>
+            <if test="role != null">
+                #{role,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.bean.model.CanbinetManager">
+        update cd_canbinet_manager
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="cardCode != null">
+                card_code = #{cardCode,jdbcType=VARCHAR},
+            </if>
+            <if test="rfidCode != null">
+                rfid_code = #{rfidCode,jdbcType=VARCHAR},
+            </if>
+            <if test="role != null">
+                role = #{role,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="getByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_canbinet_manager
+        <include refid="where"/>
+    </select>
+    <select id="getListByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_canbinet_manager
+        <include refid="where"/>
+    </select>
+
+    <!---->
+    <select id="getCabinetManagerByRfidAndCanbinetId" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT ccm.* FROM `cd_canbinet_manager` ccm
+        LEFT JOIN cd_canbinet_manager_canbinet ccmc ON ccm.id=ccmc.manager_id
+        LEFT JOIN cd_canbinet cc ON cc.canbinet_id=ccmc.canbinet_id
+        WHERE ccm.rfid_code= #{rfidCode,jdbcType=VARCHAR} AND cc.canbinet_code= #{canbinetCode,jdbcType=VARCHAR} ;
+    </select>
+</mapper>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bean.dao.VendingAdvMapper">
+  <resultMap id="BaseResultMap" type="com.bean.model.VendingAdv">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="conment" jdbcType="VARCHAR" property="conment" />
+    <result column="token_time" jdbcType="TIMESTAMP" property="tokenTime" />
+    <result column="screen_type" jdbcType="TINYINT" property="screenType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, conment, token_time, screen_type
+  </sql>
+  <sql id="where">
+    <where>
+      <if test="conment != null">
+      AND  conment = #{conment,jdbcType=VARCHAR}
+      </if>
+      <if test="tokenTime != null">
+        AND  token_time = #{tokenTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="screenType != null">
+        AND  screen_type = #{screenType,jdbcType=TINYINT}
+      </if>
+    </where>
+  </sql>
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cd_vending_adv
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long">
+    delete from cd_vending_adv
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bean.model.VendingAdv">
+    insert into cd_vending_adv
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="conment != null">
+        conment,
+      </if>
+      <if test="tokenTime != null">
+        token_time,
+      </if>
+      <if test="screenType != null">
+        screen_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="conment != null">
+        #{conment,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenTime != null">
+        #{tokenTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="screenType != null">
+        #{screenType,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.bean.model.VendingAdv">
+    update cd_vending_adv
+    <set>
+      <if test="conment != null">
+        conment = #{conment,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenTime != null">
+        token_time = #{tokenTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="screenType != null">
+        screen_type = #{screenType,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cd_vending_adv
+    <include refid="where" />
+  </select>
+  <select id="getByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cd_vending_adv
+    <include refid="where" />
+  </select>
+
+  <!--大小屏滚动信息-->
+  <select id="getByScreenAndToken" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cd_vending_adv
+    <where>
+      <if test="tokenTime != null">
+        AND  token_time != #{tokenTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="screenType != null">
+        AND  screen_type = #{screenType,jdbcType=TINYINT}
+      </if>
+    </where>
+  </select>
+</mapper>

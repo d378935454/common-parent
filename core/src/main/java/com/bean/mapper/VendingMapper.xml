@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bean.dao.VendingMapper">
+    <resultMap id="BaseResultMap" type="com.bean.model.Vending">
+        <id column="vending_id" property="vendingId" jdbcType="BIGINT"/>
+        <result column="vending_code" property="vendingCode" jdbcType="VARCHAR"/>
+        <result column="vending_name" property="vendingName" jdbcType="VARCHAR"/>
+        <result column="village_id" property="villageId" jdbcType="BIGINT"/>
+        <result column="track_num" property="trackNum" jdbcType="BIGINT"/>
+        <result column="vending_status" property="vendingStatus" jdbcType="CHAR"/>
+        <!--add-->
+        <result column="track_code" property="trackCode" jdbcType="VARCHAR"/>
+        <result column="product_id" property="productId" jdbcType="VARCHAR"/>
+        <result column="goods_info_name" property="goodsInfoName" jdbcType="VARCHAR"/>
+        <result column="spec_value_remark" property="specValueRemark" jdbcType="VARCHAR"/>
+        <result column="goods_info_prefer_price" property="goodsInfoPreferPrice" jdbcType="DECIMAL"/>
+        <result column="product_num" property="productNum" jdbcType="BIGINT"/>
+        <result column="goods_info_img_id" property="goodsInfoImgId" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    vending_id, vending_code, vending_name, village_id, track_num, vending_status
+  </sql>
+    <sql id="where">
+        <where>
+            <if test="vendingCode != null">
+                AND vending_code = #{vendingCode,jdbcType=VARCHAR}
+            </if>
+            <if test="vendingName != null">
+                AND vending_name = #{vendingName,jdbcType=VARCHAR}
+            </if>
+            <if test="villageId != null">
+                AND village_id = #{villageId,jdbcType=BIGINT}
+            </if>
+            <if test="trackNum != null">
+                AND track_num = #{trackNum,jdbcType=BIGINT}
+            </if>
+            <if test="vendingStatus != null">
+                AND vending_status = #{vendingStatus,jdbcType=CHAR}
+            </if>
+        </where>
+    </sql>
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_vending
+        where vending_id = #{vendingId,jdbcType=BIGINT}
+    </select>
+    <select id="getByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_vending
+        <include refid="where"/>
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long">
+    delete from cd_vending
+    where vending_id = #{vendingId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.bean.model.Vending">
+        insert into cd_vending
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="vendingId != null">
+                vending_id,
+            </if>
+            <if test="vendingCode != null">
+                vending_code,
+            </if>
+            <if test="vendingName != null">
+                vending_name,
+            </if>
+            <if test="villageId != null">
+                village_id,
+            </if>
+            <if test="trackNum != null">
+                track_num,
+            </if>
+            <if test="vendingStatus != null">
+                vending_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="vendingId != null">
+                #{vendingId,jdbcType=BIGINT},
+            </if>
+            <if test="vendingCode != null">
+                #{vendingCode,jdbcType=VARCHAR},
+            </if>
+            <if test="vendingName != null">
+                #{vendingName,jdbcType=VARCHAR},
+            </if>
+            <if test="villageId != null">
+                #{villageId,jdbcType=BIGINT},
+            </if>
+            <if test="trackNum != null">
+                #{trackNum,jdbcType=BIGINT},
+            </if>
+            <if test="vendingStatus != null">
+                #{vendingStatus,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.bean.model.Vending">
+        update cd_vending
+        <set>
+            <if test="vendingCode != null">
+                vending_code = #{vendingCode,jdbcType=VARCHAR},
+            </if>
+            <if test="vendingName != null">
+                vending_name = #{vendingName,jdbcType=VARCHAR},
+            </if>
+            <if test="villageId != null">
+                village_id = #{villageId,jdbcType=BIGINT},
+            </if>
+            <if test="trackNum != null">
+                track_num = #{trackNum,jdbcType=BIGINT},
+            </if>
+            <if test="vendingStatus != null">
+                vending_status = #{vendingStatus,jdbcType=CHAR},
+            </if>
+        </set>
+        where vending_id = #{vendingId,jdbcType=BIGINT}
+    </update>
+    <select id="getListByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_vending
+        <include refid="where"/>
+    </select>
+    <!--得到商品管理信息-->
+    <select id="getGoodsManageList" resultMap="BaseResultMap" parameterType="java.util.Map">
+
+SELECT
+    cva.aisle_num AS track_code,
+	ngi.goods_info_item_no  AS product_id,
+	ngi.goods_info_name,
+	ngi.goods_info_img_id,
+	ngirsd.spec_value_remark,
+	ngi.goods_info_prefer_price,
+    cva.stock AS product_num,
+    cva.update_time
+FROM
+	`cd_vendor` cv
+LEFT JOIN cd_vendor_aisle cva on cv.id=cva.fk_vendor
+LEFT JOIN np_goods_info ngi ON cva.fk_np_goods = ngi.goods_info_id
+LEFT JOIN np_goods_info_rele_spec_detail ngirsd ON ngirsd.goods_info_id = ngi.goods_info_id
+WHERE cv.vendor_num=#{vendingCode,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/caidao-api/src/main/java/com/bean/controller/ZYController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/caidao-api/src/main/webapp/js/bootstrap" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/com/bean/exception/ExecutionException.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/common/src/main/java/utils/SmsPost.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/SmartServer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/client/ClientSocketHandler.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/client/SimpleSocketClient.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/client/WriteFuture.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/codec/ProtocolDecoder.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/codec/ProtocolEncoder.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/message/AbstractMessageHandler.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/message/Listen.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/message/MessageHandler.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/message/Packet.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/message/PacketMessageDispatcher.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/message/PacketMessageHandlerAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/message/PacketMessageHandlerFinder.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/server/Application.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/server/ApplicationConfig.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/server/ExecutionException.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/server/Server.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/server/SocketServer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/server/SocketServerHandler.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/service/CanbinetHandle.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/java/com/xx/server/util/Errors.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/resources/context.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/resources/logback.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/resources/server.properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/socket/src/main/resources/server.sh" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

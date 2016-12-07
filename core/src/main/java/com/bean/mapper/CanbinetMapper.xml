@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bean.dao.CanbinetMapper">
+    <resultMap id="BaseResultMap" type="com.bean.model.Canbinet">
+        <id column="canbinet_id" property="canbinetId" jdbcType="BIGINT"/>
+        <result column="vending_id" property="vendingId" jdbcType="BIGINT"/>
+        <result column="cell_num" property="cellNum" jdbcType="BIGINT"/>
+        <result column="canbinet_status" property="canbinetStatus" jdbcType="CHAR"/>
+        <result column="canbinet_code" property="canbinetCode" jdbcType="VARCHAR"/>
+        <result column="canbinet_code_root" property="canbinetCodeRoot" jdbcType="VARCHAR"/>
+        <result column="socket_key" property="socketKey" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    canbinet_id, vending_id, cell_num, canbinet_status, canbinet_code, canbinet_code_root, 
+    socket_key
+  </sql>
+    <sql id="where">
+        <where>
+            <if test="vendingId != null">
+                AND vending_id = #{vendingId,jdbcType=BIGINT}
+            </if>
+            <if test="cellNum != null">
+                AND cell_num = #{cellNum,jdbcType=BIGINT}
+            </if>
+            <if test="canbinetStatus != null">
+                AND canbinet_status = #{canbinetStatus,jdbcType=CHAR}
+            </if>
+            <if test="canbinetCode != null">
+                AND canbinet_code = #{canbinetCode,jdbcType=VARCHAR}
+            </if>
+            <if test="canbinetCodeRoot != null">
+                AND canbinet_code_root = #{canbinetCodeRoot,jdbcType=VARCHAR}
+            </if>
+            <if test="socketKey != null">
+                AND socket_key = #{socketKey,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_canbinet
+        where canbinet_id = #{canbinetId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long">
+    delete from cd_canbinet
+    where canbinet_id = #{canbinetId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.bean.model.Canbinet">
+        insert into cd_canbinet
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="canbinetId != null">
+                canbinet_id,
+            </if>
+            <if test="vendingId != null">
+                vending_id,
+            </if>
+            <if test="cellNum != null">
+                cell_num,
+            </if>
+            <if test="canbinetStatus != null">
+                canbinet_status,
+            </if>
+            <if test="canbinetCode != null">
+                canbinet_code,
+            </if>
+            <if test="canbinetCodeRoot != null">
+                canbinet_code_root,
+            </if>
+            <if test="socketKey != null">
+                socket_key,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="canbinetId != null">
+                #{canbinetId,jdbcType=BIGINT},
+            </if>
+            <if test="vendingId != null">
+                #{vendingId,jdbcType=BIGINT},
+            </if>
+            <if test="cellNum != null">
+                #{cellNum,jdbcType=BIGINT},
+            </if>
+            <if test="canbinetStatus != null">
+                #{canbinetStatus,jdbcType=CHAR},
+            </if>
+            <if test="canbinetCode != null">
+                #{canbinetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="canbinetCodeRoot != null">
+                #{canbinetCodeRoot,jdbcType=VARCHAR},
+            </if>
+            <if test="socketKey != null">
+                #{socketKey,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.bean.model.Canbinet">
+        update cd_canbinet
+        <set>
+            <if test="vendingId != null">
+                vending_id = #{vendingId,jdbcType=BIGINT},
+            </if>
+            <if test="cellNum != null">
+                cell_num = #{cellNum,jdbcType=BIGINT},
+            </if>
+            <if test="canbinetStatus != null">
+                canbinet_status = #{canbinetStatus,jdbcType=CHAR},
+            </if>
+            <if test="canbinetCode != null">
+                canbinet_code = #{canbinetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="canbinetCodeRoot != null">
+                canbinet_code_root = #{canbinetCodeRoot,jdbcType=VARCHAR},
+            </if>
+            <if test="socketKey != null">
+                socket_key = #{socketKey,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where canbinet_id = #{canbinetId,jdbcType=BIGINT}
+    </update>
+    <select id="getListByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_canbinet
+        <include refid="where"/>
+    </select>
+    <select id="getByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_canbinet
+        <include refid="where"/>
+    </select>
+</mapper>

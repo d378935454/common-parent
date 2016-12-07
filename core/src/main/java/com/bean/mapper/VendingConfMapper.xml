@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bean.dao.VendingConfMapper" >
+  <resultMap id="BaseResultMap" type="com.bean.model.VendingConf" >
+    <id column="vending_conf_id" property="vendingConfId" jdbcType="BIGINT" />
+    <result column="track_id" property="trackId" jdbcType="BIGINT" />
+    <result column="product_id" property="productId" jdbcType="BIGINT" />
+    <result column="product_num" property="productNum" jdbcType="BIGINT" />
+    <result column="conf_date" property="confDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    vending_conf_id, track_id, product_id, product_num, conf_date
+  </sql>
+  <sql id="where">
+    <where>
+      <if test="trackId != null" >
+        and track_id = #{trackId,jdbcType=BIGINT}
+      </if>
+      <if test="productId != null" >
+        and product_id = #{productId,jdbcType=BIGINT}
+      </if>
+      <if test="productNum != null" >
+        and product_num = #{productNum,jdbcType=BIGINT}
+      </if>
+      <if test="confDate != null" >
+        and  conf_date = #{confDate,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </sql>
+  <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cd_vending_conf
+    where vending_conf_id = #{vendingConfId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from cd_vending_conf
+    where vending_conf_id = #{vendingConfId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bean.model.VendingConf" >
+    insert into cd_vending_conf
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vendingConfId != null" >
+        vending_conf_id,
+      </if>
+      <if test="trackId != null" >
+        track_id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="productNum != null" >
+        product_num,
+      </if>
+      <if test="confDate != null" >
+        conf_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vendingConfId != null" >
+        #{vendingConfId,jdbcType=BIGINT},
+      </if>
+      <if test="trackId != null" >
+        #{trackId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="productNum != null" >
+        #{productNum,jdbcType=BIGINT},
+      </if>
+      <if test="confDate != null" >
+        #{confDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.bean.model.VendingConf" >
+    update cd_vending_conf
+    <set >
+      <if test="trackId != null" >
+        track_id = #{trackId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="productNum != null" >
+        product_num = #{productNum,jdbcType=BIGINT},
+      </if>
+      <if test="confDate != null" >
+        conf_date = #{confDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where vending_conf_id = #{vendingConfId,jdbcType=BIGINT}
+  </update>
+  <select id="getListByMap" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from cd_vending_conf
+    <include refid="where" />
+  </select>
+</mapper>

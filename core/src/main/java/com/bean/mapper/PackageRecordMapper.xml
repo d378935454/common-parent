@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bean.dao.PackageRecordMapper">
+    <resultMap id="BaseResultMap" type="com.bean.model.PackageRecord">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="package_no" property="packageNo" jdbcType="VARCHAR"/>
+        <result column="canbinet_cell_id" property="canbinetCellId" jdbcType="BIGINT"/>
+        <result column="package_in_time" property="packageInTime" jdbcType="TIMESTAMP"/>
+        <result column="package_valid_time" property="packageValidTime" jdbcType="TIMESTAMP"/>
+        <result column="package_out_time" property="packageOutTime" jdbcType="TIMESTAMP"/>
+        <result column="package_status" property="packageStatus" jdbcType="INTEGER"/>
+        <association property="OrderCode" column="package_no" select="getOrderCodeByPackageNo"/>
+        <association property="Rfid" column="package_no" select="getRfidByPackageNo"/>
+
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, password, package_no, canbinet_cell_id, package_in_time, package_valid_time,
+    package_out_time, package_status
+  </sql>
+    <sql id="where">
+        <where>
+            <if test="password != null">
+                and password = #{password,jdbcType=VARCHAR}
+            </if>
+            <if test="packageNo != null">
+                and package_no = #{packageNo,jdbcType=VARCHAR}
+            </if>
+            <if test="canbinetCellId != null">
+                and canbinet_cell_id = #{canbinetCellId,jdbcType=BIGINT}
+            </if>
+            <if test="packageInTime != null">
+                and package_in_time = #{packageInTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="packageValidTime != null">
+                and package_valid_time = #{packageValidTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="packageOutTime != null">
+                and package_out_time = #{packageOutTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="packageStatus != null">
+                and package_status = #{packageStatus,jdbcType=INTEGER}
+            </if>
+        </where>
+    </sql>
+    <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_package_record
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Long">
+    delete from cd_package_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.bean.model.PackageRecord">
+        insert into cd_package_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="packageNo != null">
+                package_no,
+            </if>
+            <if test="canbinetCellId != null">
+                canbinet_cell_id,
+            </if>
+            <if test="packageInTime != null">
+                package_in_time,
+            </if>
+            <if test="packageValidTime != null">
+                package_valid_time,
+            </if>
+            <if test="packageOutTime != null">
+                package_out_time,
+            </if>
+            <if test="packageStatus != null">
+                package_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="packageNo != null">
+                #{packageNo,jdbcType=VARCHAR},
+            </if>
+            <if test="canbinetCellId != null">
+                #{canbinetCellId,jdbcType=BIGINT},
+            </if>
+            <if test="packageInTime != null">
+                #{packageInTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="packageValidTime != null">
+                #{packageValidTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="packageOutTime != null">
+                #{packageOutTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="packageStatus != null">
+                #{packageStatus,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.bean.model.PackageRecord">
+        update cd_package_record
+        <set>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="packageNo != null">
+                package_no = #{packageNo,jdbcType=VARCHAR},
+            </if>
+            <if test="canbinetCellId != null">
+                canbinet_cell_id = #{canbinetCellId,jdbcType=BIGINT},
+            </if>
+            <if test="packageInTime != null">
+                package_in_time = #{packageInTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="packageValidTime != null">
+                package_valid_time = #{packageValidTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="packageOutTime != null">
+                package_out_time = #{packageOutTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="packageStatus != null">
+                package_status = #{packageStatus,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="getListByMap" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_package_record
+        <include refid="where"/>
+    </select>
+    <select id="getByMap" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cd_package_record
+        <include refid="where"/>
+    </select>
+
+    <!--通过包裹号得到电话-->
+    <select id="getCustomerMobileByPackageNo" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT
+            nci.info_mobile
+        FROM
+            cd_package_record cpr
+LEFT JOIN np_order_container_relation nocr ON cpr.package_no = nocr.express_no
+LEFT JOIN np_order_express noe ON nocr.order_express_id = noe.order_express_id
+LEFT JOIN np_order o ON o.order_id = noe.order_id
+LEFT JOIN np_customer_info nci ON nci.customer_id = o.customer_id
+        where package_no=#{0,jdbcType=VARCHAR}
+    </select>
+    <!--通过密码或物理卡号取货-->
+    <select id="getCellCodeWithPassWordOrRfidCode" resultType="java.util.HashMap" parameterType="java.lang.String">
+        SELECT
+            cccell.cell_code,cccell.canbinet_cell_id,cpr.id,ccc.customer_id,cpr.package_no
+        FROM
+            cd_package_record cpr
+        LEFT JOIN cd_canbinet_cell cccell ON cccell.canbinet_cell_id=cpr.canbinet_cell_id
+        LEFT JOIN cd_canbinet cc ON cccell.canbinet_id=cc.canbinet_id
+        LEFT JOIN cd_vendor cv ON cv.id=cc.vending_id
+        LEFT JOIN np_order_container_relation nocr ON cpr.package_no = nocr.express_no
+LEFT JOIN np_order_express noe ON nocr.order_express_id = noe.order_express_id
+LEFT JOIN np_order o ON o.order_id = noe.order_id
+        LEFT JOIN cd_customer_card ccc ON ccc.customer_id=o.customer_id
+        WHERE  cv.vendor_num=#{0,jdbcType=VARCHAR}
+           AND cccell.cell_status="1"
+           AND cpr.package_status="1"
+           AND ccc.del_flag="0"
+           AND (ccc.rfid_code=#{1,jdbcType=VARCHAR}
+           OR cpr.`password`=#{1,jdbcType=VARCHAR})
+           LIMIT 0,1
+    </select>
+    <!--通过包裹号得到订单码-->
+    <select id="getOrderCodeByPackageNo" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT o.order_code FROM `cd_package_record` cpr
+        LEFT JOIN np_order_container_relation nocr ON cpr.package_no = nocr.express_no
+LEFT JOIN np_order_express noe ON nocr.order_express_id = noe.order_express_id
+LEFT JOIN np_order o ON o.order_id = noe.order_id
+        where cpr.package_no=#{0,jdbcType=VARCHAR};
+    </select>
+    <!--通过包裹号得到会员id-->
+    <select id="getRfidByPackageNo" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT
+	ccc.rfid_code
+FROM
+	`cd_package_record` cpr
+LEFT JOIN np_order_container_relation nocr ON cpr.package_no = nocr.express_no
+LEFT JOIN np_order_express noe ON nocr.order_express_id = noe.order_express_id
+LEFT JOIN np_order o ON o.order_id = noe.order_id
+LEFT JOIN cd_customer_card ccc ON ccc.customer_id=o.customer_id
+        where cpr.package_no=#{0,jdbcType=VARCHAR};
+    </select>
+</mapper>
