@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="Loading/css/newton.css">
     <link href="js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/select2.min.css" rel="stylesheet" />
+    <link href="css/select2.min.css" rel="stylesheet"/>
     <style type="text/css">
         .red {
             background-color: red;
@@ -28,7 +28,7 @@
 
 <p>每个人都能访问的页面.</p>
 
-<span class="glyphicon glyphicon-search"></span>
+<%--<span class="glyphicon glyphicon-search"></span>--%>
 <a href="../spring3-security-integration/main/admin"> Go AdminPage </a>
 <br/>
 <a onclick='windows.location.href=$(this).prop("href");$(this).prop("href","javascript:")' href="javascript:">a测试</a>
@@ -52,28 +52,55 @@
     <option>爸爸</option>
     <option>爸妈</option>
 </select>
+
+<div id="app">
+    <span v-bind:title="message">
+    Hover your mouse over me for a few seconds to see my dynamically bound title!
+  </span>
+    <%--<ol>--%>
+        <%--<li v-for="todo in todos">--%>
+            <%--{{ todo.text }}--%>
+        <%--</li>--%>
+    <%--</ol>--%>
+        <todo-item v-for="item in todos" v-bind:todo="item"></todo-item>
+</div>
 </body>
 <%--<a href="pages/div1.html">跳到主页面</a>--%>
 
-
+<script src="js/vue/vue.js"></script>
 <script src="js/jquery/jquery-1.12.2.js"></script>
 <script src="js/select2.min.js"></script>
 <script src="http://code.angularjs.org/angular-1.0.1.min.js"></script>
 <script src="js/bootstrap/js/bootstrap.min.js"></script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#sle').select2();
-    })
-
+    });
+    Vue.config.devtools=true;
+    Vue.component("todo-item",{
+        props:['todo'],
+        template:'<li>{{todo.text}}</li>'
+    });
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'You loaded this page on ' + new Date(),
+            todos: [
+                { text: 'Learn JavaScript' },
+                { text: 'Learn Vue' },
+                { text: 'Build something awesome' }
+            ]
+        }
+    });
     function adddiv() {
-        debugger
+        debugger;
         var l = $("#titles").find("button").length;
         var titles = $("#titles");
         var $table = $("#table");
         titles.append(
                 $("<button type='button' >").addClass("white").prop("id", "title" + l).attr("index", l).append($div[l])
         );
-        $table.append($("<div>").prop("id", "body" + l).append("第" + $div[l] + "页内容"))
+        $table.append($("<div>").prop("id", "body" + l).append("第" + $div[l] + "页内容"));
         $("#title" + l).click(
                 function () {
                     clickdiv(this)
@@ -102,7 +129,7 @@
                 alert(returndata);
             },
             error: function (returndata) {
-                debugger
+                debugger;
                 alert(returndata.responseText);
             }
         });
@@ -118,16 +145,28 @@
                 }
         )
     }
+    function hehe1() {
+        $.ajax({
+                    url: 'machine/test.htmls',
+                    contentType: "application/json",
+                    type: 'POST',
+                    data: JSON.stringify({aaa: "aaa", bbb: "bbbb"}),
+                    success: function (data) {
+                    }
+                }
+        )
+    }
+
     var name = "world";
     $(window).load(function () {
-        console.log(name)
+        console.log(name);
         if (typeof name === "undefined") {
             var name = "aaa";
             console.log(name)
         } else {
             console.log(name)
         }
-    })
+    });
     function a() {
         console.log(name)
     }

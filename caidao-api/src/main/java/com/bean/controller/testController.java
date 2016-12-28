@@ -3,6 +3,7 @@ package com.bean.controller;
 import com.bean.RSTFul.RSTFulBody;
 import com.bean.model.GoodsInfo;
 import com.bean.service.*;
+import org.springframework.web.bind.annotation.RequestBody;
 import utils.MyLogger;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -21,6 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Mr.bean on 2016/3/16.
@@ -41,12 +43,12 @@ public class testController {
     private final static String rootPath="d:\\";
         @RequestMapping("/test")
     @ResponseBody
-    public RSTFulBody test(HttpServletResponse response) {
-            try {
-                vendingService.getVendingAdvByScreenAndToken(new SimpleDateFormat("yyyyMMddHHmmss").parse("20160708153908"),"1");
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+    public RSTFulBody test(HttpServletResponse response,@RequestBody Map<String,Object> map) {
+//            try {
+////                vendingService.getVendingAdvByScreenAndToken(new SimpleDateFormat("yyyyMMddHHmmss").parse("20160708153908"),"1");
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
             return new RSTFulBody().data("哈哈").body("");
 
     }
@@ -55,7 +57,6 @@ public class testController {
     public RSTFulBody upStockExcel(HttpServletResponse response,
                                    @RequestParam(value = "file") MultipartFile[] files) {
         for(MultipartFile file:files) {
-            String a = "";
             List<GoodsInfo> goodsInfos = new ArrayList<>();
             Workbook wb = null;
             try {
@@ -71,10 +72,9 @@ public class testController {
             }
             Sheet rs = wb.getSheet(0);//或者rwb.getSheet(0)
             //  PrintWriter out=response.getWriter();
-            int clos = rs.getColumns();//得到所有的列
+//            int clos = rs.getColumns();//得到所有的列
             int rows = rs.getRows();//得到所有的行
             for (int i = 1; i < rows; i++) {
-                int j = 0;
                 //第一个是列数，第二个是行数
                 GoodsInfo bean = new GoodsInfo();
                 bean.setGoodsInfoItemNo(rs.getCell(0, i).getContents());
