@@ -1,25 +1,17 @@
 package com.bean.test;
 
-import com.bean.dao.CustomerCardMapper;
-import com.bean.dao.CustomerMapper;
-import com.bean.model.Customer;
-import com.bean.model.CustomerCard;
-import com.bean.model.Goods;
-import com.bean.redis.RedisService;
-import com.bean.redis.UserOperationsService;
-import com.bean.service.CustomerCardService;
-import com.bean.service.VendingService;
-import utils.Utils;
-import utils.Validation;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.Date;
+
+import static jxl.biff.FormatRecord.logger;
 
 /**
  * Created by Mr.bean on 2016/3/29.
@@ -27,18 +19,18 @@ import java.util.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:spring-*.xml"})
 public class test {
-    @Autowired
-    private VendingService vendingService;
-
-    @Autowired
-    private CustomerMapper customerMapper;
-    @Autowired
-    private CustomerCardService customerCardService;
+//    @Autowired
+//    private VendingService vendingService;
+//
+//    @Autowired
+//    private CustomerMapper customerMapper;
+//    @Autowired
+//    private CustomerCardService customerCardService;
 //    @Autowired
 //    private RedisService redisService;
 //    @Autowired
 //    private UserOperationsService userOperationsService;
-    @Test
+
     public void test() throws SQLException {
 //        Customer customer=new Customer();
 //        customer.setCustomerId(123L);
@@ -46,14 +38,33 @@ public class test {
 //        userOperationsService.add(customer);
 //        userOperationsService.getUser("123");
     }
-    private void aa(String a,List<String> list ,Goods goods){
-        for (String s:list){
-           if(s.equals(a)){
-               a="gai";
-               goods.setAuditStatus("1");
-           }
-        }
+    @Test
+    public void aa(){
+    String  a=generatorJWT("user");
+        checkToken(a);
 
+    }
+    private String generatorJWT(String userName) {
+
+        String jwt = Jwts.builder().setSubject("龚道顺")
+                .claim("roles", "龚道顺").setSubject("loginAccess").setIssuedAt(new Date()).setHeaderParam("type", "JWT")
+                .setHeaderParam("alg", "HS256")
+                .signWith(SignatureAlgorithm.HS256, "123").compact();
+
+        logger.debug("##############jwt=" + jwt);
+        return jwt;
+    }
+    /**
+     * 验证token的有效性
+     */
+    private boolean checkToken(String jwt) {
+        Claims claims = Jwts.parser().setSigningKey("123").parseClaimsJws(jwt).getBody();
+
+        if (claims.get("roles").toString().equals("龚道顺")) {
+            logger.debug("登录人员的姓名：" + claims.get("roles").toString());
+            return true;
+        }
+        return false;
     }
 }
 

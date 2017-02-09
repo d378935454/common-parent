@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html class="no-js">
 <head>
     <meta charset="utf-8">
@@ -58,11 +57,11 @@
     Hover your mouse over me for a few seconds to see my dynamically bound title!
   </span>
     <%--<ol>--%>
-        <%--<li v-for="todo in todos">--%>
-            <%--{{ todo.text }}--%>
-        <%--</li>--%>
+    <%--<li v-for="todo in todos">--%>
+    <%--{{ todo.text }}--%>
+    <%--</li>--%>
     <%--</ol>--%>
-        <todo-item v-for="item in todos" v-bind:todo="item"></todo-item>
+    <todo-item v-for="item in todos" v-bind:todo="item"></todo-item>
 </div>
 </body>
 <%--<a href="pages/div1.html">跳到主页面</a>--%>
@@ -73,22 +72,26 @@
 <script src="http://code.angularjs.org/angular-1.0.1.min.js"></script>
 <script src="js/bootstrap/js/bootstrap.min.js"></script>
 <script>
+    $(document).ajaxComplete(function () {
+        alert("asdasd");
+    });
+//    Vue.use(VeeValidate);
     $(document).ready(function () {
         $('#sle').select2();
     });
-    Vue.config.devtools=true;
-    Vue.component("todo-item",{
-        props:['todo'],
-        template:'<li>{{todo.text}}</li>'
+    Vue.config.devtools = true;
+    Vue.component("todo-item", {
+        props: ['todo'],
+        template: '<li>{{todo.text}}</li>'
     });
     var app = new Vue({
         el: '#app',
         data: {
             message: 'You loaded this page on ' + new Date(),
             todos: [
-                { text: 'Learn JavaScript' },
-                { text: 'Learn Vue' },
-                { text: 'Build something awesome' }
+                {text: 'Learn JavaScript'},
+                {text: 'Learn Vue'},
+                {text: 'Build something awesome'}
             ]
         }
     });
@@ -126,11 +129,10 @@
             processData: false,
             dataType: "json",
             success: function (returndata) {
-                alert(returndata);
+//                alert(returndata);
             },
             error: function (returndata) {
-                debugger;
-                alert(returndata.responseText);
+//                alert(returndata.responseText);
             }
         });
     }

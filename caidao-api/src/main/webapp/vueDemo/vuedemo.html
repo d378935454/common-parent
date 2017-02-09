@@ -1,0 +1,73 @@
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../Loading/css/newton.css">
+    <link href="../js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/select2.min.css" rel="stylesheet"/>
+</head>
+<body>
+
+
+
+<div id="app">
+    <anchored-heading :level="level">Hello world!</anchored-heading>
+</div>
+</body>
+
+<script src="../js/vue/vue.js"></script>
+<script src="../js/jquery/jquery-1.12.2.js"></script>
+<script src="../js/select2.min.js"></script>
+<script type="text/x-template" id="anchored-heading-template">
+    <div>
+        <h1 v-if="level === 1">
+            <slot></slot>
+        </h1>
+        <h2 v-if="level === 2">
+            <slot></slot>
+        </h2>
+        <h3 v-if="level === 3">
+            <slot></slot>
+        </h3>
+        <h4 v-if="level === 4">
+            <slot></slot>
+        </h4>
+        <h5 v-if="level === 5">
+            <slot></slot>
+        </h5>
+        <h6 v-if="level === 6">
+            <slot></slot>
+        </h6>
+    </div>
+</script>
+<script>
+    Vue.component("todo-item",{
+        props:['todo'],
+        template:'<li>{{todo.text}}</li>'
+    });
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            level:1
+        },
+        components:{
+            'anchored-heading':{
+                render: function (createElement) {
+                    debugger
+                    return createElement(
+                            'h' + this.level,   // tag name 标签名称
+                            this.$slots.default // 子组件中的阵列
+                    )
+                },
+                props: {
+                    level: {
+                        type: Number,
+                        required: true
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+
+</html>

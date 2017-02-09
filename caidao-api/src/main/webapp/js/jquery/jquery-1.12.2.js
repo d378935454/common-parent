@@ -7905,8 +7905,8 @@ jQuery.speed = function( speed, easing, fn ) {
 	}
 
 	// Queueing
+	debugger
 	opt.old = opt.complete;
-
 	opt.complete = function() {
 		if ( jQuery.isFunction( opt.old ) ) {
 			opt.old.call( this );
@@ -9862,7 +9862,6 @@ jQuery.extend( {
 				globalEventContext.trigger( isSuccess ? "ajaxSuccess" : "ajaxError",
 					[ jqXHR, s, isSuccess ? success : error ] );
 			}
-
 			// Complete
 			completeDeferred.fireWith( callbackContext, [ jqXHR, statusText ] );
 

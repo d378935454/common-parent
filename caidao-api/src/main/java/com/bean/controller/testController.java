@@ -2,27 +2,32 @@ package com.bean.controller;
 
 import com.bean.RSTFul.RSTFulBody;
 import com.bean.model.GoodsInfo;
-import com.bean.service.*;
-import org.springframework.web.bind.annotation.RequestBody;
-import utils.MyLogger;
+import com.bean.service.VendingService;
+import com.bean.service.WebService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import utils.MyLogger;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import static jxl.biff.FormatRecord.logger;
 
 /**
  * Created by Mr.bean on 2016/3/16.
@@ -81,11 +86,13 @@ public class testController {
                 bean.setGoodsInfoStock(new Long(rs.getCell(1, i).getContents()));
                 goodsInfos.add(bean);
             }
-                webService.updateStockByNo(goodsInfos);
+//                webService.updateStockByNo(goodsInfos);
         }
         return new RSTFulBody().data("哈哈").body("");
 
     }
+
+
 
 
 }

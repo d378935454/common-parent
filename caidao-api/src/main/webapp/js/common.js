@@ -3,17 +3,17 @@
  */
 var hashMapping = [
     {value: "#/div1.html", tagertUrl: "../div1.html"}
-]
+];
 $(function () {
     $(window).on("hashchange load", function () {
         var hash = hashMapping.filter(function (val) {
             return val.value === window.location.hash.split("?")[0];
-        })
+        });
         if (hash[0]) {
             $("#page_load").load(hash[0].tagertUrl)
         }
     })
-})
+});
 function getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var rs = window.location.href.split("?");
@@ -41,7 +41,7 @@ $.fn.serializeObject = function () {
         }
     });
     return o;
-}
+};
 
 function a() {
     var a = $(this);
