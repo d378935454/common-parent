@@ -1,6 +1,7 @@
 package com.bean.test;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.Test;
@@ -8,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.sql.SQLException;
 import java.util.Date;
 
 import static jxl.biff.FormatRecord.logger;
@@ -31,28 +31,42 @@ public class test {
 //    @Autowired
 //    private UserOperationsService userOperationsService;
 
-    public void test() throws SQLException {
-//        Customer customer=new Customer();
-//        customer.setCustomerId(123L);
-//        customer.setCustomerNickname("哈哈");
-//        userOperationsService.add(customer);
-//        userOperationsService.getUser("123");
-    }
     @Test
     public void aa(){
-    String  a=generatorJWT("user");
+    String  a=createJWT("1","","",60L);
         checkToken(a);
 
     }
-    private String generatorJWT(String userName) {
+    //Sample method to construct a JWT
 
-        String jwt = Jwts.builder().setSubject("龚道顺")
-                .claim("roles", "龚道顺").setSubject("loginAccess").setIssuedAt(new Date()).setHeaderParam("type", "JWT")
-                .setHeaderParam("alg", "HS256")
-                .signWith(SignatureAlgorithm.HS256, "123").compact();
+    private String createJWT(String id, String issuer, String subject, long ttlMillis) {
 
-        logger.debug("##############jwt=" + jwt);
-        return jwt;
+//The JWT signature algorithm we will be using to sign the token
+        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+
+        long nowMillis = System.currentTimeMillis();
+        Date now = new Date(nowMillis);
+
+//We will sign our JWT with our ApiKey secret
+//        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(apiKey.getSecret());
+//        Key signingKey = MacProvider.generateKey();
+
+        //Let's set the JWT Claims
+        JwtBuilder builder = Jwts.builder().setId(id)
+                .setIssuedAt(now)
+                .setSubject(subject)
+                .setIssuer(issuer)
+                .signWith(signatureAlgorithm,  "secretkey");
+
+//if it has been specified, let's add the expiration
+        if (ttlMillis >= 0) {
+            long expMillis = nowMillis + ttlMillis;
+            Date exp = new Date(expMillis);
+            builder.setExpiration(exp);
+        }
+
+//Builds the JWT and serializes it to a compact, URL-safe string
+        return builder.compact();
     }
     /**
      * 验证token的有效性
@@ -67,21 +81,4 @@ public class test {
         return false;
     }
 }
-
-/*try {
-
-            String content = "120605181003;http://www.cnblogs.com/jtmjx";
-            String path = "D:/";
-
-            MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-
-            Map hints = new HashMap();
-            hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-            BitMatrix bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 400, 400,hints);
-            File file1 = new File(path,"餐巾纸.jpg");
-            MatrixToImageWriter.writeToFile(bitMatrix, "jpg", file1);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
 

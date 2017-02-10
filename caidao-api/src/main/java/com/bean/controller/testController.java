@@ -4,15 +4,11 @@ import com.bean.RSTFul.RSTFulBody;
 import com.bean.model.GoodsInfo;
 import com.bean.service.VendingService;
 import com.bean.service.WebService;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,11 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
-import static jxl.biff.FormatRecord.logger;
 
 /**
  * Created by Mr.bean on 2016/3/16.
@@ -45,23 +37,26 @@ public class testController {
     @Autowired
     private WebService webService;
 
-    private final static String rootPath="d:\\";
-        @RequestMapping("/test")
+    private final static String rootPath = "d:\\";
+
+//    @Token
+    @RequestMapping("/test")
     @ResponseBody
-    public RSTFulBody test(HttpServletResponse response,@RequestBody Map<String,Object> map) {
+    public RSTFulBody test(HttpServletResponse response) {
 //            try {
 ////                vendingService.getVendingAdvByScreenAndToken(new SimpleDateFormat("yyyyMMddHHmmss").parse("20160708153908"),"1");
 //            } catch (ParseException e) {
 //                e.printStackTrace();
 //            }
-            return new RSTFulBody().data("哈哈").body("");
+        return new RSTFulBody().data("哈哈").body("");
 
     }
+
     @RequestMapping("/upStockExcel")
     @ResponseBody
     public RSTFulBody upStockExcel(HttpServletResponse response,
                                    @RequestParam(value = "file") MultipartFile[] files) {
-        for(MultipartFile file:files) {
+        for (MultipartFile file : files) {
             List<GoodsInfo> goodsInfos = new ArrayList<>();
             Workbook wb = null;
             try {
@@ -91,8 +86,6 @@ public class testController {
         return new RSTFulBody().data("哈哈").body("");
 
     }
-
-
 
 
 }
