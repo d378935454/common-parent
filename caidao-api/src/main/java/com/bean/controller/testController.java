@@ -1,6 +1,7 @@
 package com.bean.controller;
 
 import com.bean.RSTFul.RSTFulBody;
+import com.bean.annotation.Token;
 import com.bean.model.GoodsInfo;
 import com.bean.service.VendingService;
 import com.bean.service.WebService;
@@ -37,9 +38,9 @@ public class testController {
     @Autowired
     private WebService webService;
 
-    private final static String rootPath = "d:\\";
+    private final static String ROOTPATH = "d:\\";
 
-//    @Token
+    @Token
     @RequestMapping("/test")
     @ResponseBody
     public RSTFulBody test(HttpServletResponse response) {
@@ -56,12 +57,13 @@ public class testController {
     @ResponseBody
     public RSTFulBody upStockExcel(HttpServletResponse response,
                                    @RequestParam(value = "file") MultipartFile[] files) {
+        LOGGER.info("Excel");
         for (MultipartFile file : files) {
             List<GoodsInfo> goodsInfos = new ArrayList<>();
             Workbook wb = null;
             try {
                 String fileName = file.getOriginalFilename();
-                File localFile = new File(rootPath + fileName);
+                File localFile = new File(ROOTPATH + fileName);
                 //将上传文件写入到指定文件出、核心！
                 file.transferTo(localFile);
                 wb = Workbook.getWorkbook(localFile);
@@ -86,6 +88,5 @@ public class testController {
         return new RSTFulBody().data("哈哈").body("");
 
     }
-
 
 }
