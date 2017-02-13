@@ -1,7 +1,7 @@
 package com.bean.controller;
 
 import com.bean.RSTFul.RSTFulBody;
-import com.bean.annotation.Token;
+import com.bean.token.Token;
 import com.bean.model.GoodsInfo;
 import com.bean.service.VendingService;
 import com.bean.service.WebService;

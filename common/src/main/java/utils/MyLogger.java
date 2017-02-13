@@ -30,6 +30,13 @@ public class MyLogger {
     public void error(String message){
       LOGGER.error(message);
     }
+    /**
+     * 日志记录
+     * @param message 日志内容
+     */
+    public void error(Exception message){
+        LOGGER.error(message);
+    }
     public void error(String message,String... e){
         LOGGER.error(MessageFormat.format(message, e));
     }

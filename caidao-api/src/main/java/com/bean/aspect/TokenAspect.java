@@ -1,5 +1,6 @@
 package com.bean.aspect;
 
+import com.bean.token.TokenUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -18,10 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 @Aspect
 public class TokenAspect {
 
-    private final static MyLogger log = new MyLogger(TokenAspect.class);
+    private final MyLogger log = new MyLogger(TokenAspect.class);
 
     //配置切入点,该方法无方法体,主要为方便同类中其他方法使用此处配置的切入点
-    @Pointcut("@annotation(com.bean.annotation.Token)")
+    @Pointcut("@annotation(com.bean.token.Token)")
     public void token() {
     }
 
@@ -50,10 +51,10 @@ public class TokenAspect {
             StopWatch stopWatch = new StopWatch();
             stopWatch.start();
             // 检查用户所传递的 token 是否合法
-//            String token = getUserToken(request);
-//            if (!token.equalsIgnoreCase("123456")) {
-//                return "错误, 权限不合法!";
-//            }
+            String token = request.getHeader("auth_token");
+            if (TokenUtil.isValid(token,"aaaaa")) {
+                return "错误, 权限不合法!";
+            }
             Object retVal=joinPoint.proceed();
             //继续执行方法
             stopWatch.stop();

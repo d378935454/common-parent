@@ -1,4 +1,4 @@
-package com.bean.annotation;
+package com.bean.token;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
