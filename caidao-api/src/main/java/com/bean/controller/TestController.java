@@ -1,10 +1,11 @@
 package com.bean.controller;
 
 import com.bean.RSTFul.RSTFulBody;
-import com.bean.token.Token;
 import com.bean.model.GoodsInfo;
 import com.bean.service.VendingService;
 import com.bean.service.WebService;
+import com.bean.token.Token;
+import com.bean.token.TokenUtil;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -27,18 +28,18 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/machine")
-public class testController {
+public class TestController {
     /**
      * 日志记录
      **/
-    private static final MyLogger LOGGER = new MyLogger(testController.class);
+    private static final MyLogger LOGGER = new MyLogger(TestController.class);
     @Autowired
     private VendingService vendingService;
 
     @Autowired
     private WebService webService;
 
-    private final static String ROOTPATH = "d:\\";
+    private static final  String ROOTPATH = "d:\\";
 
     @Token
     @RequestMapping("/test")
@@ -50,6 +51,12 @@ public class testController {
 //                e.printStackTrace();
 //            }
         return new RSTFulBody().data("哈哈").body("");
+
+    }
+    @RequestMapping("/getToken")
+    @ResponseBody
+    public RSTFulBody getToken(HttpServletResponse response) {
+        return new RSTFulBody().data("哈哈").body(TokenUtil.getJWTString("duhongda",TokenUtil.getSECRET(),"1.0.0"));
 
     }
 
@@ -67,10 +74,9 @@ public class testController {
                 //将上传文件写入到指定文件出、核心！
                 file.transferTo(localFile);
                 wb = Workbook.getWorkbook(localFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (BiffException e) {
-                e.printStackTrace();
+            } catch (IOException|BiffException e) {
+                LOGGER.error(e);
+//                e.printStackTrace();
             }
             Sheet rs = wb.getSheet(0);//或者rwb.getSheet(0)
             //  PrintWriter out=response.getWriter();

@@ -67,14 +67,14 @@
 <%--<a href="pages/div1.html">跳到主页面</a>--%>
 
 <script src="js/vue/vue.js"></script>
-<script src="js/jquery/jquery-1.12.2.js"></script>
+<script src="js/jquery/jquery-2.0.3.min.js"></script>
 <script src="js/select2.min.js"></script>
 <%--<script src="http://code.angularjs.org/angular-1.0.1.min.js"></script>--%>
 <script src="js/bootstrap/js/bootstrap.min.js"></script>
 <script>
-    var token="asdad";
+    var token = "asdad";
     $(document).ajaxComplete(function () {
-        alert("asdasd");
+//        alert("asdasd");
     });
     //    Vue.use(VeeValidate);
     $(document).ready(function () {
@@ -155,6 +155,7 @@
                     contentType: "application/json",
                     type: 'POST',
                     data: JSON.stringify({aaa: "aaa", bbb: "bbbb"}),
+                    dataType: "json",
                     beforeSend: function (request) {                       //添加请求响应头中的自定义token
                         request.setRequestHeader("auth_token", token);
                     },
@@ -163,7 +164,22 @@
                 }
         )
     }
-
+    function getToken() {
+        $.ajax({
+            url: 'machine/getToken.htmls',
+            contentType: "application/json",
+            type: 'POST',
+            data: JSON.stringify({aaa: "aaa", bbb: "bbbb"}),
+            dataType: "json",
+            success: function (data) {
+                debugger;
+                token = data.body;
+            }
+        })
+    }
+    function a() {
+        alert(token)
+    }
     var name = "world";
     $(window).load(function () {
         console.log(name);
@@ -174,8 +190,5 @@
             console.log(name)
         }
     });
-    function a() {
-        console.log(name)
-    }
 </script>
 </html>

@@ -14,30 +14,40 @@ import java.util.Date;
  */
 public class TokenUtil {
     private static final  MyLogger log = new MyLogger(TokenAspect.class);
+    private static String SECRET = "MY SECRET";
+
+    public static String getSECRET() {
+        return SECRET;
+    }
+
+    public static void setSECRET(String SECRET) {
+        TokenUtil.SECRET = SECRET;
+    }
+
     private static final Long OUTTIME = 60 * 60 * 1000L;
     private TokenUtil() {
 
     }
 
-    public static String getJWTString(String tel, String key, String commpanyId){
-        if (tel == null) {
+    public static String getJWTString(String Sub, String secret, String Id){
+        if (Sub == null) {
             throw new NullPointerException("null username is illegal");
         }
-        if (key == null) {
-            throw new NullPointerException("null key is illegal");
+        if (secret == null) {
+            throw new NullPointerException("null secret is illegal");
         }
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         return Jwts.builder()
                 .setHeaderParam("type", "JWT")
                 .setHeaderParam("alg", "HS256")
                 .setIssuer("Jersey-Security-Basic")
-                .setSubject(tel)
+                .setSubject(Sub)
                 .setAudience("user")
                 .setExpiration(new Date(System.currentTimeMillis()+OUTTIME))
                 .claim("role","du")
                 .setIssuedAt(new Date())
-                .setId(commpanyId)
-                .signWith(signatureAlgorithm,key)
+                .setId(Id)
+                .signWith(signatureAlgorithm,secret)
                 .compact();
     }
     public static boolean isValid(String token, String key) {
@@ -117,5 +127,10 @@ public class TokenUtil {
             return claimsJws.getBody().getSubject();
         }
         return null;
+    }
+
+    public static boolean isTimeOut(String token, String secret) {
+        Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+        return new Date().after(claimsJws.getBody().getExpiration());
     }
 }

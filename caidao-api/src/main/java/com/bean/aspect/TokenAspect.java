@@ -1,5 +1,6 @@
 package com.bean.aspect;
 
+import com.bean.RSTFul.RSTFulBody;
 import com.bean.token.TokenUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -52,8 +53,11 @@ public class TokenAspect {
             stopWatch.start();
             // 检查用户所传递的 token 是否合法
             String token = request.getHeader("auth_token");
-            if (TokenUtil.isValid(token,"aaaaa")) {
-                return "错误, 权限不合法!";
+            if (!TokenUtil.isValid(token,TokenUtil.getSECRET())) {
+                return new RSTFulBody().fail().data("secret错误！");
+            }
+            if(TokenUtil.isTimeOut(token,TokenUtil.getSECRET())){
+                return new RSTFulBody().fail().data("验证已过期");
             }
             Object retVal=joinPoint.proceed();
             //继续执行方法
