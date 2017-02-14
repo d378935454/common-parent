@@ -69,7 +69,7 @@ public class TokenAspect {
 
             long end = System.currentTimeMillis();
             log.info("around " + joinPoint + "\tUse time : " + (end - start) + " ms with exception : " + e.getMessage());
-            return "";
+            return "系统错误";
         }
     }
 
