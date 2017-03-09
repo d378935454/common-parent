@@ -3,7 +3,6 @@
  */
 
 define(['vue', 'text!tpl/app.html'], function (Vue, appHtml) {
-
     return Vue.extend({
         template: appHtml,
         data: function(){
@@ -15,4 +14,4 @@ define(['vue', 'text!tpl/app.html'], function (Vue, appHtml) {
             this.user = this.$cookie.get('killPhone')
         }
     })
-})
+});

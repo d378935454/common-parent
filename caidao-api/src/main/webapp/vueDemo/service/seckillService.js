@@ -12,20 +12,20 @@ define(['vue'], function (Vue) {
                     if (json.success) {
                         return json.data
                     } else {
-                        alert(json.error)
+                        alert(json.error);
                         return null
                     }
                 })
         },
         all: function () {
-            return Vue.http.get('/seckill')
+            return Vue.http.get('/seckill.htmls')
                 .then(function (response) {
                     return (response.json())
                 }).then(function (json) {
-                    if (json.success) {
-                        return json.data
+                    if (json.code) {
+                        this.seckillList= json.body
                     } else {
-                        alert(json.error)
+                        alert(json.data);
                         return []
                     }
                 })
@@ -38,7 +38,7 @@ define(['vue'], function (Vue) {
                     if (json.success) {
                         return json.data
                     } else {
-                        alert(json.error)
+                        alert(json.error);
                         return {}
                     }
                 })
@@ -51,7 +51,7 @@ define(['vue'], function (Vue) {
                     if (json.success) {
                         return json.data
                     } else {
-                        alert(json.error)
+                        alert(json.error);
                         return null
                     }
                 })
@@ -65,7 +65,7 @@ define(['vue'], function (Vue) {
                         return json.data
                     } else {
                         if (json.error) {
-                            alert(json.error)
+                            alert(json.error);
                             return null
                         } else {
                             return json.data
@@ -74,4 +74,4 @@ define(['vue'], function (Vue) {
                 })
         }
     }
-})
+});

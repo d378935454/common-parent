@@ -1,6 +1,7 @@
 package com.bean.controller;
 
 
+import com.bean.RSTFul.RSTFulBody;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.HandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,5 +42,10 @@ public class CommenController {
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         simpleDateFormat.setLenient(true);
         binder.registerCustomEditor(Date.class,new CustomDateEditor(simpleDateFormat,true));
+    }
+    @RequestMapping(value = "/seckill")
+    @ResponseBody
+    public RSTFulBody seckill(){
+        return  new RSTFulBody().success("").data("hehe     ");
     }
 }

@@ -2,51 +2,43 @@
  * 登录组件
  * Created by yuzhou on 16/9/5.
  */
-define(['vue', 'text!tpl/login.html','vue-strap', 'service/utilService'], function (Vue, loginHtml,VueStrap, utilService) {
-
+define(['vue', 'text!tpl/login.html', 'vue-strap', 'service/utilService'], function (Vue, loginHtml, VueStrap, utilService) {
     return Vue.extend({
         template: loginHtml,
-        data: function(){
+        data: function () {
             return {
                 showModal: true,
                 killPhone: 13776573631,
-                validated: true
+                validated: true,
+                fromPath:''
             }
         },
         watch: {
-            'killPhone': function(val, oldVal){
+            'killPhone': function (val, oldVal) {
                 this.validated = utilService.validatePhone(val)
             }
         },
-        route: {
-            data: function(transition){
-                var killPhone = this.$cookie.get('killPhone')
-                if(utilService.validatePhone(killPhone)) {
-                    //alert('用户已登录')
-                    this.$router.go('/')
-                    return
-                }
-
-                return {
-                    killPhone: killPhone,
-                    validated: false,
-                    fromPath: transition.from.path
-                }
+        mounted: function () {
+            var killPhone = this.$cookie.get('killPhone');
+            if (utilService.validatePhone(killPhone)) {
+                //alert('用户已登录')
+                this.$router.go('/');
+                return
             }
+
+                this.killPhone= killPhone;
+                this.validated= false
         },
         methods: {
-            doSubmit: function(){
+            doSubmit: function () {
                 //console.log('From path', this.fromPath)
-                if(utilService.validatePhone(this.killPhone)){
+                if (utilService.validatePhone(this.killPhone)) {
                     this.$cookie.set('killPhone', this.killPhone, 1);
-                    this.$router.go(this.fromPath)
+                    this.$router.go(-1)
                 } else {
                     alert('请输入正确的手机号')
                 }
             }
-        },
-        components: {
-            modal: VueStrap.modal
         }
     })
-})
+});
