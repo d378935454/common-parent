@@ -18,17 +18,18 @@ define(['vue'], function (Vue) {
                 })
         },
         all: function () {
-            return Vue.http.get('/seckill.htmls')
-                .then(function (response) {
-                    return (response.json())
-                }).then(function (json) {
-                    if (json.code) {
-                        this.seckillList= json.body
+            return Vue.prototype.$http.get('/seckill.htmls')
+                .then(data => {
+                    debugger;
+                    if (data.code) {
+                       return data.data
                     } else {
-                        alert(json.data);
+                        alert(data.data);
                         return []
                     }
-                })
+                }).catch(err=>{
+                console.log(err);
+            })
         },
         get: function (seckillId) {
             return Vue.http.get('/seckill/' + seckillId)

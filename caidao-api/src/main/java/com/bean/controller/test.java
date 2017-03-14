@@ -18,7 +18,7 @@ public class test {
             ClassLoader loader=new URLClassLoader(new URL[]{url});//创建类加载器
             //import com.sun.org.apache.bcel.internal.util.ClassLoader;
             //ClassLoader classLoader = new ClassLoader(new String[]{""});//类路径
-            Class<?> cls=loader.loadClass("com.alibaba.fastjson.JSON");//加载指定类，注意一定要带上类的包名
+            Class<?> cls=loader.loadClass("com.alibaba.fastjson.JSONArray");//加载指定类，注意一定要带上类的包名
             Object obj=cls.newInstance();//初始化一个实例
             Method method=cls.getMethod("printString",String.class,String.class);//方法名和对应的参数类型
             Object o=method.invoke(obj,"chen","leixing");//调用得到的上边的方法method

@@ -30,6 +30,9 @@ require(['vue', 'vue-router', 'axios', 'plugin/vue-cookie', 'app'], function (Vu
         timeout: 1000,
         headers: {'X-Custom-Header': 'foobar'}
     });
+
+    //可以设置cookies
+    instance.defaults.withCredentials =true;
     //添加请求拦截器
     instance.interceptors.request.use(function (config) {
         //在发送请求之前做某事
@@ -42,16 +45,16 @@ require(['vue', 'vue-router', 'axios', 'plugin/vue-cookie', 'app'], function (Vu
 //添加响应拦截器
     instance.interceptors.response.use(function (response) {
         //对响应数据做些事
-        debugger;
-        router.push({ path: '/login' });
-        return response;
+        if (response.status == 401) {
+            router.push({path: '/login'});
+        }
+        return response.data;
     }, function (error) {
         //请求错误时做些事
         return Promise.reject(error);
     });
     // 配置resouce访问
     Vue.prototype.$http = instance;
-
     // 配置路由
     Vue.use(VueRouter);
     const routes = [,
