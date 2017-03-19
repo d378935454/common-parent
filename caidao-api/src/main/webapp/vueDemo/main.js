@@ -4,20 +4,21 @@
  */
 
 var requireConfig = {
-    baseUrl: '../../vueDemo',
+    baseUrl: '../vueDemo',
     paths: {
         'text': '../js/requirejs/text',
-        'vue': '../../js/vue/vue',
-        'vue-router': '../../js/vue/vue-router',
-        'axios': '../../js/vue/axios.min',
-        'vue-strap': '../../js/vue/vue-strap'
+        'vue': '../js/vue/vue',
+        'vue-router': '../js/vue/vue-router',
+        'axios': '../js/vue/axios.min',
+        'vue-strap': '../js/vue/vue-strap',
+        'element':'../js/vue/element-ui/index'
     },
     shim: {},
     map: {}
 };
 
 require.config(requireConfig);
-require(['vue', 'vue-router', 'axios', 'plugin/vue-cookie', 'app'], function (Vue, VueRouter, axios, VueCookie, App) {
+require(['vue', 'vue-router', 'axios', 'plugin/vue-cookie', 'app','element'], function (Vue, VueRouter, axios, VueCookie, App,Element) {
     Vue.config.devtools = true;
     Vue.use(VueCookie);
 
@@ -26,8 +27,9 @@ require(['vue', 'vue-router', 'axios', 'plugin/vue-cookie', 'app'], function (Vu
         return new Date(value).toLocaleString()
     });
     const instance = axios.create({
-        baseURL: 'http://localhost:8081',
-        timeout: 1000,
+        // baseURL: 'http://localhost:8081/',
+        baseURL: '..',
+        timeout: 10000,
         headers: {'X-Custom-Header': 'foobar'}
     });
 
@@ -38,6 +40,7 @@ require(['vue', 'vue-router', 'axios', 'plugin/vue-cookie', 'app'], function (Vu
         //在发送请求之前做某事
         return config;
     }, function (error) {
+        debugger
         //请求错误时做些事
         return Promise.reject(error);
     });
@@ -57,6 +60,7 @@ require(['vue', 'vue-router', 'axios', 'plugin/vue-cookie', 'app'], function (Vu
     Vue.prototype.$http = instance;
     // 配置路由
     Vue.use(VueRouter);
+    Vue.use(Element);
     const routes = [,
         {
             path: '/',

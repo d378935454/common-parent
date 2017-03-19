@@ -27,7 +27,6 @@ define(['vue', 'text!tpl/seckill/list.html', 'service/seckillService'], function
             //         console.log(err);
             // })
             $this.seckillList=await seckillService.all();
-            debugger
         },
         methods: {
             showDetail : function (seckill) {
