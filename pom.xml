@@ -14,6 +14,7 @@
         <module>core</module>
         <module>api-service</module>
         <module>socket</module>
+        <module>springboot</module>
     </modules>
     <name>common-parent</name>
     <packaging>pom</packaging>
@@ -26,12 +27,12 @@
             <id>jdk17</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
-                <jdk>1.7</jdk>
+                <jdk>1.8</jdk>
             </activation>
             <properties>
-                <maven.compiler.source>1.7</maven.compiler.source>
-                <maven.compiler.target>1.7</maven.compiler.target>
-                <maven.compiler.compilerVersion>1.7</maven.compiler.compilerVersion>
+                <maven.compiler.source>1.8</maven.compiler.source>
+                <maven.compiler.target>1.8</maven.compiler.target>
+                <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
             </properties>
         </profile>
         <profile>
@@ -59,15 +60,6 @@
     </profiles>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>

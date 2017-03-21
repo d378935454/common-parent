@@ -12,8 +12,9 @@ public class C  {
     }
     public static void main(String[] args) {
         C c=new C();
-       int str=1234;
+       int str=128;
         c.pr(str);
-        System.out.println(str);
+        int  aaa =126;
+        System.out.println(aaa&str);
     }
 }
