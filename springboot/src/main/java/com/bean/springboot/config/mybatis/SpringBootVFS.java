@@ -1,4 +1,4 @@
-package com.bean.springboot.mybatis;
+package com.bean.springboot.config.mybatis;
 
 import org.apache.ibatis.io.VFS;
 import org.springframework.core.io.Resource;

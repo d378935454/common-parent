@@ -16,8 +16,8 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication app =new SpringApplication(DemoApplication.class);
+//		DefaultProfileUtil.addDefaultProfile(app);
 		Environment env = app.run(args).getEnvironment();
-
 		try {
 			log.info("\n----------------------------------------------------------\n\t" +
                             "Application '{}' is running! Access URLs:\n\t" +

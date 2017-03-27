@@ -1,4 +1,4 @@
-package com.bean.springboot.mybatis;
+package com.bean.springboot.config.mybatis;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.logging.Log;

@@ -36,6 +36,8 @@
     库存Excel：<input type="file" name="file" multiple="multiple"><input value="tijiao" type="submit">
 </form>
 <input type="button" value="导入库存" onclick="upExcel();">
+<input type="button" value="下载" onclick="">
+<a href="exportExcel.htmls">下载</a>
 
 <input type="button" value="增加页" onclick="adddiv()">
 
@@ -80,6 +82,19 @@
     $(document).ready(function () {
         $('#sle').select2();
     });
+    var exportExcel=function(){
+        $.ajax({
+            url: 'exportExcel.htmls',
+            type: 'POST',
+            dataType: "json",
+            success: function (returndata) {
+//                alert(returndata);
+            },
+            error: function (returndata) {
+//                alert(returndata.responseText);
+            }
+        });
+    }
     Vue.config.devtools = true;
     Vue.component("todo-item", {
         props: ['todo'],

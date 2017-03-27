@@ -26,9 +26,9 @@ spring:
         view:
             prefix:
             suffix: .ftl
-    profiles:
-        active: dev
-        include: swagger
+#    profiles:
+#        active: test
+#        include: swagger
     jackson:
         serialization.indent_output: true
 #    datasource:
@@ -43,9 +43,8 @@ db:
     typeAliasesPackage: com.bean.model
     configLocation: classpath*:mybatis-config.xml
     jdbc:
-      type: com.alibaba.druid.pool.DruidDataSource
+#      type: com.alibaba.druid.pool.DruidDataSource
       url: jdbc:mysql://localhost:3306/caidao?useUnicode=true&characterEncoding=UTF-8&relaxAutoCommit=true&zeroDateTimeBehavior=convertToNull
-      name:
       username: root
       password: root
       driverClassName: com.mysql.jdbc.Driver
@@ -56,5 +55,5 @@ db:
       initialSize: 2
       validationQuery: SELECT 1
 server:
-    port: 8082
+    port: 8080
     address: localhost
