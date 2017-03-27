@@ -20,8 +20,6 @@ spring:
         template_update_delay: 0
         default_encoding: UTF-8
         classic_compatible: true
-
-
     mvc:
         view:
             prefix:
@@ -34,7 +32,8 @@ spring:
 #    datasource:
 
 
-
+lyw:
+  name: aaa
 
 
 db:

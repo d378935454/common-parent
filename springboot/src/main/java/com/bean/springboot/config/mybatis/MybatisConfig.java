@@ -6,6 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.io.VFS;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,9 +21,11 @@ public class MybatisConfig {
 
 	protected static Log log = LogFactory.getLog(MybatisConfig.class);
 
+
 	@Bean(name = "sqlSessionFactory")
 	public SqlSessionFactory sqlSessionFactory(DataSource datasource, MybatisConfigurationProperties properties)
 			throws Exception {
+
 
 		log.info("*************************sqlSessionFactory:begin***********************" + properties);
 

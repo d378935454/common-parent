@@ -1,5 +1,6 @@
 package com.bean.springboot.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class IndexController {
 
+    @Value(value="${lyw.name}")
+    private String a;
     @RequestMapping("/test")
     public String test(HttpServletResponse response) {
 //            try {
