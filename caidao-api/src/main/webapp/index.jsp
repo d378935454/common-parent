@@ -112,6 +112,20 @@
             ]
         }
     });
+    var cors=function () {
+        $.ajax({
+            url: 'http://localhost:8080/machine/getToken',
+            type: 'POST',
+            dataType: "json",
+            success: function (returndata) {
+                debugger
+//                alert(returndata);
+            },
+            error: function (returndata) {
+//                alert(returndata.responseText);
+            }
+        });
+    }
     function adddiv() {
         debugger;
         var l = $("#titles").find("button").length;

@@ -1,73 +1,40 @@
 <template>
-  <el-row class="tac">
-    <el-col :span="8">
-      <h5>带 icon</h5>
-      <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-        <el-submenu index="1">
-          <template slot="title"><i class="el-icon-message"></i>导航一</template>
-          <el-menu-item-group>
-            <template slot="title">分组一</template>
-            <el-menu-item index="1-1">选项1</el-menu-item>
-            <el-menu-item index="1-2">选项2</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="分组2">
-            <el-menu-item index="1-3">选项3</el-menu-item>
-          </el-menu-item-group>
-          <el-submenu index="1-4">
-            <template slot="title">选项4</template>
-            <el-menu-item index="1-4-1">选项1</el-menu-item>
-          </el-submenu>
-        </el-submenu>
-        <el-menu-item index="2"><i class="el-icon-menu"></i>导航二</el-menu-item>
-        <el-menu-item index="3"><i class="el-icon-setting"></i>导航三</el-menu-item>
-      </el-menu>
-    </el-col>
-    <el-col :span="8">
-      <h5>不带 icon</h5>
-      <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" theme="dark">
-        <el-submenu index="1">
-          <template slot="title">导航一</template>
-          <el-menu-item-group title="分组一">
-            <el-menu-item index="1-1">选项1</el-menu-item>
-            <el-menu-item index="1-2">选项2</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="分组2">
-            <el-menu-item index="1-3">选项3</el-menu-item>
-          </el-menu-item-group>
-          <el-submenu index="1-4">
-            <template slot="title">选项4</template>
-            <el-menu-item index="1-4-1">选项1</el-menu-item>
-          </el-submenu>
-        </el-submenu>
-        <el-menu-item index="2">导航二</el-menu-item>
-        <el-menu-item index="3">导航三</el-menu-item>
-      </el-menu>
-    </el-col>
-    <el-col :span="8">
-      <h5>分组</h5>
-      <el-menu mode="vertical" default-active="1" class="el-menu-vertical-demo">
-        <el-menu-item-group title="分组一">
-          <el-menu-item index="1"><i class="el-icon-message"></i>导航一</el-menu-item>
-          <el-menu-item index="2"><i class="el-icon-message"></i>导航二</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组二">
-          <el-menu-item index="3"><i class="el-icon-message"></i>导航三</el-menu-item>
-          <el-menu-item index="4"><i class="el-icon-message"></i>导航四</el-menu-item>
-        </el-menu-item-group>
-      </el-menu>
-    </el-col>
-  </el-row>
-
+  <el-upload
+    class="upload-demo"
+    ref="upload"
+    data=""
+    action="machine/upStockExcel"
+    :on-preview="handlePreview"
+    :on-remove="handleRemove"
+    :file-list="fileList"
+    :auto-upload="false">
+    <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+    <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+  </el-upload>
 </template>
-
 <script>
   export default {
+    data () {
+      return {
+        fileList: [{
+          name: 'food.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+        }, {
+          name: 'food2.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+        }]
+      }
+    },
     methods: {
-      handleOpen (key, keyPath) {
-        console.log(key, keyPath)
+      submitUpload () {
+        this.$refs.upload.submit()
       },
-      handleClose (key, keyPath) {
-        console.log(key, keyPath)
+      handleRemove (file, fileList) {
+        console.log(file, fileList)
+      },
+      handlePreview (file) {
+        console.log(file)
       }
     }
   }

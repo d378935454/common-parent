@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import utils.MyLogger;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
@@ -57,7 +58,9 @@ public class TestController {
     }
     @RequestMapping("/getToken")
     @ResponseBody
-    public RSTFulBody getToken(HttpServletResponse response) {
+    public RSTFulBody getToken(HttpServletRequest request, HttpServletResponse response) {
+        //支持跨域
+        response.setHeader("Access-Control-Allow-Origin","*");
         return new RSTFulBody().data("哈哈").body(TokenUtil.getJWTString("duhongda",TokenUtil.getSECRET(),"1.0.0"));
 
     }
@@ -78,19 +81,19 @@ public class TestController {
                 wb = Workbook.getWorkbook(localFile);
             } catch (IOException|BiffException e) {
                 LOGGER.error(e);
-//                e.printStackTrace();
+                e.printStackTrace();
             }
             Sheet rs = wb.getSheet(0);//或者rwb.getSheet(0)
             //  PrintWriter out=response.getWriter();
 //            int clos = rs.getColumns();//得到所有的列
             int rows = rs.getRows();//得到所有的行
-            for (int i = 1; i < rows; i++) {
-                //第一个是列数，第二个是行数
-                GoodsInfo bean = new GoodsInfo();
-                bean.setGoodsInfoItemNo(rs.getCell(0, i).getContents());
-                bean.setGoodsInfoStock(new Long(rs.getCell(1, i).getContents()));
-                goodsInfos.add(bean);
-            }
+//            for (int i = 1; i < rows; i++) {
+//                //第一个是列数，第二个是行数
+//                GoodsInfo bean = new GoodsInfo();
+//                bean.setGoodsInfoItemNo(rs.getCell(0, i).getContents());
+//                bean.setGoodsInfoStock(new Long(rs.getCell(1, i).getContents()));
+//                goodsInfos.add(bean);
+//            }
 //                webService.updateStockByNo(goodsInfos);
         }
         return new RSTFulBody().data("哈哈").body("");
