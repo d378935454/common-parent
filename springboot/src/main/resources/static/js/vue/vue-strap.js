@@ -1489,7 +1489,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    , result = []
 	    , key;
 	  for(key in O)if(key != IE_PROTO)has(O, key) && result.push(key);
-	  // Don't enum bug & hidden keys
+	  // Don't type bug & hidden keys
 	  while(names.length > i)if(has(O, key = names[i++])){
 	    ~arrayIndexOf(result, key) || result.push(key);
 	  }
@@ -1611,7 +1611,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 78 */
 /***/ function(module, exports) {
 
-	// IE 8- don't enum bug keys
+	// IE 8- don't type bug keys
 	module.exports = (
 	  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
 	).split(',');
