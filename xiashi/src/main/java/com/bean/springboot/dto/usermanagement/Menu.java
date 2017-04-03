@@ -1,9 +1,7 @@
 package com.bean.springboot.dto.usermanagement;
 
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -36,7 +34,7 @@ public class Menu implements Serializable {
 
     @Column(name = "is_delete")
     @JsonIgnore
-    private boolean isDisabled;
+    private Integer isDisabled;
 
     @Transient
     private List<Menu> menus=new ArrayList<>();
@@ -57,9 +55,6 @@ public class Menu implements Serializable {
         this.adminId = adminId;
     }
 
-    public void setDisabled(boolean disabled) {
-        isDisabled = disabled;
-    }
 
     public Integer getId() {
         return id;
@@ -102,30 +97,15 @@ public class Menu implements Serializable {
     }
 
 
-    public boolean isDisabled() {
+    public Integer getIsDisabled() {
         return isDisabled;
     }
 
-    public void setIsDisabled(boolean isDisabled) {
+    public void setIsDisabled(Integer isDisabled) {
         this.isDisabled = isDisabled;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (!(obj instanceof Menu))
-            return false;
-
-        Menu other = (Menu) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-
-        return true;
+    public void setDisabled(Integer disabled) {
+        isDisabled = disabled;
     }
 }

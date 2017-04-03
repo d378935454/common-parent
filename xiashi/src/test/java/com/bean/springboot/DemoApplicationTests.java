@@ -6,17 +6,17 @@ import com.bean.springboot.dto.usermanagement.User;
 import com.bean.springboot.utils.TreeUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.inject.Inject;
 import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DemoApplicationTests {
 
-	@Inject
+	@Autowired
 	UserDao userDao;
 
 	@Test

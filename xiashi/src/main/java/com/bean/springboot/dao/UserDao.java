@@ -10,4 +10,11 @@ import java.util.List;
  */
 public interface UserDao {
     User getAllUser();
+
+    /**
+     * 通过用户名密码
+     * @param account
+     * @return
+     */
+    List<User> getUserByAcount(String account);
 }

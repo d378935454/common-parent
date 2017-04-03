@@ -1,12 +1,8 @@
 package com.bean.springboot.dto.usermanagement;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -20,6 +16,7 @@ public class User {
     private String accountName;
 
     @Column(name = "password")
+    @JsonIgnore
     private String password;
 
     @Column(name = "id_card")
