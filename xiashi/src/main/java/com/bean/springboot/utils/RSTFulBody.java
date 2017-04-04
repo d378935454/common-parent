@@ -8,8 +8,8 @@ import java.io.Serializable;
  */
 public class RSTFulBody implements Serializable {
     private int code = 0;//成功1 失败0 session超时 3
-    private Object body = null;//反回json对象
-    private String data = null;//返回备注信息
+    private Object data ;//反回json对象
+    private String  msg= "";//返回备注信息
 
     /**
      * 成功
@@ -22,9 +22,9 @@ public class RSTFulBody implements Serializable {
     /**
      * 成功放入对象
      */
-    public RSTFulBody success(Object body) {
+    public RSTFulBody success(Object data) {
         this.code = 1;
-        this.body = body;
+        this.data = data;
         return this;
     }
 
@@ -41,17 +41,7 @@ public class RSTFulBody implements Serializable {
      */
     public RSTFulBody sessionTimeOut(String href) {
         this.code = 3;
-        this.body=href;
-        return this;
-    }
-
-    /**
-     * 放入对象
-     *
-     * @param body
-     */
-    public RSTFulBody body(Object body) {
-        this.body = body;
+        this.data=href;
         return this;
     }
 
@@ -60,8 +50,18 @@ public class RSTFulBody implements Serializable {
      *
      * @param data
      */
-    public RSTFulBody data(String data) {
+    public RSTFulBody data(Object data) {
         this.data = data;
+        return this;
+    }
+
+    /**
+     * 放入消息
+     *
+     * @param msg
+     */
+    public RSTFulBody msg(String msg) {
+        this.msg = msg;
         return this;
     }
 
@@ -72,12 +72,12 @@ public class RSTFulBody implements Serializable {
         return code;
     }
 
-    public Object getBody() {
-        return body;
+    public Object getData() {
+        return data;
     }
 
-    public String getData() {
-        return data;
+    public String getMsg() {
+        return msg;
     }
 
     public void setCode(int code) {

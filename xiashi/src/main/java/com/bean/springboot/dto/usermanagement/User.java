@@ -3,6 +3,10 @@ package com.bean.springboot.dto.usermanagement;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -13,6 +17,7 @@ public class User {
     private Integer id;
 
     @Column(name = "account_name")
+    @JsonIgnore
     private String accountName;
 
     @Column(name = "password")
@@ -33,17 +38,39 @@ public class User {
     private String email;
 
     @Column(name = "is_delete")
+    @JsonIgnore
     private Integer isDelete;
 
 
     @ManyToOne
     @JoinColumn(name = "admin_id")
+    @JsonIgnore
     private User admin;
 
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "permission_id")
+    @JsonIgnore
     private Permission permission ;
+
+    @Transient
+    private Set<Menu> menus=new HashSet<>();
+
+    public Set<Menu> getMenus() {
+        return menus;
+    }
+
+    public void setMenus(Set<Menu> menus) {
+        this.menus = menus;
+    }
+
+    public Permission getPermission() {
+        return permission;
+    }
+
+    public void setPermission(Permission permission) {
+        this.permission = permission;
+    }
 
     public String getIdCard() {
         return idCard;
@@ -128,12 +155,6 @@ public class User {
         return isDelete;
     }
 
-    public Permission getPermissions() {
-        return permission;
-    }
 
-    public void setPermissions(Permission permissions) {
-        this.permission = permissions;
-    }
 }
 

@@ -22,7 +22,7 @@ public class DemoApplicationTests {
 	@Test
 	public void contextLoads() {
 		User user = userDao.getAllUser();
-		Set<Menu> menus = TreeUtil.initMenus(user.getPermissions().getMenus());
+		Set<Menu> menus = TreeUtil.initMenus(user.getPermission().getMenus());
 		String aa = "";
 	}
 

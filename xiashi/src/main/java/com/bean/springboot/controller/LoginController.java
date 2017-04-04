@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ import java.util.List;
 /**
  * Created by bean on 2017/4/3.
  */
+@RequestMapping("mobile")
 @RestController
 public class LoginController {
     private static final Logger log = LoggerFactory.getLogger(LoginController.class);
@@ -35,20 +37,23 @@ public class LoginController {
      * AJAX提交
      */
     @RequestMapping("check-login")
-    public RSTFulBody ldapsubmit(String account, String pw) throws Exception {
+    public RSTFulBody ldapsubmit(HttpServletRequest request,User user) throws Exception {
+        String account = user.getAccountName();
+        String pw = user.getPassword();
         if (account == null || pw == null) {
-            return new RSTFulBody().fail().data("用户民和密码不可为空");
+            return new RSTFulBody().fail().msg("用户民和密码不可为空");
         }
         List<User> users = userSevice.getUserByAcount(account);
         if (users == null || users.isEmpty()) {
-            return new RSTFulBody().fail().data("账号不存在");
+            return new RSTFulBody().fail().msg("账号不存在");
         } else if (!md5Util.getMD5ofStr(pw).equals(users.get(0).getPassword())) {
-            return new RSTFulBody().fail().data("密码错误");
+            return new RSTFulBody().fail().msg("密码错误");
         }
         log.info(">>>>>>姓名>>>>>>>" + account);
         log.info(">>>>>>密码>>>>>>>" + pw);
 
-        return new RSTFulBody().success(TreeUtil.initMenus(users.get(0).getPermissions().getMenus()));
+        users.get(0).setMenus(TreeUtil.initMenus(users.get(0).getPermission().getMenus()));
+        return new RSTFulBody().success(users.get(0));
     }
 }
 

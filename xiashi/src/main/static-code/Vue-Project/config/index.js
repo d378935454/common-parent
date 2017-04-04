@@ -28,11 +28,11 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/machine': {
-        target: 'http://localhost:8080/',
+      '/mobile': {
+        target: 'http://localhost:8081/',
         changeOrigin: true,
         pathRewrite: {
-          '^/machine': '/machine'
+          '^/mobile': '/mobile'
         }
       }
     },
