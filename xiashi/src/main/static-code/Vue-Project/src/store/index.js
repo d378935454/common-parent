@@ -10,7 +10,8 @@ import actions from './actions'
 Vue.use(Vuex)
 const state = {
   totalTime: 0,
-  list: []
+  list: [],
+  title:""
 }
 const moduleA = {
   state,

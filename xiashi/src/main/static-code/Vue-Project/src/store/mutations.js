@@ -24,5 +24,9 @@ export default {
   // 删除某计划
   [types.DELETE_PLAN] (state, idx) {
     state.list.splice(idx, 1)
+  },
+  // 删除某计划
+  [types.UPDATE_TITLE] (state, title) {
+    state.title=title
   }
 }

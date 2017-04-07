@@ -12,6 +12,7 @@ import Page5 from '../views/nav2/Page5.vue'
 import Page6 from '../views/nav3/Page6.vue'
 import echarts from '../views/charts/echarts.vue'
 import Menu from "../views/Menu.vue"
+import MenuTwo from "../views/MenuTwo.vue"
 import main from "../views/Main.vue"
 Vue.use(Router)
 
@@ -19,20 +20,21 @@ let routes = [
   {
     path: '/login',
     component: Login,
-    name: '',
-    hidden: true
+    name: ''
   },
   {
     path: '/404',
     component: NotFound,
-    name: '',
-    hidden: true
+    name: ''
   },
   {
     path: '/main',
     component: main,
     name: '',
-    hidden: true
+    children: [
+      {path: '', component: Menu},
+      {path: ':id', component: MenuTwo}
+    ]
   },
   // { path: '/main', component: Main },
   {

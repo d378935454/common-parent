@@ -65,7 +65,7 @@
                 })
               } else {
                 sessionStorage.setItem('user', JSON.stringify(data))
-                $this.$router.push({path: '/'})
+                $this.$router.push({path: '/main'})
               }
             })
               .catch(error=>{

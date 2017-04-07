@@ -15,5 +15,8 @@ export default {
   },
   deletePlan ({commit}, plan) {
     commit(types.DELETE_PLAN, plan)
+  },
+  updateTitle ({commit}, title) {
+    commit(types.UPDATE_TITLE, title)
   }
 }
