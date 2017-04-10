@@ -10,12 +10,11 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory
 import org.springframework.boot.context.embedded.Ssl;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by ppctest02 on 2017/4/10.
  */
-@Configuration
+//@Configuration
 public class WebConfig {
     @Bean
     public EmbeddedServletContainerCustomizer containerCustomizer() {
