@@ -30,3 +30,4 @@ src/main/java/com/bean/springboot/config/
 src/main/java/com/bean/springboot/dto/A/
 /LOG_PATH_IS_UNDEFINED/
 /node_modules/
+!/src/main/java/com/bean/springboot/config/
