@@ -10,10 +10,31 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-04-09 21:03:32
+Date: 2017-04-13 22:28:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `express`
+-- ----------------------------
+DROP TABLE IF EXISTS `express`;
+CREATE TABLE `express` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `express_no` varchar(50) DEFAULT NULL COMMENT '物流编号',
+  `people_name` varchar(255) DEFAULT NULL COMMENT '物流人员',
+  `startdate` timestamp NULL DEFAULT NULL COMMENT '发送时间',
+  `old_senddate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '预计送达时间',
+  `rel_senddate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '实际送达时间',
+  `inserttime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_delete` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物流表';
+
+-- ----------------------------
+-- Records of express
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `menu`
@@ -60,6 +81,55 @@ INSERT INTO `menu` VALUES ('22', null, null, '供应商信息管理', '1', '20',
 INSERT INTO `menu` VALUES ('23', null, null, '物流单输入', '1', '20', '2017-04-08 11:43:10', '2017-04-08 11:51:17', '0');
 INSERT INTO `menu` VALUES ('24', null, null, '采购单输入', '1', '20', '2017-04-08 11:43:15', '2017-04-08 11:51:18', '0');
 INSERT INTO `menu` VALUES ('25', null, null, '付款凭证输入', '1', '20', '2017-04-08 11:43:21', '2017-04-08 11:51:19', '0');
+
+-- ----------------------------
+-- Table structure for `order`
+-- ----------------------------
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `state` tinyint(4) DEFAULT NULL COMMENT '订单状态',
+  `old_price` decimal(10,0) DEFAULT NULL COMMENT '原价格',
+  `price` decimal(10,0) DEFAULT NULL COMMENT '实际价格',
+  `send_address` varchar(50) DEFAULT NULL COMMENT '送达地点',
+  `send_date` timestamp NULL DEFAULT NULL COMMENT '预计送达时间',
+  `rel_send_date` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '实际送达时间',
+  `get_address` varchar(50) DEFAULT NULL COMMENT '取货地点',
+  `get_date` timestamp NULL DEFAULT NULL COMMENT '取货时间',
+  `pic_url` varchar(255) DEFAULT NULL COMMENT '凭证的照片地址',
+  `inserttime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_delete` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `order_info`
+-- ----------------------------
+DROP TABLE IF EXISTS `order_info`;
+CREATE TABLE `order_info` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) NOT NULL COMMENT '主订单id',
+  `goods_id` bigint(20) NOT NULL COMMENT '商品id',
+  `express_id` bigint(20) NOT NULL COMMENT '物流id',
+  `old_price` decimal(10,0) NOT NULL COMMENT '原价',
+  `price` decimal(10,0) NOT NULL COMMENT '实际价格',
+  `all_num` int(11) NOT NULL COMMENT '要求的总数量',
+  `check_num` int(11) DEFAULT NULL COMMENT '质检数量',
+  `send_num` int(11) DEFAULT NULL COMMENT '送达数量',
+  `inserttime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_Delete` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='子订单';
+
+-- ----------------------------
+-- Records of order_info
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `permission`
@@ -152,6 +222,23 @@ INSERT INTO `permission_menu` VALUES ('47', '6', '22');
 INSERT INTO `permission_menu` VALUES ('48', '6', '23');
 INSERT INTO `permission_menu` VALUES ('49', '6', '24');
 INSERT INTO `permission_menu` VALUES ('50', '6', '25');
+
+-- ----------------------------
+-- Table structure for `spec`
+-- ----------------------------
+DROP TABLE IF EXISTS `spec`;
+CREATE TABLE `spec` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `spec` varchar(255) DEFAULT NULL COMMENT '规格内容',
+  `inserttime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_delete` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='规格表';
+
+-- ----------------------------
+-- Records of spec
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `user`
