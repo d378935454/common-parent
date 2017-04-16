@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-04-13 22:28:57
+Date: 2017-04-16 18:02:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,17 +24,62 @@ CREATE TABLE `express` (
   `express_no` varchar(50) DEFAULT NULL COMMENT '物流编号',
   `people_name` varchar(255) DEFAULT NULL COMMENT '物流人员',
   `startdate` timestamp NULL DEFAULT NULL COMMENT '发送时间',
-  `old_senddate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '预计送达时间',
-  `rel_senddate` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '实际送达时间',
+  `old_senddate` timestamp NULL DEFAULT NULL COMMENT '预计送达时间',
+  `rel_senddate` timestamp NULL DEFAULT NULL COMMENT '实际送达时间',
   `inserttime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updatetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_delete` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物流表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='物流表';
 
 -- ----------------------------
 -- Records of express
 -- ----------------------------
+INSERT INTO `express` VALUES ('1', 'asd', '阿斯达', null, '2017-04-16 18:01:08', '2017-04-16 18:01:08', '2017-04-16 18:00:53', '2017-04-16 18:01:08', '0');
+
+-- ----------------------------
+-- Table structure for `goods`
+-- ----------------------------
+DROP TABLE IF EXISTS `goods`;
+CREATE TABLE `goods` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `goods_no` varchar(30) DEFAULT NULL COMMENT '商品编号',
+  `name` varchar(20) DEFAULT NULL COMMENT '商品名',
+  `type_id` bigint(20) DEFAULT NULL,
+  `inserttime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_delete` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='商品组表';
+
+-- ----------------------------
+-- Records of goods
+-- ----------------------------
+INSERT INTO `goods` VALUES ('1', null, '土鸡蛋', '1', '2017-04-16 17:20:36', '2017-04-16 17:22:27', '0');
+
+-- ----------------------------
+-- Table structure for `goods_info`
+-- ----------------------------
+DROP TABLE IF EXISTS `goods_info`;
+CREATE TABLE `goods_info` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `goods_id` bigint(20) DEFAULT NULL COMMENT '商品组id',
+  `goods_info_no` varchar(30) DEFAULT NULL COMMENT '商品编号',
+  `spec_id` bigint(20) DEFAULT NULL COMMENT '规格id',
+  `old_price` decimal(10,0) DEFAULT NULL COMMENT '原价',
+  `price` decimal(10,0) DEFAULT NULL COMMENT '现价',
+  `name` varchar(255) DEFAULT NULL COMMENT '商品名',
+  `inserttime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_delete` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='商品表';
+
+-- ----------------------------
+-- Records of goods_info
+-- ----------------------------
+INSERT INTO `goods_info` VALUES ('1', '1', null, '1', null, null, '土鸡蛋100', '2017-04-16 17:20:11', '2017-04-16 17:24:02', '0');
+INSERT INTO `goods_info` VALUES ('2', '1', null, '1', null, null, '土鸡蛋200', '2017-04-16 17:20:18', '2017-04-16 17:24:03', '0');
 
 -- ----------------------------
 -- Table structure for `menu`
@@ -83,31 +128,6 @@ INSERT INTO `menu` VALUES ('24', null, null, '采购单输入', '1', '20', '2017
 INSERT INTO `menu` VALUES ('25', null, null, '付款凭证输入', '1', '20', '2017-04-08 11:43:21', '2017-04-08 11:51:19', '0');
 
 -- ----------------------------
--- Table structure for `order`
--- ----------------------------
-DROP TABLE IF EXISTS `order`;
-CREATE TABLE `order` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `state` tinyint(4) DEFAULT NULL COMMENT '订单状态',
-  `old_price` decimal(10,0) DEFAULT NULL COMMENT '原价格',
-  `price` decimal(10,0) DEFAULT NULL COMMENT '实际价格',
-  `send_address` varchar(50) DEFAULT NULL COMMENT '送达地点',
-  `send_date` timestamp NULL DEFAULT NULL COMMENT '预计送达时间',
-  `rel_send_date` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '实际送达时间',
-  `get_address` varchar(50) DEFAULT NULL COMMENT '取货地点',
-  `get_date` timestamp NULL DEFAULT NULL COMMENT '取货时间',
-  `pic_url` varchar(255) DEFAULT NULL COMMENT '凭证的照片地址',
-  `inserttime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `is_delete` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of order
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `order_info`
 -- ----------------------------
 DROP TABLE IF EXISTS `order_info`;
@@ -116,6 +136,7 @@ CREATE TABLE `order_info` (
   `order_id` bigint(20) NOT NULL COMMENT '主订单id',
   `goods_id` bigint(20) NOT NULL COMMENT '商品id',
   `express_id` bigint(20) NOT NULL COMMENT '物流id',
+  `spec_id` bigint(20) DEFAULT NULL COMMENT '规格id',
   `old_price` decimal(10,0) NOT NULL COMMENT '原价',
   `price` decimal(10,0) NOT NULL COMMENT '实际价格',
   `all_num` int(11) NOT NULL COMMENT '要求的总数量',
@@ -124,12 +145,15 @@ CREATE TABLE `order_info` (
   `inserttime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_Delete` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='子订单';
+  PRIMARY KEY (`id`),
+  KEY `order_id` (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='子订单';
 
 -- ----------------------------
 -- Records of order_info
 -- ----------------------------
+INSERT INTO `order_info` VALUES ('1', '1', '2', '1', null, '2', '2', '100', null, null, '2017-04-16 16:39:57', '2017-04-16 17:22:43', '0');
+INSERT INTO `order_info` VALUES ('2', '1', '3', '1', null, '2', '2', '12', null, null, '2017-04-16 16:40:08', '2017-04-16 17:22:56', '0');
 
 -- ----------------------------
 -- Table structure for `permission`
@@ -234,11 +258,30 @@ CREATE TABLE `spec` (
   `updatetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `is_delete` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='规格表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='规格表';
 
 -- ----------------------------
 -- Records of spec
 -- ----------------------------
+INSERT INTO `spec` VALUES ('1', '克', '2017-04-16 17:24:27', '2017-04-16 17:24:27', '0');
+
+-- ----------------------------
+-- Table structure for `type`
+-- ----------------------------
+DROP TABLE IF EXISTS `type`;
+CREATE TABLE `type` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) DEFAULT NULL COMMENT '种类名',
+  `inserttime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_delete` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='种类表';
+
+-- ----------------------------
+-- Records of type
+-- ----------------------------
+INSERT INTO `type` VALUES ('1', '鸡蛋', '2017-04-16 17:20:52', '2017-04-16 17:21:17', '0');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -268,3 +311,29 @@ CREATE TABLE `user` (
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', 'admin', '21232F297A57A5A743894A0E4A801FC3', 'aaaa', '123', null, '1', null, null, null, null, '2017-04-02 15:39:00', '2017-04-03 18:29:20', '0');
 INSERT INTO `user` VALUES ('2', 'b', 'b', 'b', null, '1', '2', null, null, null, null, '2017-04-02 16:31:49', '2017-04-02 16:32:15', '0');
+
+-- ----------------------------
+-- Table structure for `xs_order`
+-- ----------------------------
+DROP TABLE IF EXISTS `xs_order`;
+CREATE TABLE `xs_order` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `state` tinyint(4) DEFAULT NULL COMMENT '订单状态',
+  `old_price` decimal(10,0) DEFAULT NULL COMMENT '原价格',
+  `price` decimal(10,0) DEFAULT NULL COMMENT '实际价格',
+  `send_address` varchar(50) DEFAULT NULL COMMENT '送达地点',
+  `send_date` timestamp NULL DEFAULT NULL COMMENT '预计送达时间',
+  `rel_send_date` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '实际送达时间',
+  `get_address` varchar(50) DEFAULT NULL COMMENT '取货地点',
+  `get_date` timestamp NULL DEFAULT NULL COMMENT '取货时间',
+  `pic_url` varchar(255) DEFAULT NULL COMMENT '凭证的照片地址',
+  `inserttime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_delete` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of xs_order
+-- ----------------------------
+INSERT INTO `xs_order` VALUES ('1', null, null, null, null, null, null, null, null, null, '2017-04-16 16:39:24', '2017-04-16 16:39:24', '0');

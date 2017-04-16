@@ -27,7 +27,8 @@ nbdist/
 mvnw
 mvnw.cmd
 src/main/java/com/bean/springboot/config/
-src/main/java/com/bean/springboot/dto/A/
+src/main/java/com/bean/springboot/dto/goods/
 /LOG_PATH_IS_UNDEFINED/
 /node_modules/
 !/src/main/java/com/bean/springboot/config/
+!/src/main/java/com/bean/springboot/dto/goods/
