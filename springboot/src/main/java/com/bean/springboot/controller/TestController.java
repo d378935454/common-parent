@@ -1,9 +1,10 @@
-package com.bean.controller;
+package com.bean.springboot.controller;
 
 import com.bean.RSTFul.RSTFulBody;
 import com.bean.model.GoodsInfo;
-import com.bean.service.*;
-import utils.MyLogger;
+import com.bean.service.VendingService;
+import com.bean.service.WebService;
+import com.bean.springboot.token.TokenUtil;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import utils.MyLogger;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
@@ -27,65 +30,74 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/machine")
-public class testController {
+public class TestController {
     /**
      * 日志记录
      **/
-    private static final MyLogger LOGGER = new MyLogger(testController.class);
+    private static final MyLogger LOGGER = new MyLogger(TestController.class);
     @Autowired
     private VendingService vendingService;
 
     @Autowired
     private WebService webService;
 
-    private final static String rootPath="d:\\";
-        @RequestMapping("/test")
+    private static final  String ROOTPATH = "d:\\";
+
+//    @Token
+    @RequestMapping("/test")
     @ResponseBody
     public RSTFulBody test(HttpServletResponse response) {
+
             try {
                 vendingService.getVendingAdvByScreenAndToken(new SimpleDateFormat("yyyyMMddHHmmss").parse("20160708153908"),"1");
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            return new RSTFulBody().data("哈哈").body("");
+        return new RSTFulBody().data("哈哈").body("");
 
     }
+    @RequestMapping("/getToken")
+    @ResponseBody
+    public RSTFulBody getToken(HttpServletRequest request, HttpServletResponse response) {
+        //支持跨域
+        response.setHeader("Access-Control-Allow-Origin","*");
+        return new RSTFulBody().data("哈哈").body(TokenUtil.getJWTString("duhongda",TokenUtil.getSECRET(),"1.0.0"));
+
+    }
+
     @RequestMapping("/upStockExcel")
     @ResponseBody
     public RSTFulBody upStockExcel(HttpServletResponse response,
                                    @RequestParam(value = "file") MultipartFile[] files) {
-        for(MultipartFile file:files) {
-            String a = "";
+        LOGGER.info("Excel");
+        for (MultipartFile file : files) {
             List<GoodsInfo> goodsInfos = new ArrayList<>();
             Workbook wb = null;
             try {
                 String fileName = file.getOriginalFilename();
-                File localFile = new File(rootPath + fileName);
+                File localFile = new File(ROOTPATH + fileName);
                 //将上传文件写入到指定文件出、核心！
                 file.transferTo(localFile);
                 wb = Workbook.getWorkbook(localFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (BiffException e) {
+            } catch (IOException|BiffException e) {
+                LOGGER.error(e);
                 e.printStackTrace();
             }
             Sheet rs = wb.getSheet(0);//或者rwb.getSheet(0)
             //  PrintWriter out=response.getWriter();
-            int clos = rs.getColumns();//得到所有的列
+//            int clos = rs.getColumns();//得到所有的列
             int rows = rs.getRows();//得到所有的行
-            for (int i = 1; i < rows; i++) {
-                int j = 0;
-                //第一个是列数，第二个是行数
-                GoodsInfo bean = new GoodsInfo();
-                bean.setGoodsInfoItemNo(rs.getCell(0, i).getContents());
-                bean.setGoodsInfoStock(new Long(rs.getCell(1, i).getContents()));
-                goodsInfos.add(bean);
-            }
-                webService.updateStockByNo(goodsInfos);
+//            for (int i = 1; i < rows; i++) {
+//                //第一个是列数，第二个是行数
+//                GoodsInfo bean = new GoodsInfo();
+//                bean.setGoodsInfoItemNo(rs.getCell(0, i).getContents());
+//                bean.setGoodsInfoStock(new Long(rs.getCell(1, i).getContents()));
+//                goodsInfos.add(bean);
+//            }
+//                webService.updateStockByNo(goodsInfos);
         }
         return new RSTFulBody().data("哈哈").body("");
 
     }
-
 
 }

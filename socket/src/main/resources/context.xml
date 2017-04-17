@@ -23,7 +23,7 @@
     <aop:aspectj-autoproxy/>
     <aop:config proxy-target-class="true"/>
 
-    <!--<task:annotation-driven scheduler="taskScheduler"/>-->
+    <!--<task:token-driven scheduler="taskScheduler"/>-->
     <!--<task:scheduler id="taskScheduler" pool-size="5"/>-->
 
     <bean id="dispatcher" class="com.xx.server.message.PacketMessageDispatcher"/>

@@ -1,0 +1,58 @@
+spring:
+    session:
+      store-type: none
+    freemarker:
+      allow-request-override: false
+      allow-session-override: false
+      cache: true
+      charset: UTF-8
+      check-template-location: true
+      content-type: text/html
+      enabled: true
+      expose-request-attributes: false
+      expose-session-attributes: false
+      expose-spring-macro-helpers: true
+      prefer-file-system-access: true
+
+
+      template-loader-path: classpath:/templates/
+      settings:
+        template_update_delay: 0
+        default_encoding: UTF-8
+        classic_compatible: true
+    mvc:
+        view:
+            prefix:
+            suffix: .ftl
+    profiles:
+        active: dev
+#        include: swagger
+    jackson:
+        serialization.indent_output: true
+#    datasource:
+
+
+lyw:
+  name: aaa
+
+
+db:
+  mybatis:
+    mapperLocations: classpath*:*Mapper.xml
+    typeAliasesPackage: com.bean.model
+    configLocation: classpath*:mybatis-config.xml
+    jdbc:
+#      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://localhost:3306/caidao?useUnicode=true&characterEncoding=UTF-8&relaxAutoCommit=true&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: root
+      driverClassName: com.mysql.jdbc.Driver
+      maxActive: 20
+      maxIdle: 2
+      minIdle: 2
+      maxWait: 1000
+      initialSize: 2
+      validationQuery: SELECT 1
+server:
+    port: 8080
+    address: localhost

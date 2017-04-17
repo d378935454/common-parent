@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -33,7 +32,7 @@ public class ZYController {
     /**
      * 日志记录
      **/
-    private static final MyLogger LOGGER = new MyLogger(testController.class);
+    private static final MyLogger LOGGER = new MyLogger(TestController.class);
     @Autowired
     private VendingService vendingService;
     @Autowired
