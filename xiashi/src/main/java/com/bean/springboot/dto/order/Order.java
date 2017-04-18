@@ -13,6 +13,7 @@ import java.util.List;
 public class Order {
     private long id;
     private Byte state;
+    private String orderNo;
     private Integer oldPrice;
     private Integer price;
     private String sendAddress;
@@ -44,6 +45,16 @@ public class Order {
 
     public void setState(Byte state) {
         this.state = state;
+    }
+
+    @Basic
+    @Column(name = "order_no")
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
     }
 
     @Basic

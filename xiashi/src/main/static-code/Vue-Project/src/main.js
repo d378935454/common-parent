@@ -9,8 +9,10 @@ import MintUI from 'mint-ui';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'mint-ui/lib/style.css';
 import qs from 'qs'
+import util from './common/js/util'
 // 将axios挂载到prototype上，在组件中可以直接使用this.axios访问
 Vue.prototype.http = http
+Vue.prototype.util = util
 Vue.config.productionTip = false
 Vue.use(MintUI)
 window.qs=qs
