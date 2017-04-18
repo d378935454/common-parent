@@ -1,12 +1,13 @@
 package com.bean.springboot.config.mybatis;
 
+import com.github.pagehelper.PageHelper;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.io.VFS;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,7 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 public class MybatisConfig {
@@ -38,10 +40,17 @@ public class MybatisConfig {
 
 		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		sessionFactory.setMapperLocations(resolver.getResources(properties.mapperLocations));
+		//分页插件
+		PageHelper pageHelper = new PageHelper();
+		Properties properties1 = new Properties();
+		properties1.setProperty("reasonable", "true");
+		properties1.setProperty("supportMethodsArguments", "true");
+		properties1.setProperty("returnPageInfo", "check");
+		properties1.setProperty("params", "count=countSql");
+		pageHelper.setProperties(properties1);
 
-		// sessionFactory
-		// .setConfigLocation(new
-		// PathMatchingResourcePatternResolver().getResource(properties.configLocation));
+		//添加插件
+		sessionFactory.setPlugins(new Interceptor[]{pageHelper});
 
 		SqlSessionFactory resultSessionFactory = sessionFactory.getObject();
 
