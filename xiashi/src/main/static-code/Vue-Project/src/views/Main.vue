@@ -1,8 +1,8 @@
 <template>
   <div>
     <Heade></Heade>
-  <router-view></router-view>
-	<Tabbar></Tabbar>
+    <router-view></router-view>
+    <Tabbar></Tabbar>
   </div>
 </template>
 
@@ -10,12 +10,12 @@
   import Tabbar from '../components/Tabbar.vue'
   import Heade from '../views/Head.vue'
 
-	export default {
+  export default {
     components: {
       Tabbar,
       Heade
     }
-	}
+  }
 
 </script>
 
