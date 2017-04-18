@@ -6,12 +6,12 @@ import router from './router'
 import store from './store'
 import http from './http'
 import MintUI from 'mint-ui';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import 'mint-ui/lib/style.css';
 import qs from 'qs'
 // 将axios挂载到prototype上，在组件中可以直接使用this.axios访问
 Vue.prototype.http = http
 Vue.config.productionTip = false
-Vue.use(ElementUI)
 Vue.use(MintUI)
 window.qs=qs
 router.beforeEach((to, from, next) => {

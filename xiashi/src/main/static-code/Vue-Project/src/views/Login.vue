@@ -6,11 +6,11 @@
       <form class="form">
         <div class="form-group">
           <label for="user">用户名</label>
-          <input type="email" class="form-control" id="user" placeholder="请输入用户名">
+          <input type="email" v-model.trim="username" class="form-control" id="user" placeholder="请输入用户名">
         </div>
         <div class="form-group">
           <label for="pswd">密码</label>
-          <input type="password" class="form-control" id="pswd" placeholder="请输入密码">
+          <input type="password" v-model="password" class="form-control" id="pswd" placeholder="请输入密码">
         </div>
         <button type="button" @click="handleSubmit2" class="btn btn-primary cursor ">登录</button>
       </form>
@@ -25,7 +25,7 @@
     data () {
       return {
         logining: false,
-        username: 'admin',
+        username: '',
         password: ''
       }
     },
@@ -34,7 +34,6 @@
         this.$refs.ruleForm2.resetFields()
       },
       handleSubmit2 (ev) {
-          debugger
         let $this = this
         if(!$this.username||!$this.password){
             alert("用户名和密码不可为空")
@@ -49,10 +48,7 @@
             // NProgress.done();
             let { msg, code, data } = response.data
             if (code !== 1) {
-              $this.$message({
-                message: msg,
-                type: 'error'
-              })
+              alert( msg)
             } else {
               sessionStorage.setItem('user', JSON.stringify(data))
               $this.$router.push({ path: '/main' })
@@ -60,10 +56,7 @@
           }).catch(error => {
             console.log(error)
             $this.logining = false
-            $this.$message({
-              message: "服务器异常",
-              type: 'error'
-            })
+            alert("服务器异常")
           }
         )
 
