@@ -2,7 +2,6 @@ package com.bean.springboot.dto.order;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,24 +10,54 @@ import java.util.List;
 @Entity
 @Table(name = "xs_order")
 public class Order {
-    private long id;
-    private Byte state;
-    private String orderNo;
-    private Integer oldPrice;
-    private Integer price;
-    private String sendAddress;
-    private Timestamp sendDate;
-    private Timestamp relSendDate;
-    private String getAddress;
-    private Timestamp getDate;
-    private String picUrl;
-    private Timestamp inserttime;
-    private Timestamp updatetime;
-    private byte isDelete;
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Basic
+    @Column(name = "state", nullable = true)
+    private Byte state;
+    @Basic
+    @Column(name = "order_no")
+    private String orderNo;
+    @Basic
+    @Column(name = "old_price", nullable = true, precision = 0)
+    private Integer oldPrice;
+    @Basic
+    @Column(name = "price", nullable = true, precision = 0)
+    private Integer price;
+    @Basic
+    @Column(name = "send_address", nullable = true, length = 50)
+    private String sendAddress;
+    @Basic
+    @Column(name = "send_date", nullable = true)
+    private Timestamp sendDate;
+    @Basic
+    @Column(name = "rel_send_date", nullable = true)
+    private Timestamp relSendDate;
+    @Basic
+    @Column(name = "get_address", nullable = true, length = 50)
+    private String getAddress;
+    @Basic
+    @Column(name = "get_date", nullable = true)
+    private Timestamp getDate;
+    @Basic
+    @Column(name = "pic_url", nullable = true, length = 255)
+    private String picUrl;
+    @OneToMany(mappedBy = "order",cascade = CascadeType.PERSIST)
+    private List<OrderInfo> orderInfos;
+    @Basic
+    @Column(name = "inserttime", nullable = true)
+    private Timestamp inserttime;
+    @Basic
+    @Column(name = "updatetime", nullable = true)
+    private Timestamp updatetime;
+    @Basic
+    @Column(name = "is_delete", nullable = false)
+    private byte isDelete;
+
+
     public long getId() {
         return id;
     }
@@ -37,8 +66,6 @@ public class Order {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "state", nullable = true)
     public Byte getState() {
         return state;
     }
@@ -47,8 +74,7 @@ public class Order {
         this.state = state;
     }
 
-    @Basic
-    @Column(name = "order_no")
+
     public String getOrderNo() {
         return orderNo;
     }
@@ -57,8 +83,16 @@ public class Order {
         this.orderNo = orderNo;
     }
 
-    @Basic
-    @Column(name = "old_price", nullable = true, precision = 0)
+
+    public List<OrderInfo> getOrderInfos() {
+        return orderInfos;
+    }
+
+    public void setOrderInfos(List<OrderInfo> orderInfos) {
+        this.orderInfos = orderInfos;
+    }
+
+
     public Integer getOldPrice() {
         return oldPrice;
     }
@@ -67,8 +101,7 @@ public class Order {
         this.oldPrice = oldPrice;
     }
 
-    @Basic
-    @Column(name = "price", nullable = true, precision = 0)
+
     public Integer getPrice() {
         return price;
     }
@@ -77,8 +110,7 @@ public class Order {
         this.price = price;
     }
 
-    @Basic
-    @Column(name = "send_address", nullable = true, length = 50)
+
     public String getSendAddress() {
         return sendAddress;
     }
@@ -87,8 +119,7 @@ public class Order {
         this.sendAddress = sendAddress;
     }
 
-    @Basic
-    @Column(name = "send_date", nullable = true)
+
     public Timestamp getSendDate() {
         return sendDate;
     }
@@ -97,8 +128,7 @@ public class Order {
         this.sendDate = sendDate;
     }
 
-    @Basic
-    @Column(name = "rel_send_date", nullable = true)
+
     public Timestamp getRelSendDate() {
         return relSendDate;
     }
@@ -107,8 +137,7 @@ public class Order {
         this.relSendDate = relSendDate;
     }
 
-    @Basic
-    @Column(name = "get_address", nullable = true, length = 50)
+
     public String getGetAddress() {
         return getAddress;
     }
@@ -117,8 +146,7 @@ public class Order {
         this.getAddress = getAddress;
     }
 
-    @Basic
-    @Column(name = "get_date", nullable = true)
+
     public Timestamp getGetDate() {
         return getDate;
     }
@@ -127,8 +155,7 @@ public class Order {
         this.getDate = getDate;
     }
 
-    @Basic
-    @Column(name = "pic_url", nullable = true, length = 255)
+
     public String getPicUrl() {
         return picUrl;
     }
@@ -137,8 +164,7 @@ public class Order {
         this.picUrl = picUrl;
     }
 
-    @Basic
-    @Column(name = "inserttime", nullable = true)
+
     public Timestamp getInserttime() {
         return inserttime;
     }
@@ -147,8 +173,7 @@ public class Order {
         this.inserttime = inserttime;
     }
 
-    @Basic
-    @Column(name = "updatetime", nullable = true)
+
     public Timestamp getUpdatetime() {
         return updatetime;
     }
@@ -157,8 +182,7 @@ public class Order {
         this.updatetime = updatetime;
     }
 
-    @Basic
-    @Column(name = "is_delete", nullable = false)
+
     public byte getIsDelete() {
         return isDelete;
     }

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-04-17 13:32:42
+Date: 2017-04-19 18:16:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,8 +23,9 @@ CREATE TABLE `express` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `express_no` varchar(50) DEFAULT NULL COMMENT '物流编号',
   `people_name` varchar(255) DEFAULT NULL COMMENT '物流人员',
-  `startdate` timestamp NULL DEFAULT NULL COMMENT '发送时间',
-  `old_senddate` timestamp NULL DEFAULT NULL COMMENT '预计送达时间',
+  `mobile` varchar(20) DEFAULT NULL COMMENT '联系电话',
+  `startdate` timestamp NULL DEFAULT NULL COMMENT '预计物流送货时间',
+  `old_senddate` timestamp NULL DEFAULT NULL COMMENT '预计物流取货时间',
   `rel_senddate` timestamp NULL DEFAULT NULL COMMENT '实际送达时间',
   `inserttime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updatetime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -35,7 +36,7 @@ CREATE TABLE `express` (
 -- ----------------------------
 -- Records of express
 -- ----------------------------
-INSERT INTO `express` VALUES ('1', 'asd', '阿斯达', null, '2017-04-16 18:01:08', '2017-04-16 18:01:08', '2017-04-16 18:00:53', '2017-04-16 18:01:08', '0');
+INSERT INTO `express` VALUES ('1', 'asd', '阿斯达', null, null, '2017-04-16 18:01:08', '2017-04-16 18:01:08', '2017-04-16 18:00:53', '2017-04-16 18:01:08', '0');
 
 -- ----------------------------
 -- Table structure for `goods`
@@ -124,7 +125,7 @@ INSERT INTO `menu` VALUES ('20', null, null, '夏实供应部', '0', '0', '2017-
 INSERT INTO `menu` VALUES ('21', null, null, '物流数据管理', '1', '20', '2017-04-08 11:42:59', '2017-04-08 11:51:15', '0');
 INSERT INTO `menu` VALUES ('22', null, null, '供应商信息管理', '1', '20', '2017-04-08 11:43:05', '2017-04-08 11:51:17', '0');
 INSERT INTO `menu` VALUES ('23', null, null, '物流单输入', '1', '20', '2017-04-08 11:43:10', '2017-04-08 11:51:17', '0');
-INSERT INTO `menu` VALUES ('24', null, null, '采购单输入', '1', '20', '2017-04-08 11:43:15', '2017-04-08 11:51:18', '0');
+INSERT INTO `menu` VALUES ('24', null, 'CreateOrder', '采购单输入', '1', '20', '2017-04-08 11:43:15', '2017-04-19 13:35:31', '0');
 INSERT INTO `menu` VALUES ('25', null, null, '付款凭证输入', '1', '20', '2017-04-08 11:43:21', '2017-04-08 11:51:19', '0');
 
 -- ----------------------------
@@ -318,6 +319,7 @@ INSERT INTO `user` VALUES ('2', 'b', 'b', 'b', null, '1', '2', null, null, null,
 DROP TABLE IF EXISTS `xs_order`;
 CREATE TABLE `xs_order` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `order_no` varchar(50) DEFAULT NULL COMMENT '订单编号',
   `state` tinyint(4) DEFAULT NULL COMMENT '订单状态',
   `old_price` decimal(10,0) DEFAULT NULL COMMENT '原价格',
   `price` decimal(10,0) DEFAULT NULL COMMENT '实际价格',
@@ -336,4 +338,4 @@ CREATE TABLE `xs_order` (
 -- ----------------------------
 -- Records of xs_order
 -- ----------------------------
-INSERT INTO `xs_order` VALUES ('1', null, null, null, null, null, null, null, null, null, '2017-04-16 16:39:24', '2017-04-16 16:39:24', '0');
+INSERT INTO `xs_order` VALUES ('1', null, null, null, null, null, null, null, null, null, null, '2017-04-16 16:39:24', '2017-04-16 16:39:24', '0');

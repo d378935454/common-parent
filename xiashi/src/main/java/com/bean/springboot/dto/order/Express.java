@@ -12,6 +12,7 @@ public class Express {
     private long id;
     private String expressNo;
     private String peopleName;
+    private String mobile;
     private Timestamp startdate;
     private Timestamp oldSenddate;
     private Timestamp relSenddate;
@@ -48,6 +49,15 @@ public class Express {
 
     public void setPeopleName(String peopleName) {
         this.peopleName = peopleName;
+    }
+    @Basic
+    @Column(name = "mobile", nullable = true, length = 20)
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     @Basic

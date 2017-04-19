@@ -1,15 +1,12 @@
 package com.bean.springboot.controller;
 
 
-import com.bean.springboot.utils.RSTFulBody;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.HandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +19,6 @@ import java.util.Date;
 /**
  * Created by bean on 2016/5/18.
  */
-@Controller
 public class CommenController {
     @RequestMapping(value = "/sosOutImg*")
     public void getImage(HttpServletRequest request, HttpServletResponse httpServletResponse) {
@@ -42,10 +38,5 @@ public class CommenController {
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
         simpleDateFormat.setLenient(true);
         binder.registerCustomEditor(Date.class,new CustomDateEditor(simpleDateFormat,true));
-    }
-    @RequestMapping(value = "/seckill")
-    @ResponseBody
-    public RSTFulBody seckill(){
-        return  new RSTFulBody().success("").data("hehe     ");
     }
 }

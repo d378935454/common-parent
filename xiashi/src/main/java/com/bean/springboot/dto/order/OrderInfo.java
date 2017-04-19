@@ -17,13 +17,14 @@ public class OrderInfo {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName ="id")
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "goods_id")
+    @JoinColumn(name = "goods_info_id")
     private GoodsInfo goodsInfo;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "express_id")
     private Express express;
     @Basic
