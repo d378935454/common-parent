@@ -2,7 +2,7 @@
   <div>
     <Heade></Heade>
     <router-view></router-view>
-    <Tabbar></Tabbar>
+    <!--<Tabbar></Tabbar>-->
   </div>
 </template>
 
