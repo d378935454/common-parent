@@ -1,6 +1,10 @@
 package com.bean.springboot.dto.order;
 
+import com.bean.springboot.dto.usermanagement.User;
+import com.bean.springboot.type.StateType;
+
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -17,16 +21,17 @@ public class Order {
 
     @Basic
     @Column(name = "state", nullable = true)
-    private Byte state;
+    @Enumerated(EnumType.ORDINAL)
+    private StateType state;
     @Basic
     @Column(name = "order_no")
     private String orderNo;
     @Basic
     @Column(name = "old_price", nullable = true, precision = 0)
-    private Integer oldPrice;
+    private BigDecimal oldPrice;
     @Basic
     @Column(name = "price", nullable = true, precision = 0)
-    private Integer price;
+    private BigDecimal price;
     @Basic
     @Column(name = "send_address", nullable = true, length = 50)
     private String sendAddress;
@@ -42,6 +47,10 @@ public class Order {
     @Basic
     @Column(name = "get_date", nullable = true)
     private Timestamp getDate;
+
+    @ManyToOne
+    @JoinColumn(name = "get_user_id" )
+    private User user;
     @Basic
     @Column(name = "pic_url", nullable = true, length = 255)
     private String picUrl;
@@ -66,11 +75,11 @@ public class Order {
         this.id = id;
     }
 
-    public Byte getState() {
+    public StateType getState() {
         return state;
     }
 
-    public void setState(Byte state) {
+    public void setState(StateType state) {
         this.state = state;
     }
 
@@ -93,23 +102,30 @@ public class Order {
     }
 
 
-    public Integer getOldPrice() {
+    public BigDecimal getOldPrice() {
         return oldPrice;
     }
 
-    public void setOldPrice(Integer oldPrice) {
+    public void setOldPrice(BigDecimal oldPrice) {
         this.oldPrice = oldPrice;
     }
 
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getSendAddress() {
         return sendAddress;

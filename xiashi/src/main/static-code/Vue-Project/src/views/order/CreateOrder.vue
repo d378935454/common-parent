@@ -2,18 +2,24 @@
   <div class="container-fluid">
     <form class="row">
       <div class="form-group">
-        <label for="order_no">编号</label>
-        <input type="text" v-model="order.orderNo" class="form-control" id="order_no" placeholder="">
-      </div>
-      <div class="form-group">
         <label for="send_date">预计到货日期</label>
         <input type="text" :value="order.sendDate" @click="openPicker('send_date')" class="form-control" id="send_date"
                readonly>
         <mt-datetime-picker
-          type="datetiem"
+          type="datetime"
           ref="send_date"
           @confirm="confirm">
         </mt-datetime-picker>
+      </div>
+      <div class="form-group">
+        <label>总价格</label>
+        <input type="number" v-model="order.price" class="form-control" placeholder="">
+      </div>
+      <div class="form-group">
+        <label >收货人</label>
+        <Select v-model="order.user.id" filterable>
+          <Option v-for="item in repositoryerList" :value="item.id" :key="item">{{ item.name }}</Option>
+        </Select>
       </div>
       <div class="form-group">
         <label for="send_address">预计到货地点</label>
@@ -24,19 +30,21 @@
         <input type="text" v-model="express.expressNo" class="form-control" id="express_no" placeholder="">
       </div>
       <div class="form-group">
-        <label for="people_name">物流联系人</label>
-        <input type="text" v-model="express.peopleName" class="form-control" id="people_name" placeholder="">
+        <label >物流联系人</label>
+        <Select v-model="express.user.id" filterable>
+          <Option v-for="item in transporterList" :value="item.id" :key="item">{{ item.name }}</Option>
+        </Select>
       </div>
       <div class="form-group">
-        <label for="mobile">物流联系人电话</label>
-        <input type="text" v-model="express.mobile" class="form-control" id="mobile" placeholder="">
+        <label for="price">物流价格</label>
+        <input type="text" v-model="express.price" class="form-control" id="price" placeholder="">
       </div>
       <div class="form-group">
         <label for="old_senddate">物流取货时间</label>
         <input type="text" @click="openPicker('old_senddate')" v-model="express.oldSenddate" class="form-control"
                id="old_senddate" readonly>
         <mt-datetime-picker
-          type="datetiem"
+          type="datetime"
           ref="old_senddate"
           @confirm="confirm">
         </mt-datetime-picker>
@@ -46,7 +54,7 @@
         <input type="text" @click="openPicker('startdate')" v-model="express.startdate" class="form-control"
                id="startdate" readonly>
         <mt-datetime-picker
-          type="datetiem"
+          type="datetime"
           ref="startdate"
           @confirm="confirm">
         </mt-datetime-picker>
@@ -85,12 +93,17 @@
     data() {
       return {
         goodsInfoList: [],
+        transporterList: [],
+        repositoryerList: [],
         picker: "",
         selected: "",
         order: {
-          orderNo: "",
+          user:{
+            id:""
+          },
           sendDate: "",
           sendAddress: "",
+          price: "",
           orderInfos: [
             {
               goodsInfo: {
@@ -101,8 +114,8 @@
         },
         express: {
           expressNo: "",
-          peopleName: "",
-          mobile: "",
+          user:{id:""},
+          price: "",
           oldSenddate: "",
           startdate: ""
         }
@@ -111,31 +124,35 @@
     created: function () {
       let $this = this
       $this.$store.dispatch('updateTitle', "采购单输入")
-      $this.http.get('mobile/goods/get-all-goods-info',)
-        .then(response => {
-          $this.goodsInfoList = response.data.data
-        }).catch(error => {
-        console.log(error)
-        $this.logining = false
-        alert("服务器异常")
-      })
+      Promise.all([$this.getAllGoods(), $this.getUserByType('TRANSPORT'), $this.getUserByType('REPOSITORY')])
+        .then(([goods, transporter, repository]) => {
+          $this.goodsInfoList = goods.data.data
+          $this.transporterList = transporter.data.data
+          $this.repositoryerList = repository.data.data
+        })
+        .catch(error => {
+          console.log(error)
+          $this.logining = false
+          alert("服务器异常")
+        });
     },
     computed: function () {
 
     },
     methods: {
       onSubmit() {
-          let $this=this
-        $this.http.post('mobile/order/create-order',{order:$this.order,express:$this.express})
+        let $this = this
+        $this.http.post('mobile/order/create-order', {order: $this.order, express: $this.express})
           .then(response => {
-            debugger
+            alert("订单新建完成")
+//            $this.$router.go(-1)
+            $this.$router.push({path: "main"})
           })
           .catch(error => {
             console.log(error)
             $this.logining = false
             alert("服务器异常")
           })
-        console.log('submit!');
       },
       confirm: function (time) {
         time = this.util.formatDate.format(time, "yyyy-MM-dd hh:mm:ss")
@@ -155,7 +172,16 @@
       openPicker(picker) {
         this.$refs[picker].open();
         this.picker = picker
-      }
+      },
+      getAllGoods: function () {
+        return this.http.get('mobile/goods/get-all-goods-info')
+      },
+      /**
+       * 根据角色类型得到用户
+       */
+      getUserByType: function (permissionType) {
+        return this.http.get('mobile/user/getUserByType?permissionType=' + permissionType)
+      },
     },
 
   }

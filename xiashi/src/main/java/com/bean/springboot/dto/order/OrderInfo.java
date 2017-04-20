@@ -3,6 +3,7 @@ package com.bean.springboot.dto.order;
 import com.bean.springboot.dto.goods.GoodsInfo;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
@@ -28,11 +29,11 @@ public class OrderInfo {
     @JoinColumn(name = "express_id")
     private Express express;
     @Basic
-    @Column(name = "old_price", nullable = false, precision = 0)
-    private int oldPrice;
+    @Column(name = "old_price", nullable = true, precision = 0)
+    private BigDecimal oldPrice;
     @Basic
-    @Column(name = "price", nullable = false, precision = 0)
-    private int price;
+    @Column(name = "price", nullable = true, precision = 0)
+    private BigDecimal price;
     @Basic
     @Column(name = "all_num", nullable = false)
     private int allNum;
@@ -49,8 +50,8 @@ public class OrderInfo {
     @Column(name = "updatetime", nullable = false)
     private Timestamp updatetime;
     @Basic
-    @Column(name = "is_Delete", nullable = true)
-    private Byte isDelete;
+    @Column(name = "is_Delete", nullable = false)
+    private Byte isDelete=0;
 
 
     public long getId() {
@@ -86,19 +87,19 @@ public class OrderInfo {
         this.express = express;
     }
 
-    public int getOldPrice() {
+    public BigDecimal getOldPrice() {
         return oldPrice;
     }
 
-    public void setOldPrice(int oldPrice) {
+    public void setOldPrice(BigDecimal oldPrice) {
         this.oldPrice = oldPrice;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -177,8 +178,6 @@ public class OrderInfo {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + oldPrice;
-        result = 31 * result + price;
         result = 31 * result + allNum;
         result = 31 * result + (checkNum != null ? checkNum.hashCode() : 0);
         result = 31 * result + (sendNum != null ? sendNum.hashCode() : 0);

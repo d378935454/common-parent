@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bean.springboot.dto.order.Express;
 import com.bean.springboot.dto.order.Order;
 import com.bean.springboot.sevice.OrderSevice;
+import com.bean.springboot.type.StateType;
 import com.bean.springboot.utils.RSTFulBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,12 +37,15 @@ public class OrderController {
             @RequestBody JSONObject orderMap
     ) {
         Order order = JSON.parseObject(orderMap.getJSONObject("order").toJSONString(), Order.class);
+        order.setState(StateType.CREATED);
         Express express = JSON.parseObject(orderMap.getJSONObject("express").toJSONString(), Express.class);
-        order.getOrderInfos().stream()
-                .forEach(o -> o.setExpress(express));
+        order.getOrderInfos()
+                .forEach(o -> {
+                    o.setExpress(express);
+                    o.setOrder(order);
+                });
         orderSevice.insertOrder(order);
         return new RSTFulBody();
-
     }
 
 }

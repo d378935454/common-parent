@@ -1,6 +1,7 @@
 package com.bean.springboot.dto.goods;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
@@ -14,8 +15,8 @@ public class GoodsInfo {
     private Spec spec;
     private Goods goods;
     private String goodsInfoNo;
-    private Integer oldPrice;
-    private Integer price;
+    private BigDecimal oldPrice;
+    private BigDecimal price;
     private String name;
     private Timestamp inserttime;
     private Timestamp updatetime;
@@ -64,21 +65,21 @@ public class GoodsInfo {
 
     @Basic
     @Column(name = "old_price", nullable = true, precision = 0)
-    public Integer getOldPrice() {
+    public BigDecimal getOldPrice() {
         return oldPrice;
     }
 
-    public void setOldPrice(Integer oldPrice) {
+    public void setOldPrice(BigDecimal oldPrice) {
         this.oldPrice = oldPrice;
     }
 
     @Basic
     @Column(name = "price", nullable = true, precision = 0)
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
