@@ -53,4 +53,8 @@
         <appender-ref ref="ERROR_FILE" />
     </root>
 
+    <!--<springProfile name="test,dev">-->
+        <!--<logger name="org.springframework.web" level="INFO"/>-->
+
+    <!--</springProfile>-->
 </configuration>

@@ -10,6 +10,7 @@ import java.util.Map;
  */
 public enum StateType {
     CREATED("刚新建"),
+    REPOCONF("确认采购单"),
     CHECKED("质检完"),
     SALE("夏实销售部"),
     TRANSPORT("物流"),

@@ -31,6 +31,12 @@ public class OrderController {
     @Autowired
     private OrderSevice orderSevice;
 
+    /**
+     * 新建订单
+     * @param request
+     * @param orderMap
+     * @return
+     */
     @RequestMapping("/create-order")
     public RSTFulBody test(
             HttpServletRequest request,
@@ -48,4 +54,43 @@ public class OrderController {
         return new RSTFulBody();
     }
 
+    /**
+     * 根据类型得到订单
+     * @param type
+     * @return
+     */
+    @RequestMapping("/getOrderListByType")
+    public RSTFulBody getOrderListByType(
+            HttpServletRequest request,
+            StateType type
+    ) {
+        return new RSTFulBody().success(orderSevice.getOrderListByType(type));
+    }
+    /**
+     * 根据id得到订单
+     * @param id
+     * @return
+     */
+    @RequestMapping("/getOrderById")
+    public RSTFulBody getOrderById(
+            HttpServletRequest request,
+            Long id
+    ) {
+        return new RSTFulBody().success(orderSevice.getOrderById(id));
+    }
+    /**
+     * 根据id修改订单state
+     * @param id
+     * @return
+     */
+    @RequestMapping("/updateStateById")
+    public RSTFulBody updateStateById(
+            HttpServletRequest request,
+            Long id,
+            StateType stateType,
+            StateType  $state
+    ) {
+        orderSevice.updateStateById(id,stateType,$state);
+        return new RSTFulBody().success();
+    }
 }

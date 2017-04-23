@@ -68,3 +68,6 @@ server:
 #      basedir: D:/springboot-tomcat-tmp
 logging:
   path: d://logsssss
+  level:
+    org:
+      hibernate: ERROR

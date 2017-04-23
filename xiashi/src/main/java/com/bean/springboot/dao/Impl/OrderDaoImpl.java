@@ -2,12 +2,14 @@ package com.bean.springboot.dao.Impl;
 
 import com.bean.springboot.dao.OrderDao;
 import com.bean.springboot.dto.order.Order;
+import com.bean.springboot.type.StateType;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -16,7 +18,7 @@ import java.util.concurrent.locks.ReentrantLock;
 @Repository
 public class OrderDaoImpl implements OrderDao {
 
-    private ReentrantLock reentrantLock=new ReentrantLock();
+    private ReentrantLock reentrantLock = new ReentrantLock();
     @PersistenceContext
     private EntityManager em;
 
@@ -30,18 +32,56 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public void insertOrder(Order order) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        String date= sdf.format(new Date());
+        String date = sdf.format(new Date());
         reentrantLock.lock();
-        StringBuilder num= new StringBuilder(em.createQuery("select count(o) from Order o where o.orderNo like CONCAT(:date,'%') ", Long.class)
+        StringBuilder num = new StringBuilder(em.createQuery("select count(o) from Order o where o.orderNo like CONCAT(:date,'%') ", Long.class)
                 .setParameter("date", date)
-                .getSingleResult().toString())
-                ;
+                .getSingleResult().toString());
         int len = num.length();
-        for(int i=len;i<4;i++){
+        for (int i = len; i < 4; i++) {
             num.insert(0, "0");
         }
-        order.setOrderNo(date+num);
+        order.setOrderNo(date + num);
         em.persist(order);
         reentrantLock.unlock();
+    }
+
+    /**
+     * 根据类型得到订单
+     *
+     * @param type
+     * @return
+     */
+    @Override
+    public List<Order> getOrderListByType(StateType type) {
+        return em.createQuery("select o from Order o where o.state=:types and o.isDelete=0", Order.class)
+                .setParameter("types", type)
+                .getResultList();
+    }
+
+    /**
+     * 根据id得到订单
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Order getOrderById(Long id) {
+        return em.find(Order.class, id);
+    }
+
+    /**
+     * 根据id修改订单state
+     *
+     * @param id
+     * @param stateType
+     */
+    @Override
+    public void updateStateById(Long id, StateType stateType,StateType $state) {
+        em.createQuery("update Order o set o.state=:stateType where o.id=:id and o.state=:state")
+                .setParameter("id", id)
+                .setParameter("stateType", stateType)
+                .setParameter("state",$state)
+                .executeUpdate();
     }
 }

@@ -42,7 +42,7 @@
         // _this.$router.replace('/table');
         // NProgress.start();
         let loginParams = { accountName: $this.username, password: $this.password }
-        $this.http.post('/mobile/check-login', qs.stringify(loginParams))
+        $this.http.post('/check-login', qs.stringify(loginParams))
           .then(response => {
             $this.logining = false
             // NProgress.done();

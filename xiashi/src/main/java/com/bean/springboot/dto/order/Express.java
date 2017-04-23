@@ -1,6 +1,7 @@
 package com.bean.springboot.dto.order;
 
 import com.bean.springboot.dto.usermanagement.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -68,6 +69,7 @@ public class Express {
 
     @Basic
     @Column(name = "startdate", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")
     public Timestamp getStartdate() {
         return startdate;
     }
@@ -78,6 +80,7 @@ public class Express {
 
     @Basic
     @Column(name = "old_senddate", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")
     public Timestamp getOldSenddate() {
         return oldSenddate;
     }
@@ -88,6 +91,7 @@ public class Express {
 
     @Basic
     @Column(name = "rel_senddate", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")
     public Timestamp getRelSenddate() {
         return relSenddate;
     }

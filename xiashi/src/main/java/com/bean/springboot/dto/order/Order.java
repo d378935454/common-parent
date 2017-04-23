@@ -2,6 +2,9 @@ package com.bean.springboot.dto.order;
 
 import com.bean.springboot.dto.usermanagement.User;
 import com.bean.springboot.type.StateType;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,6 +16,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "xs_order")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")//防止json转换无限循环
 public class Order {
     @Id
     @Column(name = "id")
@@ -58,9 +62,11 @@ public class Order {
     private List<OrderInfo> orderInfos;
     @Basic
     @Column(name = "inserttime", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")//json的返回格式
     private Timestamp inserttime;
     @Basic
     @Column(name = "updatetime", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")//json的返回格式
     private Timestamp updatetime;
     @Basic
     @Column(name = "is_delete", nullable = false)
