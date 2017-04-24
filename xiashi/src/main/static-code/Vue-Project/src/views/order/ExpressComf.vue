@@ -7,8 +7,23 @@
                readonly>
       </div>
       <div class="form-group">
+        <label >预计取货地点</label>
+        <input type="text" :value="order.oldGetDate"  class="form-control"
+               readonly>
+      </div>
+      <div class="form-group">
         <label >预计取货日期</label>
         <input type="text" :value="order.oldGetDate"  class="form-control"
+               readonly>
+      </div>
+      <div class="form-group">
+        <label >预计到货地点</label>
+        <input type="text" :value="order.sendAddress"  class="form-control"
+               readonly>
+      </div>
+      <div class="form-group">
+        <label >预计到货日期</label>
+        <input type="text" :value="order.sendDate"  class="form-control"
                readonly>
       </div>
       <div v-for="(item,index) in order.orderInfos" :key="order.orderInfos.id">
@@ -40,7 +55,7 @@
       },
       created:function () {
         let $this=this
-        $this.$store.dispatch('updateTitle', "确认采购单")
+        $this.$store.dispatch('updateTitle', "确认物流单")
         $this.id=$this.$route.params.id
         $this.getOrderById($this.id)
           .then(res=>{
@@ -50,9 +65,9 @@
       methods:{
         onSubmit() {
           let $this = this
-          $this.http.post('order/updateStateById?id='+$this.id+'&stateType=REPOCONF&$state=CREATED')
+          $this.http.post('order/updateStateById?id='+$this.id+'&stateType=WAITCHECK&$state=REPOCONF')
             .then(response => {
-              alert("订单确认完成")
+              alert("物流确认完成")
 //            $this.$router.go(-1)
               $this.$router.push({path: "/main"})
             })

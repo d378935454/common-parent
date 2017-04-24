@@ -4,7 +4,9 @@ import Login from '../views/Login.vue'
 import NotFound from '../views/404.vue'
 import CreateOrder from '../views/order/CreateOrder.vue'
 import RepoComf from '../views/order/RepoComf.vue'
+import ExpressComf from '../views/order/ExpressComf.vue'
 import OrderList from '../views/order/OrderList.vue'
+import Check from '../views/order/Check.vue'
 // import echarts from '../views/charts/echarts.vue'
 import Menu from "../views/Menu.vue"
 import MenuTwo from "../views/MenuTwo.vue"
@@ -31,7 +33,9 @@ let routes = [
       { path: ':id', component: MenuTwo },
       { path: '/CreateOrder', component: CreateOrder },
       { path: '/OrderList/:type', component: OrderList },
-      { path: '/RepoComf/:id', component: RepoComf }
+      { path: '/RepoComf/:id', component: RepoComf },
+      { path: '/ExpressComf/:id', component: ExpressComf },
+      { path: '/Check/:id', component: Check },
     ]
   },
   // { path: '/main', component: Main },

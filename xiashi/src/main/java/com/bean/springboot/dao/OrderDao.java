@@ -1,6 +1,8 @@
 package com.bean.springboot.dao;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bean.springboot.dto.order.Order;
+import com.bean.springboot.dto.order.OrderInfo;
 import com.bean.springboot.type.StateType;
 
 import java.util.List;
@@ -37,4 +39,11 @@ public interface OrderDao {
      * @param stateType
      */
     void updateStateById(Long id, StateType stateType,StateType $state);
+
+    /**
+     * 质检订单
+     *
+     * @param orderInfos
+     */
+    void check(JSONObject orderInfos);
 }

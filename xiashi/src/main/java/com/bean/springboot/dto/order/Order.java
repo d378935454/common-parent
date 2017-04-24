@@ -41,15 +41,23 @@ public class Order {
     private String sendAddress;
     @Basic
     @Column(name = "send_date", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")//json的返回格式
     private Timestamp sendDate;
     @Basic
     @Column(name = "rel_send_date", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")//json的返回格式
     private Timestamp relSendDate;
     @Basic
     @Column(name = "get_address", nullable = true, length = 50)
     private String getAddress;
+
+    @Basic
+    @Column(name = "old_get_date", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")//json的返回格式
+    private Timestamp oldGetDate;
     @Basic
     @Column(name = "get_date", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")//json的返回格式
     private Timestamp getDate;
 
     @ManyToOne
@@ -119,6 +127,14 @@ public class Order {
 
     public BigDecimal getPrice() {
         return price;
+    }
+
+    public Timestamp getOldGetDate() {
+        return oldGetDate;
+    }
+
+    public void setOldGetDate(Timestamp oldGetDate) {
+        this.oldGetDate = oldGetDate;
     }
 
     public void setPrice(BigDecimal price) {

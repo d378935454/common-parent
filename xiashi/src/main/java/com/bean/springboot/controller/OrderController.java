@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.bean.springboot.dto.order.Express;
 import com.bean.springboot.dto.order.Order;
+import com.bean.springboot.dto.order.OrderInfo;
 import com.bean.springboot.sevice.OrderSevice;
 import com.bean.springboot.type.StateType;
 import com.bean.springboot.utils.RSTFulBody;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by ppctest02 on 2017/3/21.
@@ -91,6 +93,20 @@ public class OrderController {
             StateType  $state
     ) {
         orderSevice.updateStateById(id,stateType,$state);
+        return new RSTFulBody().success();
+    }
+    /**
+     * 质检订单
+     * @param orderInfosMap
+     * @return
+     */
+    @RequestMapping("/check")
+    public RSTFulBody check(
+            HttpServletRequest request,
+            @RequestBody JSONObject orderInfosMap
+    ) {
+//        List<OrderInfo> orderInfos =JSON.parseArray(orderInfosMap.toString(),OrderInfo.class);
+        orderSevice.check(orderInfosMap);
         return new RSTFulBody().success();
     }
 }

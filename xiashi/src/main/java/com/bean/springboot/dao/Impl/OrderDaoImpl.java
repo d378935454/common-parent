@@ -1,7 +1,10 @@
 package com.bean.springboot.dao.Impl;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.bean.springboot.dao.OrderDao;
 import com.bean.springboot.dto.order.Order;
+import com.bean.springboot.dto.order.OrderInfo;
 import com.bean.springboot.type.StateType;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Stream;
 
 /**
  * Created by bean on 2017/4/2.
@@ -77,11 +81,38 @@ public class OrderDaoImpl implements OrderDao {
      * @param stateType
      */
     @Override
-    public void updateStateById(Long id, StateType stateType,StateType $state) {
+    public void updateStateById(Long id, StateType stateType, StateType $state) {
         em.createQuery("update Order o set o.state=:stateType where o.id=:id and o.state=:state")
                 .setParameter("id", id)
                 .setParameter("stateType", stateType)
-                .setParameter("state",$state)
+                .setParameter("state", $state)
                 .executeUpdate();
+    }
+
+    /**
+     * 质检订单
+     *
+     * @param order
+     */
+    @Override
+    public void check(JSONObject order) {
+        Long orderId = order.getLong("id");
+
+        JSONArray orderInfos = order.getJSONArray("orderInfos");
+        reentrantLock.lock();
+        Order o = em.find(Order.class, orderId);
+        if(o.getState().equals(StateType.WAITCHECK)) {
+            for (Object obj : orderInfos) {
+                JSONObject oi = (JSONObject) obj;
+                em.createQuery("update OrderInfo oi set oi.checkNum=:checkNum where oi.id=:id")
+                        .setParameter("checkNum", oi.getInteger("checkNum"))
+                        .setParameter("id", (long) oi.getLong("id"))
+                        .executeUpdate();
+                orderId = oi.getLong("order");
+            }
+            o.setState(StateType.CHECKED);
+            em.flush();
+        }
+        reentrantLock.unlock();
     }
 }

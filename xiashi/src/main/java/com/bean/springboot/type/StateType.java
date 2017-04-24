@@ -11,11 +11,9 @@ import java.util.Map;
 public enum StateType {
     CREATED("刚新建"),
     REPOCONF("确认采购单"),
+    WAITCHECK("待质检"),
     CHECKED("质检完"),
-    SALE("夏实销售部"),
-    TRANSPORT("物流"),
-    REPOSITORY("仓库"),
-    SYSTEM("供应链");
+    ;
     private String desc;
 
     StateType(String desc) {

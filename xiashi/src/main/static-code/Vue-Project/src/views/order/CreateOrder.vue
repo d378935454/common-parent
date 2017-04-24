@@ -2,12 +2,30 @@
   <div class="container-fluid">
     <form class="row">
       <div class="form-group">
+        <label for="send_address">预计到货地点</label>
+        <input type="text" v-model="order.sendAddress" class="form-control" id="send_address" placeholder="">
+      </div>
+      <div class="form-group">
         <label for="send_date">预计到货日期</label>
         <input type="text" :value="order.sendDate" @click="openPicker('send_date')" class="form-control" id="send_date"
                readonly>
         <mt-datetime-picker
           type="datetime"
           ref="send_date"
+          @confirm="confirm">
+        </mt-datetime-picker>
+      </div>
+      <div class="form-group">
+        <label >预计取货地点</label>
+        <input type="text" v-model="order.getAddress" class="form-control"  placeholder="">
+      </div>
+      <div class="form-group">
+        <label for="old_senddate">预计取货时间</label>
+        <input type="text" @click="openPicker('old_senddate')" v-model="order.oldGetDate" class="form-control"
+               id="old_senddate" readonly>
+        <mt-datetime-picker
+          type="datetime"
+          ref="old_senddate"
           @confirm="confirm">
         </mt-datetime-picker>
       </div>
@@ -21,10 +39,7 @@
           <Option v-for="item in repositoryerList" :value="item.id" :key="item">{{ item.name }}</Option>
         </Select>
       </div>
-      <div class="form-group">
-        <label for="send_address">预计到货地点</label>
-        <input type="text" v-model="order.sendAddress" class="form-control" id="send_address" placeholder="">
-      </div>
+
       <div class="form-group">
         <label for="express_no">物流单号</label>
         <input type="text" v-model="express.expressNo" class="form-control" id="express_no" placeholder="">
@@ -39,31 +54,22 @@
         <label for="price">物流价格</label>
         <input type="text" v-model="express.price" class="form-control" id="price" placeholder="">
       </div>
-      <div class="form-group">
-        <label for="old_senddate">物流取货时间</label>
-        <input type="text" @click="openPicker('old_senddate')" v-model="express.oldSenddate" class="form-control"
-               id="old_senddate" readonly>
-        <mt-datetime-picker
-          type="datetime"
-          ref="old_senddate"
-          @confirm="confirm">
-        </mt-datetime-picker>
-      </div>
-      <div class="form-group">
-        <label for="startdate">物流送货时间</label>
-        <input type="text" @click="openPicker('startdate')" v-model="express.startdate" class="form-control"
-               id="startdate" readonly>
-        <mt-datetime-picker
-          type="datetime"
-          ref="startdate"
-          @confirm="confirm">
-        </mt-datetime-picker>
-      </div>
+
+      <!--<div class="form-group">-->
+        <!--<label for="startdate">物流送货时间</label>-->
+        <!--<input type="text" @click="openPicker('startdate')" v-model="express.startdate" class="form-control"-->
+               <!--id="startdate" readonly>-->
+        <!--<mt-datetime-picker-->
+          <!--type="datetime"-->
+          <!--ref="startdate"-->
+          <!--@confirm="confirm">-->
+        <!--</mt-datetime-picker>-->
+      <!--</div>-->
       <div v-for="(item,index) in order.orderInfos">
         <div class="form-group">
           <div class="col-xs-12">
             <label>产品名{{index + 1}}</label>
-            <button style="float: right" type="button" @click="order.order_info.splice(index,1)"
+            <button style="float: right" type="button" @click="order.orderInfos.splice(index,1)"
                     class="btn btn-warning">删除
             </button>
           </div>
@@ -103,6 +109,8 @@
           },
           sendDate: "",
           sendAddress: "",
+          oldGetDate: "",
+          getAddress:"",
           price: "",
           orderInfos: [
             {
@@ -115,9 +123,7 @@
         express: {
           expressNo: "",
           user:{id:""},
-          price: "",
-          oldSenddate: "",
-          startdate: ""
+          price: ""
         }
       }
     },
@@ -162,11 +168,11 @@
             $this.order.sendDate = time
             break;
           case "old_senddate":
-            $this.express.oldSenddate = time
+            $this.order.oldGetDate = time
             break;
-          case "startdate":
-            $this.express.startdate = time
-            break;
+//          case "startdate":
+//            $this.express.startdate = time
+//            break;
         }
       },
       openPicker(picker) {

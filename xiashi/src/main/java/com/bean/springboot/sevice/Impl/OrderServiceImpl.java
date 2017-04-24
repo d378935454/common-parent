@@ -1,7 +1,9 @@
 package com.bean.springboot.sevice.Impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bean.springboot.dao.OrderDao;
 import com.bean.springboot.dto.order.Order;
+import com.bean.springboot.dto.order.OrderInfo;
 import com.bean.springboot.sevice.OrderSevice;
 import com.bean.springboot.type.StateType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,5 +66,17 @@ public class OrderServiceImpl implements OrderSevice {
     @Transactional
     public void updateStateById(Long id, StateType stateType,StateType $state) {
         goodsDao.updateStateById(id,stateType,$state);
+    }
+
+    /**
+     * 质检订单
+     *
+     * @param orderInfos
+     */
+    @Override
+    @Transactional
+    public void check(JSONObject orderInfos) {
+        goodsDao.check(orderInfos);
+
     }
 }

@@ -6,11 +6,6 @@
         <input type="text" :value="order.orderNo"  class="form-control"
                readonly>
       </div>
-      <div class="form-group">
-        <label >预计取货日期</label>
-        <input type="text" :value="order.oldGetDate"  class="form-control"
-               readonly>
-      </div>
       <div v-for="(item,index) in order.orderInfos" :key="order.orderInfos.id">
         <div class="form-group">
           <div class="col-xs-12">
@@ -18,10 +13,13 @@
           </div>
           <input type="text" v-model="item.goodsInfo.name" class="form-control" readonly>
         </div>
-
         <div class="form-group">
-          <label>数量</label>
+          <label>计划数量</label>
           <input type="number" v-model="item.allNum" class="form-control" readonly>
+        </div>
+        <div class="form-group">
+          <label>实际数量</label>
+          <input type="number" v-model.number="item.checkNum" class="form-control" >
         </div>
       </div>
       <button type="button" @click="onSubmit" class="btn btn-primary">确认</button>
@@ -40,7 +38,7 @@
       },
       created:function () {
         let $this=this
-        $this.$store.dispatch('updateTitle', "确认采购单")
+        $this.$store.dispatch('updateTitle', "质检订单")
         $this.id=$this.$route.params.id
         $this.getOrderById($this.id)
           .then(res=>{
@@ -50,9 +48,9 @@
       methods:{
         onSubmit() {
           let $this = this
-          $this.http.post('order/updateStateById?id='+$this.id+'&stateType=REPOCONF&$state=CREATED')
+          $this.http.post('order/check',$this.order)
             .then(response => {
-              alert("订单确认完成")
+              alert("质检完成")
 //            $this.$router.go(-1)
               $this.$router.push({path: "/main"})
             })
