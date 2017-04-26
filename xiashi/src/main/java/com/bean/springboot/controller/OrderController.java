@@ -4,9 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.bean.springboot.dto.order.Express;
 import com.bean.springboot.dto.order.Order;
-import com.bean.springboot.dto.order.OrderInfo;
 import com.bean.springboot.sevice.OrderSevice;
 import com.bean.springboot.type.StateType;
+import com.bean.springboot.utils.FileUtil;
 import com.bean.springboot.utils.RSTFulBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,10 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * Created by ppctest02 on 2017/3/21.
@@ -27,14 +28,15 @@ import java.util.List;
 public class OrderController {
 
     private static final Logger log = LoggerFactory.getLogger(OrderController.class);
-    @Value(value = "${lyw.name}")
-    private String a;
+    @Value(value = "${root-path}")
+    private String ROOTPATH;
 
     @Autowired
     private OrderSevice orderSevice;
 
     /**
      * 新建订单
+     *
      * @param request
      * @param orderMap
      * @return
@@ -58,6 +60,7 @@ public class OrderController {
 
     /**
      * 根据类型得到订单
+     *
      * @param type
      * @return
      */
@@ -68,8 +71,10 @@ public class OrderController {
     ) {
         return new RSTFulBody().success(orderSevice.getOrderListByType(type));
     }
+
     /**
      * 根据id得到订单
+     *
      * @param id
      * @return
      */
@@ -80,8 +85,10 @@ public class OrderController {
     ) {
         return new RSTFulBody().success(orderSevice.getOrderById(id));
     }
+
     /**
      * 根据id修改订单state
+     *
      * @param id
      * @return
      */
@@ -90,13 +97,15 @@ public class OrderController {
             HttpServletRequest request,
             Long id,
             StateType stateType,
-            StateType  $state
+            StateType $state
     ) {
-        orderSevice.updateStateById(id,stateType,$state);
+        orderSevice.updateStateById(id, stateType, $state);
         return new RSTFulBody().success();
     }
+
     /**
      * 质检订单
+     *
      * @param orderInfosMap
      * @return
      */
@@ -107,6 +116,31 @@ public class OrderController {
     ) {
 //        List<OrderInfo> orderInfos =JSON.parseArray(orderInfosMap.toString(),OrderInfo.class);
         orderSevice.check(orderInfosMap);
+        return new RSTFulBody().success();
+    }
+
+    /**
+     * 上传收货凭证
+     *
+     * @param file 图片
+     * @param id  orderid
+     * @param orderNo 订单编号
+     * @return
+     */
+    @RequestMapping("/upPic")
+    public RSTFulBody upPic(
+            HttpServletRequest request,
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("id") Long id,
+            @RequestParam("orderNo") Long orderNo
+
+    ) {
+        try {
+            FileUtil.upFile(ROOTPATH + "/" + orderNo, file);
+            orderSevice.upPic(id,ROOTPATH + "/" + orderNo+"/"+file.getOriginalFilename());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return new RSTFulBody().success();
     }
 }

@@ -2,7 +2,6 @@ package com.bean.springboot.sevice;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bean.springboot.dto.order.Order;
-import com.bean.springboot.dto.order.OrderInfo;
 import com.bean.springboot.type.StateType;
 
 import java.util.List;
@@ -44,4 +43,10 @@ public interface OrderSevice {
      * @param orderInfos
      */
     void check(JSONObject orderInfos);
+
+    /**
+     * 上传收货凭证图片
+     * @param id
+     */
+    void upPic(Long id,String picUrl);
 }

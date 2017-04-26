@@ -19,8 +19,12 @@
         </div>
         <div class="form-group">
           <label>质检数量</label>
-          <input type="number" v-model.number="item.checkNum" class="form-control" >
+          <input type="number" v-model.number="item.checkNum" class="form-control" readonly>
         </div>
+      </div>
+      <div class="form-group">
+        <label>上传收货凭证照片</label>
+        <input type="file" accept="image/*"  ref="pic">
       </div>
       <button type="button" @click="onSubmit" class="btn btn-primary">确认</button>
     </form>
@@ -38,7 +42,7 @@
       },
       created:function () {
         let $this=this
-        $this.$store.dispatch('updateTitle', "质检订单")
+        $this.$store.dispatch('updateTitle', "上传凭证")
         $this.id=$this.$route.params.id
         $this.getOrderById($this.id)
           .then(res=>{
@@ -48,11 +52,17 @@
       methods:{
         onSubmit() {
           let $this = this
-          $this.http.post('order/check',$this.order)
+          let pic=$this.$refs.pic[0].files[0];
+          let form = new FormData();
+          form.append("file",pic)
+          form.append("id",$this.id)
+          form.append("orderNo",$this.order.orderNo)
+          $this.http.post('order/upPic',form,
+            {headers: {'Content-Type': 'multipart/form-data'}})
             .then(response => {
-              alert("质检完成")
+//              alert("质检完成")
 //            $this.$router.go(-1)
-              $this.$router.push({path: "/main"})
+//              $this.$router.push({path: "/main"})
             })
             .catch(error => {
               console.log(error)

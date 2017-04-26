@@ -3,7 +3,6 @@ package com.bean.springboot.sevice.Impl;
 import com.alibaba.fastjson.JSONObject;
 import com.bean.springboot.dao.OrderDao;
 import com.bean.springboot.dto.order.Order;
-import com.bean.springboot.dto.order.OrderInfo;
 import com.bean.springboot.sevice.OrderSevice;
 import com.bean.springboot.type.StateType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,5 +77,16 @@ public class OrderServiceImpl implements OrderSevice {
     public void check(JSONObject orderInfos) {
         goodsDao.check(orderInfos);
 
+    }
+
+    /**
+     * 上传收货凭证图片
+     *
+     * @param id
+     */
+    @Override
+    @Transactional
+    public void upPic(Long id,String picUrl) {
+        goodsDao.upPic(id,picUrl);
     }
 }

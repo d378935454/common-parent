@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : local
-Source Server Version : 50624
+Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : xiashi
 
 Target Server Type    : MYSQL
-Target Server Version : 50624
+Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-04-24 23:13:48
+Date: 2017-04-26 18:44:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -128,12 +128,12 @@ INSERT INTO `menu` VALUES ('10', null, null, '查看物流单据', '1', '9', '20
 INSERT INTO `menu` VALUES ('11', null, 'OrderList/WAITCHECK', '输入质检信息', '1', '9', '2017-04-08 11:41:26', '2017-04-24 21:29:49', '0');
 INSERT INTO `menu` VALUES ('12', null, null, '修改物流单据', '1', '9', '2017-04-08 11:41:32', '2017-04-08 11:41:55', '0');
 INSERT INTO `menu` VALUES ('13', null, null, '输入到货时间', '1', '9', '2017-04-08 11:41:38', '2017-04-08 11:41:56', '0');
-INSERT INTO `menu` VALUES ('14', null, null, '输入客户端收货凭证', '1', '9', '2017-04-08 11:41:48', '2017-04-08 11:41:57', '0');
+INSERT INTO `menu` VALUES ('14', null, 'OrderList/CHECKED', '输入客户端收货凭证', '1', '9', '2017-04-08 11:41:48', '2017-04-25 18:13:06', '0');
 INSERT INTO `menu` VALUES ('15', null, null, '夏实销售部', '0', '0', '2017-04-08 11:42:09', '2017-04-08 11:42:36', '0');
 INSERT INTO `menu` VALUES ('16', null, null, '客户数据管理', '1', '15', '2017-04-08 11:42:17', '2017-04-08 11:42:42', '0');
 INSERT INTO `menu` VALUES ('17', null, null, '订单输入输入', '1', '15', '2017-04-08 11:42:22', '2017-04-08 11:42:43', '0');
-INSERT INTO `menu` VALUES ('18', null, null, '收货信息输入', '1', '15', '2017-04-08 11:42:28', '2017-04-08 11:42:43', '0');
-INSERT INTO `menu` VALUES ('19', null, null, '收款凭证输入', '1', '15', '2017-04-08 11:42:33', '2017-04-08 11:42:44', '0');
+INSERT INTO `menu` VALUES ('18', null, 'OrderList/UPPIC', '收货信息输入', '1', '15', '2017-04-08 11:42:28', '2017-04-26 18:40:45', '0');
+INSERT INTO `menu` VALUES ('19', null, '', '收款凭证输入', '1', '15', '2017-04-08 11:42:33', '2017-04-25 18:13:06', '0');
 INSERT INTO `menu` VALUES ('20', null, null, '夏实供应部', '0', '0', '2017-04-08 11:42:54', '2017-04-08 11:42:54', '0');
 INSERT INTO `menu` VALUES ('21', null, null, '物流数据管理', '1', '20', '2017-04-08 11:42:59', '2017-04-08 11:51:15', '0');
 INSERT INTO `menu` VALUES ('22', null, null, '供应商信息管理', '1', '20', '2017-04-08 11:43:05', '2017-04-08 11:51:17', '0');
@@ -171,8 +171,8 @@ INSERT INTO `order_info` VALUES ('2', '1', '3', '1', null, '2', '2', '12', null,
 INSERT INTO `order_info` VALUES ('3', '9', '2', '7', null, '0', '0', '1231', null, null, '2017-04-20 10:02:11', '2017-04-20 10:24:08', '0');
 INSERT INTO `order_info` VALUES ('4', '14', '2', '12', null, null, null, '1111', null, null, '2017-04-20 11:34:26', '2017-04-20 11:34:26', '0');
 INSERT INTO `order_info` VALUES ('5', '14', '2', '12', null, null, null, '2222', null, null, '2017-04-20 11:34:26', '2017-04-20 11:34:26', '0');
-INSERT INTO `order_info` VALUES ('6', '15', '2', '13', null, null, null, '1111', null, null, '2017-04-20 13:09:16', '2017-04-20 13:09:16', '0');
-INSERT INTO `order_info` VALUES ('7', '15', '1', '13', null, null, null, '2222', null, null, '2017-04-20 13:09:16', '2017-04-20 13:09:16', '0');
+INSERT INTO `order_info` VALUES ('6', '15', '2', '13', null, null, null, '1111', '100', null, '2017-04-20 13:09:16', '2017-04-25 16:16:55', '0');
+INSERT INTO `order_info` VALUES ('7', '15', '1', '13', null, null, null, '2222', '100', null, '2017-04-20 13:09:16', '2017-04-25 16:16:55', '0');
 INSERT INTO `order_info` VALUES ('8', '17', '1', '15', null, null, null, '111', null, null, '2017-04-20 13:16:34', '2017-04-20 13:16:34', '0');
 INSERT INTO `order_info` VALUES ('9', '18', '2', '16', null, null, null, '111', null, null, '2017-04-20 13:18:00', '2017-04-20 13:18:00', '0');
 INSERT INTO `order_info` VALUES ('10', '24', '2', '21', null, null, null, '123', null, null, '2017-04-20 16:43:19', '2017-04-20 16:43:19', '0');
@@ -375,7 +375,7 @@ INSERT INTO `xs_order` VALUES ('1', null, null, null, null, null, null, null, nu
 INSERT INTO `xs_order` VALUES ('6', null, null, null, null, null, null, null, null, null, null, null, null, '2017-04-19 18:32:49', '2017-04-19 18:32:49', '0');
 INSERT INTO `xs_order` VALUES ('9', 'asdads', null, null, null, 'asdfdsf', '2007-01-01 00:00:00', '2017-04-20 10:23:29', null, null, null, null, null, '2017-04-19 18:32:49', '2017-04-20 10:23:29', '0');
 INSERT INTO `xs_order` VALUES ('14', 'ads', null, null, '123', 'didian', '2007-01-01 04:00:00', null, null, null, null, null, null, '2017-04-20 11:34:26', '2017-04-20 11:34:26', '0');
-INSERT INTO `xs_order` VALUES ('15', 'ads', '2', null, '123', 'didian', '2007-01-01 04:00:00', '2017-04-23 15:35:33', null, null, null, null, null, '2017-04-20 13:09:16', '2017-04-23 15:35:33', '0');
+INSERT INTO `xs_order` VALUES ('15', 'ads', '3', null, '123', 'didian', '2007-01-01 04:00:00', '2017-04-23 15:35:33', null, null, null, null, null, '2017-04-20 13:09:16', '2017-04-23 15:35:33', '0');
 INSERT INTO `xs_order` VALUES ('17', 'asda', '0', null, '123', 'asdsada', '2007-01-01 00:02:00', null, null, null, null, null, null, '2017-04-20 13:16:34', '2017-04-20 13:16:34', '0');
 INSERT INTO `xs_order` VALUES ('18', 'sada', '0', null, '1', 'sadad', '2007-01-01 00:00:00', null, null, null, null, null, null, '2017-04-20 13:18:00', '2017-04-20 13:18:00', '0');
 INSERT INTO `xs_order` VALUES ('24', '201704200000', '0', null, '12', '地点', '2007-01-02 00:00:00', null, null, null, null, '3', null, '2017-04-20 16:43:19', '2017-04-20 16:43:19', '0');
@@ -385,4 +385,4 @@ INSERT INTO `xs_order` VALUES ('27', '201704240000', '0', null, '111', '阿斯�
 INSERT INTO `xs_order` VALUES ('28', '201704240001', '0', null, '1', '阿斯达', '2007-01-01 00:00:00', null, null, null, null, '3', null, '2017-04-24 20:47:19', '2017-04-24 20:47:19', '0');
 INSERT INTO `xs_order` VALUES ('29', '201704240002', '0', null, '111', '嗷嗷待食', '2007-01-01 00:00:00', null, null, null, null, '3', null, '2017-04-24 20:48:47', '2017-04-24 20:48:47', '0');
 INSERT INTO `xs_order` VALUES ('30', '201704240003', '1', null, '11', '11', '2007-01-01 00:02:00', null, null, '2007-01-01 00:00:00', null, '3', null, '2017-04-24 20:50:08', '2017-04-24 20:53:58', '0');
-INSERT INTO `xs_order` VALUES ('31', '201704240004', '3', null, '1', 'da', '2007-01-01 00:00:00', null, 'qu', '2007-01-01 08:00:00', null, '3', null, '2017-04-24 21:04:37', '2017-04-24 23:13:08', '0');
+INSERT INTO `xs_order` VALUES ('31', '201704240004', '4', null, '1', 'da', '2007-01-01 00:00:00', null, 'qu', '2007-01-01 08:00:00', null, '3', 'd:/picsss/201704240004/h5-执行流程 .png', '2017-04-24 21:04:37', '2017-04-26 17:38:36', '0');

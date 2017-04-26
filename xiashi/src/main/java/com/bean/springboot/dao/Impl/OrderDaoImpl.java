@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bean.springboot.dao.OrderDao;
 import com.bean.springboot.dto.order.Order;
-import com.bean.springboot.dto.order.OrderInfo;
 import com.bean.springboot.type.StateType;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +13,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.stream.Stream;
 
 /**
  * Created by bean on 2017/4/2.
@@ -23,6 +21,7 @@ import java.util.stream.Stream;
 public class OrderDaoImpl implements OrderDao {
 
     private ReentrantLock reentrantLock = new ReentrantLock();
+    private ReentrantLock reentrantLock1 = new ReentrantLock();
     @PersistenceContext
     private EntityManager em;
 
@@ -99,7 +98,7 @@ public class OrderDaoImpl implements OrderDao {
         Long orderId = order.getLong("id");
 
         JSONArray orderInfos = order.getJSONArray("orderInfos");
-        reentrantLock.lock();
+        reentrantLock1.lock();
         Order o = em.find(Order.class, orderId);
         if(o.getState().equals(StateType.WAITCHECK)) {
             for (Object obj : orderInfos) {
@@ -113,6 +112,20 @@ public class OrderDaoImpl implements OrderDao {
             o.setState(StateType.CHECKED);
             em.flush();
         }
-        reentrantLock.unlock();
+        reentrantLock1.unlock();
+    }
+    /**
+     * 上传收货凭证图片
+     *
+     * @param id
+     */
+    @Override
+    public void upPic(Long id, String picUrl) {
+        em.createQuery("update Order o set o.picUrl=:picUrl ,o.state=:state where o.id=:id and o.state=:nstate")
+                .setParameter("picUrl", picUrl)
+                .setParameter("id", id)
+                .setParameter("state",StateType.UPPIC)
+                .setParameter("nstate",StateType.CHECKED)
+                .executeUpdate();
     }
 }

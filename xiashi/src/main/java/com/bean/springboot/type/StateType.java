@@ -12,7 +12,9 @@ public enum StateType {
     CREATED("刚新建"),
     REPOCONF("确认采购单"),
     WAITCHECK("待质检"),
-    CHECKED("质检完"),
+    CHECKED("质检完成"),
+    UPPIC("凭证上传完成"),
+    OVER("输入收货凭证信息"),
     ;
     private String desc;
 

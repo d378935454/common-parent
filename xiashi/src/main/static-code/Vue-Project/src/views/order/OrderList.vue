@@ -29,6 +29,14 @@
           tittle = "质检订单"
           $this.to='Check/'
           break;
+        case "CHECKED":
+          tittle = "质检订单"
+          $this.to='UpPic/'
+          break;
+        case "UPPIC":
+          tittle = "输入收货凭证信息"
+          $this.to='Over/'
+          break;
       }
       $this.$store.dispatch('updateTitle', tittle)
       $this.type = $this.$route.params.type
