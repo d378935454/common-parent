@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
           <label>上传凭证照片</label>
-          <img :src="'mobile/sosOutImg'+order.picUrl"/>
+          <img :src="'mobile/sosOutImg'"/>
         </div>
       </div>
       <button type="button" @click="onSubmit" class="btn btn-primary">确认</button>
@@ -39,6 +39,10 @@
             }
         },
       computed:{
+        img:function() {
+            let $this=this
+         return  require($this.order.picUrl)
+        }
       },
       created:function () {
         let $this=this

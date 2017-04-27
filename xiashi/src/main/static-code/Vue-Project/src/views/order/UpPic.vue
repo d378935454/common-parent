@@ -52,7 +52,7 @@
       methods:{
         onSubmit() {
           let $this = this
-          let pic=$this.$refs.pic[0].files[0];
+          let pic=$this.$refs.pic.files[0];
           let form = new FormData();
           form.append("file",pic)
           form.append("id",$this.id)

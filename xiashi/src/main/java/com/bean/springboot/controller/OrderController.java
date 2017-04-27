@@ -137,12 +137,12 @@ public class OrderController {
             HttpServletRequest request,
             @RequestParam("file") MultipartFile file,
             @RequestParam("id") Long id,
-            @RequestParam("orderNo") Long orderNo
+            @RequestParam("orderNo") String orderNo
 
     ) {
         try {
-            FileUtil.upFile(ROOTPATH + "/" + orderNo, file);
-            orderSevice.upPic(id,orderNo+"/"+file.getOriginalFilename());
+            String filename=FileUtil.upload(ROOTPATH , file,orderNo.toString());
+            orderSevice.upPic(id,filename);
         } catch (Exception e) {
             e.printStackTrace();
         }
