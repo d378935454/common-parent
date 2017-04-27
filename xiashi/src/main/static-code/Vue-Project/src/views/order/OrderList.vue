@@ -30,7 +30,7 @@
           $this.to='Check/'
           break;
         case "CHECKED":
-          tittle = "质检订单"
+          tittle = "上传收货凭证照片"
           $this.to='UpPic/'
           break;
         case "UPPIC":

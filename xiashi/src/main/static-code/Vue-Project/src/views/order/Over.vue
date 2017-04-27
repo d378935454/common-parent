@@ -22,8 +22,8 @@
           <input type="number" v-model.number="item.checkNum" class="form-control" readonly>
         </div>
         <div class="form-group">
-          <label>质检数量</label>
-          <input type="file" accept="image/*" capture="camera" ref="pic">
+          <label>上传凭证照片</label>
+          <img :src="'mobile/sosOutImg'+order.picUrl"/>
         </div>
       </div>
       <button type="button" @click="onSubmit" class="btn btn-primary">确认</button>

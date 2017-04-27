@@ -8,17 +8,22 @@ import com.bean.springboot.sevice.OrderSevice;
 import com.bean.springboot.type.StateType;
 import com.bean.springboot.utils.FileUtil;
 import com.bean.springboot.utils.RSTFulBody;
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.HandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 
 /**
  * Created by ppctest02 on 2017/3/21.
@@ -137,10 +142,18 @@ public class OrderController {
     ) {
         try {
             FileUtil.upFile(ROOTPATH + "/" + orderNo, file);
-            orderSevice.upPic(id,ROOTPATH + "/" + orderNo+"/"+file.getOriginalFilename());
+            orderSevice.upPic(id,orderNo+"/"+file.getOriginalFilename());
         } catch (Exception e) {
             e.printStackTrace();
         }
         return new RSTFulBody().success();
+    }
+    @RequestMapping(value = "/sosOutImg*")
+    public void getImage(HttpServletRequest request, HttpServletResponse httpServletResponse) {
+        String path = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+        String pattern = (String) request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE);
+        AntPathMatcher antPathMatcher = new AntPathMatcher();
+        String finlpath = antPathMatcher.extractPathWithinPattern(pattern, path);
+        File file = new File(FilenameUtils.concat(ROOTPATH, finlpath));
     }
 }
