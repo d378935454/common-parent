@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
           <label>上传凭证照片</label>
-          <img :src="img"/>
+          <img :src="'mobile/sosOutImg'+img"/>
         </div>
       </div>
       <button type="button" @click="onSubmit" class="btn btn-primary">确认</button>
@@ -40,15 +40,23 @@
       }
     },
     computed: {},
-    created: function () {
+    created: async function () {
       let $this = this
       $this.$store.dispatch('updateTitle', "输入收货凭证信息")
       $this.id = $this.$route.params.id
-      $this.getOrderById($this.id)
-        .then(res => {
-          $this.order = res.data.data
-          $this.img = order.aa
-        })
+      let res = await $this.getOrderById($this.id)
+      $this.order = res.data.data
+//      $this.img=''
+      $this.img=$this.order.picUrl
+//       $this.getImg($this.order.picUrl)
+//        .then(res=>{
+//          $this.img =res.data
+//          debugger
+//        })
+//        .then(res => {
+//          $this.order = res.data.data
+//          $this.img = order.aa
+//        })
 
     },
     methods: {
@@ -60,7 +68,7 @@
         form.append("id", $this.id)
         form.append("orderNo", $this.order.orderNo)
         $this.http.post('order/upPic', form,
-          {headers: {'Content-Type': 'multipart/form-data'}})
+          { headers: { 'Content-Type': 'multipart/form-data' } })
           .then(response => {
 //              alert("质检完成")
 //            $this.$router.go(-1)
@@ -72,11 +80,12 @@
             alert("服务器异常")
           })
       },
-      getOrderById: (id) => {
-        return this.http.get("order/getOrderById?id=" + id)
+      getOrderById: function (id) {
+        let $this = this
+        return $this.http.get("order/getOrderById?id=" + id)
       },
       getImg: function (picUrl) {
-        return this.http.get("sosOutImg" + picUrl)
+        return this.http.get("img",{headers:{ImgPath: picUrl}})
       }
     }
   }
