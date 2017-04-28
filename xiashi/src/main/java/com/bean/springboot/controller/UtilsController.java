@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.AntPathMatcher;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.HandlerMapping;
@@ -30,6 +29,15 @@ public class UtilsController {
 
     @Value(value = "${root-path}")
     private String ROOTPATH;
+
+    @RequestMapping(value = "/sosOutImg*")
+    public void getImagess(HttpServletRequest request, HttpServletResponse httpServletResponse) {
+        String path = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+        String pattern = (String) request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE);
+        AntPathMatcher antPathMatcher = new AntPathMatcher();
+        String finlpath = antPathMatcher.extractPathWithinPattern(pattern, path);
+        File file = new File(FilenameUtils.concat(ROOTPATH, finlpath));
+    }
     @RequestMapping(value = "/img", method = RequestMethod.GET)
     public void getImage( HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
        String imgPath=  request.getHeader("ImgPath");

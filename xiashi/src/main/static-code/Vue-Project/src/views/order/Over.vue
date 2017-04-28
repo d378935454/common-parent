@@ -2,8 +2,8 @@
   <div class="container-fluid">
     <form class="row">
       <div class="form-group">
-        <label >订单号</label>
-        <input type="text" :value="order.orderNo"  class="form-control"
+        <label>订单号</label>
+        <input type="text" :value="order.orderNo" class="form-control"
                readonly>
       </div>
       <div v-for="(item,index) in order.orderInfos" :key="order.orderInfos.id">
@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
           <label>上传凭证照片</label>
-          <img :src="'mobile/sosOutImg'"/>
+          <img :src="img"/>
         </div>
       </div>
       <button type="button" @click="onSubmit" class="btn btn-primary">确认</button>
@@ -31,55 +31,55 @@
   </div>
 </template>
 <script>
-    export default{
-        data(){
-            return {
-              id:"",
-              order: {}
-            }
-        },
-      computed:{
-        img:function() {
-            let $this=this
-         return  require($this.order.picUrl)
-        }
-      },
-      created:function () {
-        let $this=this
-        $this.$store.dispatch('updateTitle', "输入收货凭证信息")
-        $this.id=$this.$route.params.id
-        $this.getOrderById($this.id)
-          .then(res=>{
-            $this.order=res.data.data
-          })
-      },
-      methods:{
-        onSubmit() {
-          let $this = this
-          let pic=$this.$refs.pic[0].files[0];
-          let form = new FormData();
-          form.append("file",pic)
-          form.append("id",$this.id)
-          form.append("orderNo",$this.order.orderNo)
-          $this.http.post('order/upPic',form,
-            {headers: {'Content-Type': 'multipart/form-data'}})
-            .then(response => {
+  export default{
+    data(){
+      return {
+        id: "",
+        order: {},
+        img: ""
+      }
+    },
+    computed: {},
+    created: function () {
+      let $this = this
+      $this.$store.dispatch('updateTitle', "输入收货凭证信息")
+      $this.id = $this.$route.params.id
+      $this.getOrderById($this.id)
+        .then(res => {
+          $this.order = res.data.data
+          $this.img = order.aa
+        })
+
+    },
+    methods: {
+      onSubmit() {
+        let $this = this
+        let pic = $this.$refs.pic[0].files[0];
+        let form = new FormData();
+        form.append("file", pic)
+        form.append("id", $this.id)
+        form.append("orderNo", $this.order.orderNo)
+        $this.http.post('order/upPic', form,
+          {headers: {'Content-Type': 'multipart/form-data'}})
+          .then(response => {
 //              alert("质检完成")
 //            $this.$router.go(-1)
 //              $this.$router.push({path: "/main"})
-            })
-            .catch(error => {
-              console.log(error)
-              $this.logining = false
-              alert("服务器异常")
-            })
-        },
-        getOrderById:function (id) {
-          let $this=this
-          return $this.http.get("order/getOrderById?id="+$this.id)
-        }
+          })
+          .catch(error => {
+            console.log(error)
+            $this.logining = false
+            alert("服务器异常")
+          })
+      },
+      getOrderById: (id) => {
+        return this.http.get("order/getOrderById?id=" + id)
+      },
+      getImg: function (picUrl) {
+        return this.http.get("sosOutImg" + picUrl)
       }
     }
+  }
 </script>
 <style lang="scss" scoped>
 
