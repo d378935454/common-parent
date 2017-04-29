@@ -60,9 +60,8 @@
           $this.http.post('order/upPic',form,
             {headers: {'Content-Type': 'multipart/form-data'}})
             .then(response => {
-//              alert("质检完成")
-//            $this.$router.go(-1)
-//              $this.$router.push({path: "/main"})
+              alert("质检完成")
+              $this.$router.push({path: "/main"})
             })
             .catch(error => {
               console.log(error)

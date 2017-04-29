@@ -30,6 +30,7 @@ public class UtilsController {
     @Value(value = "${root-path}")
     private String ROOTPATH;
 
+
     @RequestMapping(value = "/sosOutImg/**")
     public void getImagess(HttpServletRequest request, HttpServletResponse resp) throws IOException {
         String path = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);

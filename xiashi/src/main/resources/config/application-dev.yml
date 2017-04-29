@@ -46,11 +46,14 @@ spring:
 #        include: swagger
     jackson:
         serialization.indent_output: true
+    http:
+      multipart:
+        max-file-size: 5Mb
 #    datasource:
 
 server:
     port: 8081
-    address: localhost
+    address: 0.0.0.0
     undertow:
       io-threads: 4
       worker-threads: 32
