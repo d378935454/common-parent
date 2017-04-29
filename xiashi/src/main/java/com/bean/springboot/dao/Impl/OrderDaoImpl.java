@@ -4,11 +4,13 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bean.springboot.dao.OrderDao;
 import com.bean.springboot.dto.order.Order;
+import com.bean.springboot.dto.order.OrderInfo;
 import com.bean.springboot.type.StateType;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -105,9 +107,8 @@ public class OrderDaoImpl implements OrderDao {
                 JSONObject oi = (JSONObject) obj;
                 em.createQuery("update OrderInfo oi set oi.checkNum=:checkNum where oi.id=:id")
                         .setParameter("checkNum", oi.getInteger("checkNum"))
-                        .setParameter("id", (long) oi.getLong("id"))
+                        .setParameter("id",  oi.getLong("id"))
                         .executeUpdate();
-                orderId = oi.getLong("order");
             }
             o.setState(StateType.CHECKED);
             em.flush();
@@ -127,5 +128,29 @@ public class OrderDaoImpl implements OrderDao {
                 .setParameter("state",StateType.UPPIC)
                 .setParameter("nstate",StateType.CHECKED)
                 .executeUpdate();
+    }
+
+    /**
+     * 输入收货凭证信息
+     *
+     * @param id            orderid
+     * @param orderInfoList
+     * @return
+     */
+    @Override
+    public void Over(long id, Timestamp relSendDate, JSONArray orderInfoList) {
+      Order o=  em.find(Order.class, id);
+        if(o.getState().equals(StateType.UPPIC)) {
+            o.setState(StateType.OVER);
+            o.setRelSendDate(relSendDate);
+            em.flush();
+            for(Object orderInfo:orderInfoList){
+                JSONObject oi = (JSONObject) orderInfo;
+                em.createQuery("update OrderInfo oi set oi.sendNum=:sendNum where oi.id=:id")
+                        .setParameter("sendNum", oi.getInteger("sendNum"))
+                        .setParameter("id",  oi.getLong("id"))
+                        .executeUpdate();
+            }
+        }
     }
 }

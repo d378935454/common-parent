@@ -6,6 +6,19 @@
         <input type="text" :value="order.orderNo" class="form-control"
                readonly>
       </div>
+      <div class="form-group">
+        <label>上传凭证照片</label>
+        <img v-if="img" :src="'mobile/sosOutImg'+img"/>
+      </div>
+      <div class="form-group">
+        <label>送达时间</label>
+        <input type="text" @click="openPicker('relSendDate')" v-model="order.relSendDate" class="form-control" readonly>
+        <mt-datetime-picker
+          type="datetime"
+          ref="relSendDate"
+          @confirm="confirm">
+        </mt-datetime-picker>
+      </div>
       <div v-for="(item,index) in order.orderInfos" :key="order.orderInfos.id">
         <div class="form-group">
           <div class="col-xs-12">
@@ -22,10 +35,11 @@
           <input type="number" v-model.number="item.checkNum" class="form-control" readonly>
         </div>
         <div class="form-group">
-          <label>上传凭证照片</label>
-          <img :src="'mobile/sosOutImg'+img"/>
+          <label>送达数量</label>
+          <input type="number" v-model.number="item.sendNum" class="form-control" >
         </div>
       </div>
+
       <button type="button" @click="onSubmit" class="btn btn-primary">确认</button>
     </form>
   </div>
@@ -35,6 +49,7 @@
     data(){
       return {
         id: "",
+        picker:"",
         order: {},
         img: ""
       }
@@ -46,33 +61,16 @@
       $this.id = $this.$route.params.id
       let res = await $this.getOrderById($this.id)
       $this.order = res.data.data
-//      $this.img=''
       $this.img=$this.order.picUrl
-//       $this.getImg($this.order.picUrl)
-//        .then(res=>{
-//          $this.img =res.data
-//          debugger
-//        })
-//        .then(res => {
-//          $this.order = res.data.data
-//          $this.img = order.aa
-//        })
-
     },
     methods: {
       onSubmit() {
         let $this = this
-        let pic = $this.$refs.pic[0].files[0];
-        let form = new FormData();
-        form.append("file", pic)
-        form.append("id", $this.id)
-        form.append("orderNo", $this.order.orderNo)
-        $this.http.post('order/upPic', form,
-          { headers: { 'Content-Type': 'multipart/form-data' } })
+        $this.http.post('order/Over', $this.order)
           .then(response => {
-//              alert("质检完成")
+              alert("输入收货凭证信息")
 //            $this.$router.go(-1)
-//              $this.$router.push({path: "/main"})
+              $this.$router.push({path: "/main"})
           })
           .catch(error => {
             console.log(error)
@@ -84,8 +82,21 @@
         let $this = this
         return $this.http.get("order/getOrderById?id=" + id)
       },
-      getImg: function (picUrl) {
-        return this.http.get("img",{headers:{ImgPath: picUrl}})
+      openPicker(picker) {
+        this.$refs[picker].open();
+        this.picker = picker
+      },
+      confirm: function (time) {
+        time = this.util.formatDate.format(time, "yyyy-MM-dd hh:mm:ss")
+        let $this = this
+        switch ($this.picker) {
+          case "relSendDate":
+            $this.order.relSendDate = time
+            break;
+//          case "startdate":
+//            $this.express.startdate = time
+//            break;
+        }
       }
     }
   }

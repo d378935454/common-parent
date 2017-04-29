@@ -1,9 +1,11 @@
 package com.bean.springboot.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bean.springboot.dto.order.Express;
 import com.bean.springboot.dto.order.Order;
+import com.bean.springboot.dto.order.OrderInfo;
 import com.bean.springboot.sevice.OrderSevice;
 import com.bean.springboot.type.StateType;
 import com.bean.springboot.utils.FileUtil;
@@ -24,6 +26,8 @@ import org.springframework.web.servlet.HandlerMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * Created by ppctest02 on 2017/3/21.
@@ -141,19 +145,31 @@ public class OrderController {
 
     ) {
         try {
-            String filename=FileUtil.upload(ROOTPATH , file,orderNo.toString());
+            String filename=FileUtil.upload(ROOTPATH , file,orderNo);
             orderSevice.upPic(id,filename);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return new RSTFulBody().success();
     }
-    @RequestMapping(value = "/sosOutImg*")
-    public void getImage(HttpServletRequest request, HttpServletResponse httpServletResponse) {
-        String path = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-        String pattern = (String) request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE);
-        AntPathMatcher antPathMatcher = new AntPathMatcher();
-        String finlpath = antPathMatcher.extractPathWithinPattern(pattern, path);
-        File file = new File(FilenameUtils.concat(ROOTPATH, finlpath));
+
+    /**
+     * 输入收货凭证信息
+     *
+     * @return
+     */
+    @RequestMapping("/Over")
+    public RSTFulBody Over(
+            HttpServletRequest request,
+           @RequestBody JSONObject order
+
+    ) {
+       long id=  order.getLongValue("id");
+       Timestamp relSendDate= order.getTimestamp("relSendDate");
+        order.getJSONArray("orderInfos");
+        JSONArray orderInfoList=order.getJSONArray("orderInfos");
+        orderSevice.Over(id,relSendDate,orderInfoList);
+        return new RSTFulBody().success();
     }
+
 }

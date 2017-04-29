@@ -1,9 +1,12 @@
 package com.bean.springboot.sevice;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bean.springboot.dto.order.Order;
+import com.bean.springboot.dto.order.OrderInfo;
 import com.bean.springboot.type.StateType;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -49,4 +52,11 @@ public interface OrderSevice {
      * @param id
      */
     void upPic(Long id,String picUrl);
+
+    /**
+     * 输入收货凭证信息
+     *
+     * @return
+     */
+    void Over(long id, Timestamp relSendDate, JSONArray orderInfoList);
 }

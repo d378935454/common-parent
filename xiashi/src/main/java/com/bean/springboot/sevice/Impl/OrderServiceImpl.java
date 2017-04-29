@@ -1,14 +1,17 @@
 package com.bean.springboot.sevice.Impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bean.springboot.dao.OrderDao;
 import com.bean.springboot.dto.order.Order;
+import com.bean.springboot.dto.order.OrderInfo;
 import com.bean.springboot.sevice.OrderSevice;
 import com.bean.springboot.type.StateType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -19,7 +22,7 @@ import java.util.List;
 public class OrderServiceImpl implements OrderSevice {
 
     @Autowired
-    private OrderDao goodsDao;
+    private OrderDao orderDao;
 
     /**
      * 插入订单
@@ -30,7 +33,7 @@ public class OrderServiceImpl implements OrderSevice {
     @Override
     @Transactional
     public void insertOrder(Order order) {
-        goodsDao.insertOrder(order);
+        orderDao.insertOrder(order);
     }
 
     /**
@@ -41,7 +44,7 @@ public class OrderServiceImpl implements OrderSevice {
      */
     @Override
     public List<Order> getOrderListByType(StateType type) {
-        return  goodsDao.getOrderListByType(type);
+        return  orderDao.getOrderListByType(type);
     }
 
     /**
@@ -52,7 +55,7 @@ public class OrderServiceImpl implements OrderSevice {
      */
     @Override
     public Order getOrderById(Long id) {
-        return goodsDao.getOrderById(id);
+        return orderDao.getOrderById(id);
     }
 
     /**
@@ -64,7 +67,7 @@ public class OrderServiceImpl implements OrderSevice {
     @Override
     @Transactional
     public void updateStateById(Long id, StateType stateType,StateType $state) {
-        goodsDao.updateStateById(id,stateType,$state);
+        orderDao.updateStateById(id,stateType,$state);
     }
 
     /**
@@ -75,7 +78,7 @@ public class OrderServiceImpl implements OrderSevice {
     @Override
     @Transactional
     public void check(JSONObject orderInfos) {
-        goodsDao.check(orderInfos);
+        orderDao.check(orderInfos);
 
     }
 
@@ -87,6 +90,19 @@ public class OrderServiceImpl implements OrderSevice {
     @Override
     @Transactional
     public void upPic(Long id,String picUrl) {
-        goodsDao.upPic(id,picUrl);
+        orderDao.upPic(id,picUrl);
+    }
+
+    /**
+     * 输入收货凭证信息
+     *
+     * @param id orderid
+     * @param orderInfoList
+     * @return
+     */
+    @Override
+    @Transactional
+    public void Over(long id, Timestamp relSendDate, JSONArray orderInfoList) {
+        orderDao.Over(id,relSendDate, orderInfoList);
     }
 }

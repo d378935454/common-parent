@@ -52,7 +52,7 @@
       </div>
       <div class="form-group">
         <label for="price">物流价格</label>
-        <input type="text" v-model="express.price" class="form-control" id="price" placeholder="">
+        <input type="number" v-model="express.price" class="form-control" id="price" placeholder="">
       </div>
 
       <!--<div class="form-group">-->
