@@ -1,5 +1,6 @@
 package com.bean.springboot.aspect;
 
+import com.bean.springboot.token.Token;
 import com.bean.springboot.token.TokenUtil;
 import com.bean.springboot.utils.RSTFulBody;
 import org.aspectj.lang.JoinPoint;
@@ -47,8 +48,8 @@ public class TokenAspect {
     }
 
     //配置环绕通知,使用在方法aspect()上注册的切入点
-    @Around("token()")
-    public Object around(ProceedingJoinPoint joinPoint) {
+    @Around("token()&&@annotation(token1)")
+    public Object around(ProceedingJoinPoint joinPoint, Token token1) {
         long start = System.currentTimeMillis();
         try {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
