@@ -66,7 +66,7 @@
     methods: {
       onSubmit() {
         let $this = this
-        $this.http.post('order/Over', $this.order)
+        $this.$http.post('order/Over', $this.order)
           .then(response => {
               alert("输入收货凭证信息")
 //            $this.$router.go(-1)
@@ -80,7 +80,7 @@
       },
       getOrderById: function (id) {
         let $this = this
-        return $this.http.get("order/getOrderById?id=" + id)
+        return $this.$http.get("order/getOrderById?id=" + id)
       },
       openPicker(picker) {
         this.$refs[picker].open();

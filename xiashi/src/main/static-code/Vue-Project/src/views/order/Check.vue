@@ -48,7 +48,7 @@
       methods:{
         onSubmit() {
           let $this = this
-          $this.http.post('order/check',$this.order)
+          $this.$http.post('order/check',$this.order)
             .then(response => {
               alert("质检完成")
 //            $this.$router.go(-1)
@@ -62,7 +62,7 @@
         },
         getOrderById:function (id) {
           let $this=this
-          return $this.http.get("order/getOrderById?id="+$this.id)
+          return $this.$http.get("order/getOrderById?id="+$this.id)
         }
       }
     }

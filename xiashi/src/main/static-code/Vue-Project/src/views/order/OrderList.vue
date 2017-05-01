@@ -48,7 +48,7 @@
     methods: {
       getOrderListByType: function (type) {
         let $this = this
-        return $this.http.get("order/getOrderListByType?type=" + $this.type)
+        return $this.$http.get("order/getOrderListByType?type=" + $this.type)
 
       }
     }

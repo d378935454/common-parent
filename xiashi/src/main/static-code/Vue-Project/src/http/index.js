@@ -32,4 +32,8 @@ axios.interceptors.response.use(
     return Promise.reject(error.response.data)
   })
 
-export default http
+export default {
+  install: function(Vue,) {
+    Object.defineProperty(Vue.prototype, '$http', { value: http });
+  }
+}

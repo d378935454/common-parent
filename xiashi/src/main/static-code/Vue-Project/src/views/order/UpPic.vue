@@ -57,7 +57,7 @@
           form.append("file",pic)
           form.append("id",$this.id)
           form.append("orderNo",$this.order.orderNo)
-          $this.http.post('order/upPic',form,
+          $this.$http.post('order/upPic',form,
             {headers: {'Content-Type': 'multipart/form-data'}})
             .then(response => {
               alert("质检完成")
@@ -71,7 +71,7 @@
         },
         getOrderById:function (id) {
           let $this=this
-          return $this.http.get("order/getOrderById?id="+$this.id)
+          return $this.$http.get("order/getOrderById?id="+$this.id)
         }
       }
     }

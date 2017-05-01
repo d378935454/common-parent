@@ -65,7 +65,7 @@
       methods:{
         onSubmit() {
           let $this = this
-          $this.http.post('order/updateStateById?id='+$this.id+'&stateType=WAITCHECK&$state=REPOCONF')
+          $this.$http.post('order/updateStateById?id='+$this.id+'&stateType=WAITCHECK&$state=REPOCONF')
             .then(response => {
               alert("物流确认完成")
 //            $this.$router.go(-1)
@@ -79,7 +79,7 @@
         },
         getOrderById:function (id) {
           let $this=this
-          return $this.http.get("order/getOrderById?id="+$this.id)
+          return $this.$http.get("order/getOrderById?id="+$this.id)
         }
       }
     }

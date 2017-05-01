@@ -50,7 +50,7 @@
       methods:{
         onSubmit() {
           let $this = this
-          $this.http.post('order/updateStateById?id='+$this.id+'&stateType=REPOCONF&$state=CREATED')
+          $this.$http.post('order/updateStateById?id='+$this.id+'&stateType=REPOCONF&$state=CREATED')
             .then(response => {
               alert("订单确认完成")
 //            $this.$router.go(-1)
@@ -64,7 +64,7 @@
         },
         getOrderById:function (id) {
           let $this=this
-          return $this.http.get("order/getOrderById?id="+$this.id)
+          return $this.$http.get("order/getOrderById?id="+$this.id)
         }
       }
     }

@@ -148,7 +148,7 @@
     methods: {
       onSubmit() {
         let $this = this
-        $this.http.post('order/create-order', {order: $this.order, express: $this.express})
+        $this.$http.post('order/create-order', {order: $this.order, express: $this.express})
           .then(response => {
             alert("订单新建完成")
 //            $this.$router.go(-1)
@@ -180,13 +180,13 @@
         this.picker = picker
       },
       getAllGoods: function () {
-        return this.http.get('goods/get-all-goods-info')
+        return this.$http.get('goods/get-all-goods-info')
       },
       /**
        * 根据角色类型得到用户
        */
       getUserByType: function (permissionType) {
-        return this.http.get('user/getUserByType?permissionType=' + permissionType)
+        return this.$http.get('user/getUserByType?permissionType=' + permissionType)
       },
     },
 
