@@ -10,7 +10,6 @@ import Check from '../views/order/Check.vue'
 import UpPic from '../views/order/UpPic.vue'
 import Over from '../views/order/Over.vue'
 // import echarts from '../views/charts/echarts.vue'
-import Menu from "../views/Menu.vue"
 import MenuTwo from "../views/MenuTwo.vue"
 import main from "../views/Main.vue"
 Vue.use(Router)
@@ -31,7 +30,7 @@ let routes = [
     component: main,
     name: '',
     children: [
-      { path: '', component: Menu },
+      { path: '', component: resolve => require(["../views/Menu.vue"], resolve) },
       { path: ':id', component: MenuTwo },
       { path: '/CreateOrder', component: CreateOrder },
       { path: '/OrderList/:type', component: OrderList },

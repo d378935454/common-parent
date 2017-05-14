@@ -3,7 +3,6 @@ package com.bean.springboot.sevice.Impl;
 import com.bean.springboot.dao.UserDao;
 import com.bean.springboot.dto.usermanagement.User;
 import com.bean.springboot.sevice.UserSevice;
-import com.bean.springboot.token.Token;
 import com.bean.springboot.type.PermissionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,6 @@ public class UserServiceImpl implements UserSevice {
     private UserDao userDao;
 
     @Override
-    @Token(value = "12312321")
     public User getAllUser() {
         return null;
     }
