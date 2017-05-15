@@ -11,16 +11,12 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.channel.group.ChannelMatcher;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadFactory;
@@ -31,7 +27,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @Sharable
-public class SocketServerHandler extends SimpleChannelInboundHandler<Packet> {
+public class  SocketServerHandler extends SimpleChannelInboundHandler<Packet> {
     private static final Logger LOGGER = LoggerFactory.getLogger(SocketServerHandler.class);
     private ThreadPoolExecutor executor;
 

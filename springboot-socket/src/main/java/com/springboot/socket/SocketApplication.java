@@ -1,25 +1,18 @@
-package com.bean.springboot;
+package com.springboot.socket;
 
 import com.corundumstudio.socketio.AuthorizationListener;
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.HandshakeData;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.env.Environment;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
-@SpringBootApplication(scanBasePackages ={"com.bean"} )
-public class DemoApplication {
-
-	private static final Logger log = LoggerFactory.getLogger(DemoApplication.class);
+@SpringBootApplication
+public class SocketApplication {
 
 	@Value("${wss.server.host}")
 	private String host;
@@ -56,25 +49,6 @@ public class DemoApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication app =new SpringApplication(DemoApplication.class);
-//		DefaultProfileUtil.addDefaultProfile(app);
-		Environment env = app.run(args).getEnvironment();
-		try {
-			log.info("\n----------------------------------------------------------\n\t" +
-                            "Application '{}' is running! Access URLs:\n\t" +
-                            "Local: \t\thttp://localhost:{}\n\t" +
-                            "External: \thttp://{}:{}\n----------------------------------------------------------",
-                    env.getProperty("spring.application.name"),
-                    env.getProperty("server.port"),
-                    InetAddress.getLocalHost().getHostAddress(),
-                    env.getProperty("server.port"));
-		} catch (UnknownHostException e) {
-			log.error(e.getMessage());
-		}
-
-		String configServerStatus = env.getProperty("configserver.status");
-		log.info("\n----------------------------------------------------------\n\t" +
-						"Config Server: \t{}\n----------------------------------------------------------",
-				configServerStatus == null ? "Not found or not setup for this application" : configServerStatus);
+		SpringApplication.run(SocketApplication.class, args);
 	}
 }

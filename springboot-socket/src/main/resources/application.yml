@@ -1,0 +1,57 @@
+spring:
+  session:
+    store-type: none
+  freemarker:
+    allow-request-override: false
+    allow-session-override: false
+    cache: true
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    enabled: true
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: true
+    prefer-file-system-access: true
+
+
+    template-loader-path: classpath:/templates/
+    settings:
+      template_update_delay: 0
+      default_encoding: UTF-8
+      classic_compatible: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+#        url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://localhost:3306/xiashi?useUnicode=true&characterEncoding=utf8&useSSL=false
+    name:
+    username: root
+    password: root
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database: MYSQL
+    show-sql: true
+    properties:
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: true
+    open-in-view: true
+
+  mvc:
+    view:
+      prefix:
+      suffix: .ftl
+  #    profiles:
+  #        active: test
+  #        include: swagger
+  jackson:
+    serialization.indent_output: true
+  http:
+    multipart:
+      max-file-size: 5Mb
+#    datasource:
+
+wss:
+  server:
+      port: 8081
+      host: localhost
