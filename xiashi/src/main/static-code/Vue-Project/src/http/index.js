@@ -5,6 +5,7 @@ import axios from 'axios'
 
 const http = axios.create({
   // baseURL: 'http://localhost:8088',
+  baseURL: 'mobile',
   timeout: 2000,
   headers: {'X-Custom-Header': 'foobar'}
 })
@@ -31,4 +32,8 @@ axios.interceptors.response.use(
     return Promise.reject(error.response.data)
   })
 
-export default http
+export default {
+  install: function(Vue,) {
+    Object.defineProperty(Vue.prototype, '$http', { value: http });
+  }
+}

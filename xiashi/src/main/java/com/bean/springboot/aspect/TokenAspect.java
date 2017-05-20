@@ -1,26 +1,30 @@
 package com.bean.springboot.aspect;
 
-import com.bean.springboot.DemoApplication;
+import com.bean.springboot.token.Token;
 import com.bean.springboot.token.TokenUtil;
 import com.bean.springboot.utils.RSTFulBody;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.annotation.Annotation;
 
 /**
  * Created by ppctest02 on 2017/2/10.
  */
 @Component
 @Aspect
-public class TokenAspect {
+//@Order(Ordered.HIGHEST_PRECEDENCE)
+public class TokenAspect implements Ordered {
 
     private static final Logger log = LoggerFactory.getLogger(TokenAspect.class);
     //配置切入点,该方法无方法体,主要为方便同类中其他方法使用此处配置的切入点
@@ -34,6 +38,9 @@ public class TokenAspect {
      */
     @Before("token()")
     public void before(JoinPoint joinPoint) {
+       Class aClass=joinPoint.getTarget().getClass();
+        MethodSignature methodSignature=(MethodSignature)joinPoint.getSignature();
+        methodSignature.getMethod().getAnnotation(com.bean.springboot.token.Token.class);
 
     }
 
@@ -44,8 +51,8 @@ public class TokenAspect {
     }
 
     //配置环绕通知,使用在方法aspect()上注册的切入点
-    @Around("token()")
-    public Object around(ProceedingJoinPoint joinPoint) {
+    @Around("token()&&@annotation(token1)")
+    public Object around(ProceedingJoinPoint joinPoint, Token token1) {
         long start = System.currentTimeMillis();
         try {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
@@ -88,5 +95,11 @@ public class TokenAspect {
 
     public void reportToMonitorSystem(String methodName, long expiredTime) {
         log.info("---method {0} invoked, expired time: {1} ms---", methodName, expiredTime);
+    }
+
+
+    @Override
+    public int getOrder() {
+        return 0;
     }
 }

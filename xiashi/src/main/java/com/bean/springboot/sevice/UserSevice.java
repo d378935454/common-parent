@@ -1,6 +1,7 @@
 package com.bean.springboot.sevice;
 
 import com.bean.springboot.dto.usermanagement.User;
+import com.bean.springboot.type.PermissionType;
 
 import java.util.List;
 
@@ -16,4 +17,11 @@ public interface UserSevice {
      * @return
      */
     List<User> getUserByAcount(String account);
+
+    /**
+     * 根据角色类型得到用户
+     * @param permissionType
+     * @return
+     */
+    List<User> getUserByType(PermissionType permissionType);
 }

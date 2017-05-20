@@ -5,6 +5,7 @@ import com.bean.springboot.dto.order.Order;
 import com.bean.springboot.dto.order.OrderInfo;
 import com.bean.springboot.dto.usermanagement.Menu;
 import com.bean.springboot.dto.usermanagement.User;
+import com.bean.springboot.sevice.UserSevice;
 import com.bean.springboot.utils.TreeUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,16 +23,15 @@ import java.util.Set;
 public class DemoApplicationTests {
 
 	@Inject
-	UserDao userDao;
+	UserSevice userSevice;
 
 	@Inject
 	EntityManager em;
 
 	@Test
 	public void contextLoads() {
-		User user = userDao.getAllUser();
-		Set<Menu> menus = TreeUtil.initMenus(user.getPermission().getMenus());
-		String aa = "";
+		User user = userSevice.getAllUser();
+
 	}
 	@Test
 	@Transactional

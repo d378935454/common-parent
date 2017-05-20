@@ -1,20 +1,25 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App'
+import App from './App.vue'
 import router from './router'
 import store from './store'
 import http from './http'
-import 'element-ui/lib/theme-default/index.css'
-import ElementUI from 'element-ui'
 import MintUI from 'mint-ui';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import 'mint-ui/lib/style.css';
 import qs from 'qs'
+import util from './common/js/util'
+
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';    // 使用 CSS
 // 将axios挂载到prototype上，在组件中可以直接使用this.axios访问
-Vue.prototype.http = http
+// Vue.prototype.http =
+Vue.use(http)
+Vue.prototype.util = util
 Vue.config.productionTip = false
-Vue.use(ElementUI)
 Vue.use(MintUI)
+Vue.use(iView)
 window.qs=qs
 router.beforeEach((to, from, next) => {
   // NProgress.start();

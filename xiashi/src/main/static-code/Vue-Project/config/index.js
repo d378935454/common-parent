@@ -34,6 +34,13 @@ module.exports = {
         pathRewrite: {
           '^/mobile': '/mobile'
         }
+      },
+      '/util': {
+        target: 'http://localhost:8081/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/util': '/util'
+        }
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

@@ -1,8 +1,14 @@
 package com.bean.springboot.dto.order;
 
+import com.bean.springboot.dto.usermanagement.User;
+import com.bean.springboot.type.StateType;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,24 +16,71 @@ import java.util.List;
  */
 @Entity
 @Table(name = "xs_order")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")//防止json转换无限循环
 public class Order {
-    private long id;
-    private Byte state;
-    private Integer oldPrice;
-    private Integer price;
-    private String sendAddress;
-    private Timestamp sendDate;
-    private Timestamp relSendDate;
-    private String getAddress;
-    private Timestamp getDate;
-    private String picUrl;
-    private Timestamp inserttime;
-    private Timestamp updatetime;
-    private byte isDelete;
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Basic
+    @Column(name = "state", nullable = true)
+    @Enumerated(EnumType.ORDINAL)
+    private StateType state;
+    @Basic
+    @Column(name = "order_no")
+    private String orderNo;
+    @Basic
+    @Column(name = "old_price", nullable = true, precision = 0)
+    private BigDecimal oldPrice;
+    @Basic
+    @Column(name = "price", nullable = true, precision = 0)
+    private BigDecimal price;
+    @Basic
+    @Column(name = "send_address", nullable = true, length = 50)
+    private String sendAddress;
+    @Basic
+    @Column(name = "send_date", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")//json的返回格式
+    private Timestamp sendDate;
+    @Basic
+    @Column(name = "rel_send_date", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")//json的返回格式
+    private Timestamp relSendDate;
+    @Basic
+    @Column(name = "get_address", nullable = true, length = 50)
+    private String getAddress;
+
+    @Basic
+    @Column(name = "old_get_date", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")//json的返回格式
+    private Timestamp oldGetDate;
+    @Basic
+    @Column(name = "get_date", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")//json的返回格式
+    private Timestamp getDate;
+
+    @ManyToOne
+    @JoinColumn(name = "get_user_id" )
+    private User user;
+    @Basic
+    @Column(name = "pic_url", nullable = true, length = 255)
+    private String picUrl;
+    @OneToMany(mappedBy = "order",cascade = CascadeType.PERSIST)
+    private List<OrderInfo> orderInfos;
+    @Basic
+    @Column(name = "inserttime", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")//json的返回格式
+    private Timestamp inserttime;
+    @Basic
+    @Column(name = "updatetime", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")//json的返回格式
+    private Timestamp updatetime;
+    @Basic
+    @Column(name = "is_delete", nullable = false)
+    private byte isDelete;
+
+
     public long getId() {
         return id;
     }
@@ -36,38 +89,66 @@ public class Order {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "state", nullable = true)
-    public Byte getState() {
+    public StateType getState() {
         return state;
     }
 
-    public void setState(Byte state) {
+    public void setState(StateType state) {
         this.state = state;
     }
 
-    @Basic
-    @Column(name = "old_price", nullable = true, precision = 0)
-    public Integer getOldPrice() {
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+
+    public List<OrderInfo> getOrderInfos() {
+        return orderInfos;
+    }
+
+    public void setOrderInfos(List<OrderInfo> orderInfos) {
+        this.orderInfos = orderInfos;
+    }
+
+
+    public BigDecimal getOldPrice() {
         return oldPrice;
     }
 
-    public void setOldPrice(Integer oldPrice) {
+    public void setOldPrice(BigDecimal oldPrice) {
         this.oldPrice = oldPrice;
     }
 
-    @Basic
-    @Column(name = "price", nullable = true, precision = 0)
-    public Integer getPrice() {
+
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public Timestamp getOldGetDate() {
+        return oldGetDate;
+    }
+
+    public void setOldGetDate(Timestamp oldGetDate) {
+        this.oldGetDate = oldGetDate;
+    }
+
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    @Basic
-    @Column(name = "send_address", nullable = true, length = 50)
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public String getSendAddress() {
         return sendAddress;
     }
@@ -76,8 +157,7 @@ public class Order {
         this.sendAddress = sendAddress;
     }
 
-    @Basic
-    @Column(name = "send_date", nullable = true)
+
     public Timestamp getSendDate() {
         return sendDate;
     }
@@ -86,8 +166,7 @@ public class Order {
         this.sendDate = sendDate;
     }
 
-    @Basic
-    @Column(name = "rel_send_date", nullable = true)
+
     public Timestamp getRelSendDate() {
         return relSendDate;
     }
@@ -96,8 +175,7 @@ public class Order {
         this.relSendDate = relSendDate;
     }
 
-    @Basic
-    @Column(name = "get_address", nullable = true, length = 50)
+
     public String getGetAddress() {
         return getAddress;
     }
@@ -106,8 +184,7 @@ public class Order {
         this.getAddress = getAddress;
     }
 
-    @Basic
-    @Column(name = "get_date", nullable = true)
+
     public Timestamp getGetDate() {
         return getDate;
     }
@@ -116,8 +193,7 @@ public class Order {
         this.getDate = getDate;
     }
 
-    @Basic
-    @Column(name = "pic_url", nullable = true, length = 255)
+
     public String getPicUrl() {
         return picUrl;
     }
@@ -126,8 +202,7 @@ public class Order {
         this.picUrl = picUrl;
     }
 
-    @Basic
-    @Column(name = "inserttime", nullable = true)
+
     public Timestamp getInserttime() {
         return inserttime;
     }
@@ -136,8 +211,7 @@ public class Order {
         this.inserttime = inserttime;
     }
 
-    @Basic
-    @Column(name = "updatetime", nullable = true)
+
     public Timestamp getUpdatetime() {
         return updatetime;
     }
@@ -146,8 +220,7 @@ public class Order {
         this.updatetime = updatetime;
     }
 
-    @Basic
-    @Column(name = "is_delete", nullable = false)
+
     public byte getIsDelete() {
         return isDelete;
     }

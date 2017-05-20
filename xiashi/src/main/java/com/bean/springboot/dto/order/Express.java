@@ -1,6 +1,10 @@
 package com.bean.springboot.dto.order;
 
+import com.bean.springboot.dto.usermanagement.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
@@ -11,7 +15,8 @@ import java.sql.Timestamp;
 public class Express {
     private long id;
     private String expressNo;
-    private String peopleName;
+    private User user;
+    private BigDecimal price;
     private Timestamp startdate;
     private Timestamp oldSenddate;
     private Timestamp relSenddate;
@@ -40,18 +45,31 @@ public class Express {
         this.expressNo = expressNo;
     }
 
-    @Basic
-    @Column(name = "people_name", nullable = true, length = 255)
-    public String getPeopleName() {
-        return peopleName;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    public User getUser() {
+        return user;
     }
 
-    public void setPeopleName(String peopleName) {
-        this.peopleName = peopleName;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
+
+    @Basic
+    @Column(name = "price", nullable = true, length = 20)
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     @Basic
     @Column(name = "startdate", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")
     public Timestamp getStartdate() {
         return startdate;
     }
@@ -62,6 +80,7 @@ public class Express {
 
     @Basic
     @Column(name = "old_senddate", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")
     public Timestamp getOldSenddate() {
         return oldSenddate;
     }
@@ -72,6 +91,7 @@ public class Express {
 
     @Basic
     @Column(name = "rel_senddate", nullable = true)
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")
     public Timestamp getRelSenddate() {
         return relSenddate;
     }
@@ -120,7 +140,6 @@ public class Express {
         if (id != express.id) return false;
         if (isDelete != express.isDelete) return false;
         if (expressNo != null ? !expressNo.equals(express.expressNo) : express.expressNo != null) return false;
-        if (peopleName != null ? !peopleName.equals(express.peopleName) : express.peopleName != null) return false;
         if (startdate != null ? !startdate.equals(express.startdate) : express.startdate != null) return false;
         if (oldSenddate != null ? !oldSenddate.equals(express.oldSenddate) : express.oldSenddate != null) return false;
         if (relSenddate != null ? !relSenddate.equals(express.relSenddate) : express.relSenddate != null) return false;
@@ -134,7 +153,6 @@ public class Express {
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (expressNo != null ? expressNo.hashCode() : 0);
-        result = 31 * result + (peopleName != null ? peopleName.hashCode() : 0);
         result = 31 * result + (startdate != null ? startdate.hashCode() : 0);
         result = 31 * result + (oldSenddate != null ? oldSenddate.hashCode() : 0);
         result = 31 * result + (relSenddate != null ? relSenddate.hashCode() : 0);

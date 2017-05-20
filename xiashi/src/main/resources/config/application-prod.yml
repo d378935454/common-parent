@@ -1,0 +1,76 @@
+spring:
+    session:
+      store-type: none
+    freemarker:
+      allow-request-override: false
+      allow-session-override: false
+      cache: true
+      charset: UTF-8
+      check-template-location: true
+      content-type: text/html
+      enabled: true
+      expose-request-attributes: false
+      expose-session-attributes: false
+      expose-spring-macro-helpers: true
+      prefer-file-system-access: true
+
+
+      template-loader-path: classpath:/templates/
+      settings:
+        template_update_delay: 0
+        default_encoding: UTF-8
+        classic_compatible: true
+    datasource:
+            type: com.alibaba.druid.pool.DruidDataSource
+            url: jdbc:mysql://localhost:3306/xiashi?useUnicode=true&characterEncoding=utf8&useSSL=false
+            name:
+            username: root
+            password: Xiashi123123
+    jpa:
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+        database: MYSQL
+        show-sql: true
+        properties:
+            hibernate.cache.use_second_level_cache: true
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: true
+        open-in-view: true
+
+    mvc:
+        view:
+            prefix:
+            suffix: .ftl
+#    profiles:
+#        active: test
+#        include: swagger
+    jackson:
+        serialization.indent_output: true
+    http:
+      multipart:
+        max-file-size: 5Mb
+#    datasource:
+
+server:
+    port: 8080
+    address: 0.0.0.0
+    undertow:
+      io-threads: 4
+      worker-threads: 32
+#    ssl:
+#      key-store:
+#      key-store-password: mypassword
+#      keyStoreType: PKCS12
+#      keyAlias: tomcat
+#    tomcat:
+#    # tomcat最大线程数，默认为200
+#      max-connections: 800
+#    # tomcat的URI编码
+#      uri-encoding: UTF-8
+#    # 存放Tomcat的日志、Dump等文件的临时文件夹，默认为系统的tmp文件夹（如：C:\Users\Angel\AppData\Local\Temp）
+#      basedir: D:/springboot-tomcat-tmp
+root-path: c:/pics
+logging:
+  path: c:/xiashi-logs
+  level:
+    org:
+      hibernate: ERROR

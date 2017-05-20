@@ -1,21 +1,21 @@
 <template>
-  <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px"
-           class="demo-ruleForm login-container">
-    <h3 class="title">系统登录</h3>
-    <el-form-item prop="account">
-      <el-input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="账号"></el-input>
-    </el-form-item>
-    <el-form-item prop="checkPass">
-      <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="密码"></el-input>
-    </el-form-item>
-    <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
-    <el-form-item style="width:100%;">
-      <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining">登录
+    <div class="login-body">
+      <header class="login-header">
+        <b>欢迎登录</b>
+      </header>
+      <form class="form">
+        <div class="form-group">
+          <label for="user">用户名</label>
+          <input type="email" v-model.trim="username" class="form-control" id="user" placeholder="请输入用户名">
+        </div>
+        <div class="form-group">
+          <label for="pswd">密码</label>
+          <input type="password" v-model="password" class="form-control" id="pswd" placeholder="请输入密码">
+        </div>
+        <button type="button" @click="handleSubmit2" class="btn btn-primary cursor ">登录</button>
+      </form>
+    </div>
 
-      </el-button>
-      <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
-    </el-form-item>
-  </el-form>
 </template>
 
 <script>
@@ -25,21 +25,8 @@
     data () {
       return {
         logining: false,
-        ruleForm2: {
-          account: 'admin',
-          checkPass: '123456'
-        },
-        rules2: {
-          account: [
-            { required: true, message: '请输入账号', trigger: 'blur' }
-            // { validator: validaePass }
-          ],
-          checkPass: [
-            { required: true, message: '请输入密码', trigger: 'blur' }
-            // { validator: validaePass2 }
-          ]
-        },
-        checked: true
+        username: '',
+        password: ''
       }
     },
     methods: {
@@ -48,68 +35,98 @@
       },
       handleSubmit2 (ev) {
         let $this = this
-        this.$refs.ruleForm2.validate((valid) => {
-          if (valid) {
-            // _this.$router.replace('/table');
-            $this.logining = true
-            // NProgress.start();
-            let loginParams = { accountName: $this.ruleForm2.account, password: $this.ruleForm2.checkPass }
-            $this.http.post('/mobile/check-login', qs.stringify(loginParams))
-              .then(response => {
-                $this.logining = false
-                // NProgress.done();
-                let { msg, code, data } = response.data
-                if (code !== 1) {
-                  $this.$message({
-                    message: msg,
-                    type: 'error'
-                  })
-                } else {
-                  sessionStorage.setItem('user', JSON.stringify(data))
-                  $this.$router.push({ path: '/main' })
-                }
-              }).catch(error => {
-                console.log(error)
-                $this.$message({
-                  message: error,
-                  type: 'error'
-                })
-              }
-            )
-
-          } else {
-            console.log('error submit!!')
-            return false
+        if(!$this.username||!$this.password){
+            alert("用户名和密码不可为空")
+            return
+        }
+        // _this.$router.replace('/table');
+        // NProgress.start();
+        let loginParams = { accountName: $this.username, password: $this.password }
+        $this.$http.post('/check-login', qs.stringify(loginParams))
+          .then(response => {
+            $this.logining = false
+            // NProgress.done();
+            let { msg, code, data } = response.data
+            if (code !== 1) {
+              alert( msg)
+            } else {
+              sessionStorage.setItem('user', JSON.stringify(data))
+              $this.$router.push({ path: '/main' })
+            }
+          }).catch(error => {
+            console.log(error)
+            $this.logining = false
+            alert("服务器异常")
           }
-        })
+        )
+
+
       }
     }
   }
 
 </script>
 
-<style scoped>
-  .login-container {
-    /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    background-clip: padding-box;
-    margin: 180px auto;
-    width: 350px;
-    padding: 35px 35px 15px 35px;
-    background: #fff;
-    border: 1px solid #eaeaea;
-    box-shadow: 0 0 25px #cac6c6;
+<style>
+  /* ==============初始化样式============== */
+  *{box-sizing:border-box;-moz-box-sizing:border-box; -webkit-box-sizing:border-box; outline: none;}
+  body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td { margin: 0; padding: 0; border: 0;}
+  html,body { height: 100%; }
+  body,button,input,select,textarea { font-size: 12px; font-family: 'Microsoft Yahei','微软雅黑', \5FAE\8F6F\96C5\9ED1,'宋体',\5b8b\4f53,arial,'Hiragino Sans GB',Tahoma,Arial,Helvetica; }
+  ul,ol,li,dl,dd,dt{list-style: none;}
+  em { font-style: normal; }
+  a { text-decoration: none; }
+  a:hover { text-decoration: none; }
+  legend { color: #000; }
+  fieldset,img { border: 0; }
+  label,button { cursor: pointer; }
+  /* dfa */
+  html,body,form,fieldset,p,div,h1,h2,h3,h4,h5,h6{-webkit-text-size-adjust:none;}
+  article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
+  input[type="submit"],input[type="reset"],input[type="button"],button,input[type="search"],select,input[type=number],input[type=number]{-webkit-appearance: none;}
+  input[type='number'],input[type='tel'] {-moz-appearance:textfield;}
+  input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button {-webkit-appearance: none ;margin: 0;}{-moz-appearance:textfield;}
+  input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button {-webkit-appearance: none ;margin: 0;}
+  /*解决IE图片缩放失真*/
+  img { -ms-interpolation-mode: bicubic; }
+  /*清除浮动*/
+  .clearfix:after { content: ''; display: block; height: 0; clear: both; }
+  .clearfix { zoom: 1; line-height: normal; }
+  .clear { clear: both; }
+  /*连续英文、数字换行*/
+  .wordwrap { word-break: break-all; word-wrap: break-word; }
+  /*单行文字超出显示省略号*/
+  .omg{overflow: hidden; text-overflow: ellipsis; white-space:nowrap;}
+  /*ios去除点击时的灰色遮罩*/
+  a,button,input,textarea,select{-webkit-tap-highlight-color: rgba(255,255,255,0);}
+  *{
+    -webkit-touch-callout:none;  /*系统默认菜单被禁用*/
+    -webkit-user-select:none; /*webkit浏览器*/
+    user-select:none;
+  }
+  input{
+    -webkit-user-select:auto; /*webkit浏览器*/
   }
 
-  .title {
-    margin: 0px auto 40px auto;
+  .login-header {
+    width: 100%;
     text-align: center;
-    color: #505458;
+    padding:20% 0 10%;
   }
 
-  .remember {
-    margin: 0px 0px 35px 0px;
+  .login-header b {
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+  }
+
+
+
+
+.form{
+  margin: 0 10%;
+}
+  .btn-primary{
+    width: 100%;
   }
 </style>

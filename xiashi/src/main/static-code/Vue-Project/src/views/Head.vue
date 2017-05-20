@@ -1,5 +1,5 @@
 <template>
-  <mt-header fixed :title="title">
+  <mt-header  :title="title">
     <mt-button v-on:click="goback" icon="back" slot="left">返回</mt-button>
     <!--<mt-button icon="more" slot="right"></mt-button>-->
   </mt-header>
@@ -23,6 +23,6 @@
       }
     }
 </script>
-<style lang="scss" scoped>
+<style>
 
 </style>
