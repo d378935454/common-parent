@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 
 import java.net.InetAddress;
@@ -27,7 +26,7 @@ public class DemoApplication {
 	@Value("${wss.server.port}")
 	private Integer port;
 
-	@Bean
+//	@Bean
 	public SocketIOServer socketIOServer()
 	{
 		Configuration config = new Configuration();
@@ -50,7 +49,7 @@ public class DemoApplication {
 		return server;
 	}
 
-	@Bean
+//	@Bean
 	public SpringAnnotationScanner springAnnotationScanner(SocketIOServer socketServer) {
 		return new SpringAnnotationScanner(socketServer);
 	}
