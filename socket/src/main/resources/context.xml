@@ -39,7 +39,8 @@
 
     <bean id="app" class="com.xx.server.server.Application" init-method="start" destroy-method="stop"/>
 
-    <bean id="socketServer" class="com.xx.server.server.SocketServer" init-method="start"
+    <bean id="socketServer" class="com.xx.server.server.SocketServer"
+          init-method="start"
           destroy-method="stop">
         <constructor-arg name="port" value="${server.port}"/>
         <property name="keepAliveTimeout" value="${keep_alive_timeout}"/>

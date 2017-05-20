@@ -20,22 +20,22 @@ spring:
       template_update_delay: 0
       default_encoding: UTF-8
       classic_compatible: true
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-#        url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false
-    url: jdbc:mysql://localhost:3306/xiashi?useUnicode=true&characterEncoding=utf8&useSSL=false
-    name:
-    username: root
-    password: root
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    database: MYSQL
-    show-sql: true
-    properties:
-      hibernate.cache.use_second_level_cache: true
-      hibernate.cache.use_query_cache: false
-      hibernate.generate_statistics: true
-    open-in-view: true
+#  datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource
+##        url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false
+#    url: jdbc:mysql://localhost:3306/xiashi?useUnicode=true&characterEncoding=utf8&useSSL=false
+#    name:
+#    username: root
+#    password: root
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#    database: MYSQL
+#    show-sql: true
+#    properties:
+#      hibernate.cache.use_second_level_cache: true
+#      hibernate.cache.use_query_cache: false
+#      hibernate.generate_statistics: true
+#    open-in-view: true
 
   mvc:
     view:
@@ -50,6 +50,25 @@ spring:
     multipart:
       max-file-size: 5Mb
 #    datasource:
+
+db:
+  mybatis:
+    mapperLocations: classpath*:*Mapper.xml
+    typeAliasesPackage: com.bean.model
+    configLocation: classpath*:mybatis-config.xml
+    jdbc:
+#      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://localhost:3306/caidao?useUnicode=true&characterEncoding=UTF-8&relaxAutoCommit=true&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: root
+      driverClassName: com.mysql.jdbc.Driver
+      maxActive: 20
+      maxIdle: 2
+      minIdle: 2
+      maxWait: 1000
+      initialSize: 2
+      validationQuery: SELECT 1
+
 
 wss:
   server:

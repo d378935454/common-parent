@@ -15,6 +15,7 @@
         <module>api-service</module>
         <module>socket</module>
         <module>springboot</module>
+        <module>springboot-socket</module>
     </modules>
     <name>common-parent</name>
     <packaging>pom</packaging>
