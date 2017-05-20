@@ -16,4 +16,12 @@ public class IndexController {
         return "index";
     }
 
+    @RequestMapping("/1")
+    public String index1(){
+        return "index1";
+    }
+    @RequestMapping("/2")
+    public String index2(){
+        return "index2";
+    }
 }

@@ -15,6 +15,9 @@ import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
@@ -27,10 +30,13 @@ import java.util.concurrent.atomic.AtomicLong;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @Sharable
+@Component
+@ConfigurationProperties(prefix="my.hander")
 public class  SocketServerHandler extends SimpleChannelInboundHandler<Packet> {
     private static final Logger LOGGER = LoggerFactory.getLogger(SocketServerHandler.class);
     private ThreadPoolExecutor executor;
 
+    @Autowired
     private PacketMessageDispatcher messageDispatcher;
 
     private int corePoolSize = 5;
@@ -101,13 +107,13 @@ public class  SocketServerHandler extends SimpleChannelInboundHandler<Packet> {
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
         // 服务器未就绪，一律拒绝客户端的连接请求
-        if (!Application.getInstance().isAvailable()) {
+//        if (!Application.getInstance().isAvailable()) {
             // 告诉客户端服务器还没准备好，然后立即关闭此连接
             Packet packet = new Packet(null, "00", "服务器还未准备好");
             ctx.channel().writeAndFlush(packet).addListener(ChannelFutureListener.CLOSE);
-        } else {
-            super.channelRegistered(ctx);
-        }
+//        } else {
+//            super.channelRegistered(ctx);
+//        }
     }
 
     @Override
