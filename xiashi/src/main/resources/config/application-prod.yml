@@ -25,7 +25,7 @@ spring:
             url: jdbc:mysql://localhost:3306/xiashi?useUnicode=true&characterEncoding=utf8&useSSL=false
             name:
             username: root
-            password: Xiashi123123
+            password: Xiashi123321
     jpa:
         database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
         database: MYSQL
