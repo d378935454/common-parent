@@ -6,8 +6,8 @@ import java.util.Date;
 /**
  * Created by duhongda on 2017/5/14.
  */
-@Entity
-@Table(name="t_clientinfo")
+//@Entity
+//@Table(name="t_clientinfo")
 public class ClientInfo {
 
     @Id

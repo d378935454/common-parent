@@ -7,7 +7,6 @@ import com.corundumstudio.socketio.annotation.OnConnect;
 import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,7 +17,7 @@ import java.util.UUID;
 /**
  * Created by duhongda on 2017/5/14.
  */
-@Component
+//@Component
 public class MessageEventHandler {
     private final SocketIOServer server;
 
