@@ -25,16 +25,16 @@ public class DemoApplicationTests {
 
 	@Inject
 	UserSevice userSevice;
-	@Inject
-	BaseRedisSupport redis;
+//	@Inject
+//	BaseRedisSupport redis;
 
 	@Inject
 	EntityManager em;
 
 	@Test
 	public void contextLoads() {
-		redis.set("a","asdasda",10);
-		redis.get("a");
+//		redis.set("a","asdasda",10);
+//		redis.get("a");
 		userSevice.getAllUser();
 
 	}
