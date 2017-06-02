@@ -25,9 +25,7 @@ public class OrderInfo {
     @JoinColumn(name = "goods_info_id")
     private GoodsInfo goodsInfo;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "express_id")
-    private Express express;
+
     @Basic
     @Column(name = "old_price", nullable = true, precision = 0)
     private BigDecimal oldPrice;
@@ -79,13 +77,7 @@ public class OrderInfo {
         this.goodsInfo = goodsInfo;
     }
 
-    public Express getExpress() {
-        return express;
-    }
 
-    public void setExpress(Express express) {
-        this.express = express;
-    }
 
     public BigDecimal getOldPrice() {
         return oldPrice;

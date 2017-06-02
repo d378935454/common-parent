@@ -59,7 +59,9 @@ public class Order {
     @Column(name = "get_date", nullable = true)
     @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")//json的返回格式
     private Timestamp getDate;
-
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "express_id")
+    private Express express;
     @ManyToOne
     @JoinColumn(name = "get_user_id" )
     private User user;
@@ -97,7 +99,13 @@ public class Order {
         this.state = state;
     }
 
+    public Express getExpress() {
+        return express;
+    }
 
+    public void setExpress(Express express) {
+        this.express = express;
+    }
     public String getOrderNo() {
         return orderNo;
     }

@@ -60,9 +60,9 @@ public class OrderController {
         Express express = JSON.parseObject(orderMap.getJSONObject("express").toJSONString(), Express.class);
         order.getOrderInfos()
                 .forEach(o -> {
-                    o.setExpress(express);
                     o.setOrder(order);
                 });
+        order.setExpress(express);
         orderSevice.insertOrder(order);
         return new RSTFulBody();
     }

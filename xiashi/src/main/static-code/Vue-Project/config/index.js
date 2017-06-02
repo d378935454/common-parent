@@ -29,14 +29,14 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/mobile': {
-        target: 'http://localhost:8081/',
+        target: 'http://localhost:8080/',
         changeOrigin: true,
         pathRewrite: {
           '^/mobile': '/mobile'
         }
       },
       '/util': {
-        target: 'http://localhost:8081/',
+        target: 'http://localhost:8080/',
         changeOrigin: true,
         pathRewrite: {
           '^/util': '/util'

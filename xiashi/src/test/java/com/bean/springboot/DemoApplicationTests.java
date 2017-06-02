@@ -7,6 +7,7 @@ import com.bean.springboot.dto.usermanagement.Menu;
 import com.bean.springboot.dto.usermanagement.User;
 import com.bean.springboot.sevice.UserSevice;
 import com.bean.springboot.utils.TreeUtil;
+import com.bean.springboot.utils.redis.BaseRedisSupport;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,17 @@ public class DemoApplicationTests {
 
 	@Inject
 	UserSevice userSevice;
+	@Inject
+	BaseRedisSupport redis;
 
 	@Inject
 	EntityManager em;
 
 	@Test
 	public void contextLoads() {
-		User user = userSevice.getAllUser();
+		redis.set("a","asdasda",10);
+		redis.get("a");
+		userSevice.getAllUser();
 
 	}
 	@Test
