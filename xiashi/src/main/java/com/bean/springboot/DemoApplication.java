@@ -20,10 +20,10 @@ public class DemoApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(DemoApplication.class);
 
-	@Value("${wss.server.host}")
+//	@Value("${wss.server.host}")
 	private String host;
 
-	@Value("${wss.server.port}")
+//	@Value("${wss.server.port}")
 	private Integer port;
 
 //	@Bean
