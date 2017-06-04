@@ -47,6 +47,7 @@ public class OrderDaoImpl implements OrderDao {
             num.insert(0, "0");
         }
         order.setOrderNo(date + num);
+        order.getExpress().setExpressNo(order.getOrderNo());
         em.persist(order);
         reentrantLock.unlock();
     }

@@ -6,7 +6,7 @@ import axios from 'axios'
 const http = axios.create({
   // baseURL: 'http://localhost:8088',
   baseURL: 'mobile',
-  timeout: 2000,
+  timeout: 20000,
   headers: {'X-Custom-Header': 'foobar'}
 })
 

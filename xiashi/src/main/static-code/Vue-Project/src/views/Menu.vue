@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mt-cell v-for="i in menus" :title="i.name"  :key="i.id" label="描述信息" is-link :to="'main/'+i.id"></mt-cell>
+    <mt-cell  v-for="i in menus" :title="i.name"  :key="i.id" label="描述信息" is-link :to="'main/'+i.id"></mt-cell>
   </div>
 </template>
 

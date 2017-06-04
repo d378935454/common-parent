@@ -13,6 +13,8 @@ import util from './common/js/util'
 
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';    // 使用 CSS
+import VuePreview from 'vue-preview'
+Vue.use(VuePreview)
 // 将axios挂载到prototype上，在组件中可以直接使用this.axios访问
 // Vue.prototype.http =
 Vue.use(http)

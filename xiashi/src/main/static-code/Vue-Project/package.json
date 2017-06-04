@@ -19,6 +19,8 @@
     "mint-ui": "^2.2.3",
     "nprogress": "^0.2.0",
     "vue": "^2.2.2",
+    "vue-imageview": "^1.0.4",
+    "vue-preview": "^1.0.5",
     "vue-router": "^2.2.1",
     "vuex": "^2.2.1"
   },

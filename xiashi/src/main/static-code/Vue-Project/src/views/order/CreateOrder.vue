@@ -40,10 +40,10 @@
         </Select>
       </div>
 
-      <div class="form-group">
-        <label for="express_no">物流单号</label>
-        <input type="text" v-model="express.expressNo" class="form-control" id="express_no" placeholder="">
-      </div>
+      <!--<div class="form-group">-->
+        <!--<label for="express_no">物流单号</label>-->
+        <!--<input type="text" v-model="express.expressNo" class="form-control" id="express_no" placeholder="">-->
+      <!--</div>-->
       <div class="form-group">
         <label >物流联系人</label>
         <Select v-model="express.user.id" filterable>
@@ -176,6 +176,7 @@
         }
       },
       openPicker(picker) {
+          debugger
         this.$refs[picker].open();
         this.picker = picker
       },

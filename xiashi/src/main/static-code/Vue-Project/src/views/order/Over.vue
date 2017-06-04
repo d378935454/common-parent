@@ -8,7 +8,7 @@
       </div>
       <div class="form-group">
         <label>上传凭证照片</label>
-        <img v-if="img" :src="'mobile/sosOutImg'+img"/>
+        <img class="preview-img" style="width: 300px" v-for="(item, index) in img"  :src="item.src" @click="$preview.open(index, img)"/>
       </div>
       <div class="form-group">
         <label>送达时间</label>
@@ -51,7 +51,7 @@
         id: "",
         picker:"",
         order: {},
-        img: ""
+        img: []
       }
     },
     computed: {},
@@ -61,7 +61,11 @@
       $this.id = $this.$route.params.id
       let res = await $this.getOrderById($this.id)
       $this.order = res.data.data
-      $this.img=$this.order.picUrl
+      $this.img=[{
+        src: 'mobile/sosOutImg'+$this.order.picUrl,
+        w: 600,
+        h: 400
+      }]
     },
     methods: {
       onSubmit() {

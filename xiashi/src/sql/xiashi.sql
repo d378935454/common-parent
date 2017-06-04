@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-06-02 23:33:18
+Date: 2017-06-03 00:05:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -150,7 +150,6 @@ CREATE TABLE `order_info` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `order_id` bigint(20) NOT NULL COMMENT '主订单id',
   `goods_info_id` bigint(20) NOT NULL COMMENT '商品id',
-  `express_id` bigint(20) NOT NULL COMMENT '物流id',
   `spec_id` bigint(20) DEFAULT NULL COMMENT '规格id',
   `old_price` decimal(10,0) DEFAULT NULL COMMENT '原价',
   `price` decimal(10,0) DEFAULT NULL COMMENT '实际价格',
@@ -167,27 +166,27 @@ CREATE TABLE `order_info` (
 -- ----------------------------
 -- Records of order_info
 -- ----------------------------
-INSERT INTO `order_info` VALUES ('1', '1', '2', '1', null, '2', '2', '100', null, null, '2017-04-16 16:39:57', '2017-04-16 17:22:43', '0');
-INSERT INTO `order_info` VALUES ('2', '1', '3', '1', null, '2', '2', '12', null, null, '2017-04-16 16:40:08', '2017-04-16 17:22:56', '0');
-INSERT INTO `order_info` VALUES ('3', '9', '2', '7', null, '0', '0', '1231', null, null, '2017-04-20 10:02:11', '2017-04-20 10:24:08', '0');
-INSERT INTO `order_info` VALUES ('4', '14', '2', '12', null, null, null, '1111', null, null, '2017-04-20 11:34:26', '2017-04-20 11:34:26', '0');
-INSERT INTO `order_info` VALUES ('5', '14', '2', '12', null, null, null, '2222', null, null, '2017-04-20 11:34:26', '2017-04-20 11:34:26', '0');
-INSERT INTO `order_info` VALUES ('6', '15', '2', '13', null, null, null, '1111', '100', '122', '2017-04-20 13:09:16', '2017-04-29 15:52:44', '0');
-INSERT INTO `order_info` VALUES ('7', '15', '1', '13', null, null, null, '2222', '100', '123', '2017-04-20 13:09:16', '2017-04-29 15:52:44', '0');
-INSERT INTO `order_info` VALUES ('8', '17', '1', '15', null, null, null, '111', null, null, '2017-04-20 13:16:34', '2017-04-20 13:16:34', '0');
-INSERT INTO `order_info` VALUES ('9', '18', '2', '16', null, null, null, '111', null, null, '2017-04-20 13:18:00', '2017-04-20 13:18:00', '0');
-INSERT INTO `order_info` VALUES ('10', '24', '2', '21', null, null, null, '123', null, null, '2017-04-20 16:43:19', '2017-04-20 16:43:19', '0');
-INSERT INTO `order_info` VALUES ('11', '25', '2', '22', null, null, null, '123', null, null, '2017-04-20 16:45:20', '2017-04-20 16:45:20', '0');
-INSERT INTO `order_info` VALUES ('12', '26', '2', '23', null, null, null, '123', null, null, '2017-04-22 21:55:14', '2017-04-22 21:55:14', '0');
-INSERT INTO `order_info` VALUES ('13', '26', '1', '23', null, null, null, '11', null, null, '2017-04-22 21:55:14', '2017-04-22 21:55:14', '0');
-INSERT INTO `order_info` VALUES ('14', '27', '1', '24', null, null, null, '111', null, null, '2017-04-24 20:43:05', '2017-04-24 20:43:05', '0');
-INSERT INTO `order_info` VALUES ('15', '28', '1', '25', null, null, null, '1231', null, null, '2017-04-24 20:47:19', '2017-04-24 20:47:19', '0');
-INSERT INTO `order_info` VALUES ('16', '28', '1', '25', null, null, null, '1', null, null, '2017-04-24 20:47:19', '2017-04-24 20:47:19', '0');
-INSERT INTO `order_info` VALUES ('17', '29', '1', '26', null, null, null, '111', null, null, '2017-04-24 20:48:47', '2017-04-24 20:48:47', '0');
-INSERT INTO `order_info` VALUES ('18', '30', '1', '27', null, null, null, '111', null, null, '2017-04-24 20:50:08', '2017-04-24 20:50:08', '0');
-INSERT INTO `order_info` VALUES ('19', '31', '1', '28', null, null, null, '111', '199', null, '2017-04-24 21:04:37', '2017-04-24 23:13:13', '0');
-INSERT INTO `order_info` VALUES ('20', '32', '2', '29', null, null, null, '11', null, null, '2017-04-29 16:06:36', '2017-04-29 16:06:36', '0');
-INSERT INTO `order_info` VALUES ('21', '32', '1', '29', null, null, null, '111', null, null, '2017-04-29 16:06:36', '2017-04-29 16:06:36', '0');
+INSERT INTO `order_info` VALUES ('1', '1', '2', null, '2', '2', '100', null, null, '2017-04-16 16:39:57', '2017-04-16 17:22:43', '0');
+INSERT INTO `order_info` VALUES ('2', '1', '3', null, '2', '2', '12', null, null, '2017-04-16 16:40:08', '2017-04-16 17:22:56', '0');
+INSERT INTO `order_info` VALUES ('3', '9', '2', null, '0', '0', '1231', null, null, '2017-04-20 10:02:11', '2017-04-20 10:24:08', '0');
+INSERT INTO `order_info` VALUES ('4', '14', '2', null, null, null, '1111', null, null, '2017-04-20 11:34:26', '2017-04-20 11:34:26', '0');
+INSERT INTO `order_info` VALUES ('5', '14', '2', null, null, null, '2222', null, null, '2017-04-20 11:34:26', '2017-04-20 11:34:26', '0');
+INSERT INTO `order_info` VALUES ('6', '15', '2', null, null, null, '1111', '100', '122', '2017-04-20 13:09:16', '2017-04-29 15:52:44', '0');
+INSERT INTO `order_info` VALUES ('7', '15', '1', null, null, null, '2222', '100', '123', '2017-04-20 13:09:16', '2017-04-29 15:52:44', '0');
+INSERT INTO `order_info` VALUES ('8', '17', '1', null, null, null, '111', null, null, '2017-04-20 13:16:34', '2017-04-20 13:16:34', '0');
+INSERT INTO `order_info` VALUES ('9', '18', '2', null, null, null, '111', null, null, '2017-04-20 13:18:00', '2017-04-20 13:18:00', '0');
+INSERT INTO `order_info` VALUES ('10', '24', '2', null, null, null, '123', null, null, '2017-04-20 16:43:19', '2017-04-20 16:43:19', '0');
+INSERT INTO `order_info` VALUES ('11', '25', '2', null, null, null, '123', null, null, '2017-04-20 16:45:20', '2017-04-20 16:45:20', '0');
+INSERT INTO `order_info` VALUES ('12', '26', '2', null, null, null, '123', null, null, '2017-04-22 21:55:14', '2017-04-22 21:55:14', '0');
+INSERT INTO `order_info` VALUES ('13', '26', '1', null, null, null, '11', null, null, '2017-04-22 21:55:14', '2017-04-22 21:55:14', '0');
+INSERT INTO `order_info` VALUES ('14', '27', '1', null, null, null, '111', null, null, '2017-04-24 20:43:05', '2017-04-24 20:43:05', '0');
+INSERT INTO `order_info` VALUES ('15', '28', '1', null, null, null, '1231', null, null, '2017-04-24 20:47:19', '2017-04-24 20:47:19', '0');
+INSERT INTO `order_info` VALUES ('16', '28', '1', null, null, null, '1', null, null, '2017-04-24 20:47:19', '2017-04-24 20:47:19', '0');
+INSERT INTO `order_info` VALUES ('17', '29', '1', null, null, null, '111', null, null, '2017-04-24 20:48:47', '2017-04-24 20:48:47', '0');
+INSERT INTO `order_info` VALUES ('18', '30', '1', null, null, null, '111', null, null, '2017-04-24 20:50:08', '2017-04-24 20:50:08', '0');
+INSERT INTO `order_info` VALUES ('19', '31', '1', null, null, null, '111', '199', null, '2017-04-24 21:04:37', '2017-04-24 23:13:13', '0');
+INSERT INTO `order_info` VALUES ('20', '32', '2', null, null, null, '11', null, null, '2017-04-29 16:06:36', '2017-04-29 16:06:36', '0');
+INSERT INTO `order_info` VALUES ('21', '32', '1', null, null, null, '111', null, null, '2017-04-29 16:06:36', '2017-04-29 16:06:36', '0');
 
 -- ----------------------------
 -- Table structure for `permission`
